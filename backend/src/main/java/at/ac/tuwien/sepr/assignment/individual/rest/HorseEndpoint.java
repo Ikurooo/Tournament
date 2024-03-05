@@ -7,6 +7,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.service.HorseService;
+
 import java.lang.invoke.MethodHandles;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping(path = HorseEndpoint.BASE_PATH)
@@ -61,6 +64,26 @@ public class HorseEndpoint {
     } catch (NotFoundException e) {
       HttpStatus status = HttpStatus.NOT_FOUND;
       logClientError(status, "Horse to update not found", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    }
+  }
+
+
+  @PostMapping
+  public ResponseEntity<HorseDetailDto> create(@RequestBody HorseDetailDto toCreate) {
+    LOG.info("POST " + BASE_PATH);
+    LOG.debug("Body of request:\n{}", toCreate);
+
+    try {
+      HorseDetailDto createdHorse = service.create(toCreate);
+      return new ResponseEntity<>(createdHorse, HttpStatus.CREATED);
+    } catch (ValidationException e) {
+      HttpStatus status = HttpStatus.BAD_REQUEST;
+      logClientError(status, "Validation issue during creation", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (ConflictException e) {
+      HttpStatus status = HttpStatus.CONFLICT;
+      logClientError(status, "Conflict issue during creation", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }

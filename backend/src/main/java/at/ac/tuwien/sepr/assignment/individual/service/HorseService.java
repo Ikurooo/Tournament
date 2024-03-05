@@ -21,6 +21,19 @@ public interface HorseService {
    */
   Stream<HorseListDto> search(HorseSearchDto searchParameters);
 
+
+  /**
+   * Creates a new horse with the data provided in {@code horse}
+   * and stores it in the persistent data store.
+   *
+   * @param horse the horse to create
+   * @return the created horse
+   * @throws ValidationException if the data provided for the new horse is incorrect (e.g., missing name, name too long, etc.)
+   * @throws ConflictException  if there is a conflict with the existing data in the system (e.g., breed does not exist)
+   */
+  HorseDetailDto create(HorseDetailDto horse) throws ValidationException, ConflictException;
+
+
   /**
    * Updates the horse with the ID given in {@code horse}
    * with the data given in {@code horse}

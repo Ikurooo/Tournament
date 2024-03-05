@@ -28,4 +28,8 @@ public class HorseValidator {
     }
   }
 
+  public void validateForCreate(HorseDetailDto horse) throws ValidationException {
+    // TODO: validation logic?
+  }
+
 }
