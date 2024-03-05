@@ -79,10 +79,6 @@ public class HorseJdbcDao implements HorseDao {
   public Horse create(HorseDetailDto horse) {
     LOG.trace("create({})", horse);
 
-    // Assuming that the "breed" property of HorseDetailDto contains the Breed object.
-    // fetch the Breed from the database first if it only contains the ID.
-    // what?
-
     var update = jdbcTemplate.update("INSERT INTO " + TABLE_NAME
                     + " (name, sex, date_of_birth, height, weight, breed_id)"
                     + " VALUES (?, ?, ?, ?, ?, ?)",
@@ -99,12 +95,7 @@ public class HorseJdbcDao implements HorseDao {
     }
 
     // Fetch the newly created horse from the database
-    return jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, this::mapRow, getLastInsertId());
-  }
-
-  // Helper method to get the last insert ID
-  private long getLastInsertId() {
-    return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+    return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID() AS id", this::mapRow);
   }
 
   @Override
