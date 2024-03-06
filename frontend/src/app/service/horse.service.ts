@@ -17,7 +17,7 @@ export class HorseService {
     private http: HttpClient,
   ) { }
 
-  getById(id: number): Observable<Horse> {
+  getById(id: string): Observable<Horse> {
     return this.http.get<Horse>(`${baseUri}/${id}`);
   }
 
