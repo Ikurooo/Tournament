@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm, NgModel} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Observable, of, retry} from 'rxjs';
-import {Horse} from 'src/app/dto/horse';
-import {Sex} from 'src/app/dto/sex';
-import {HorseService} from 'src/app/service/horse.service';
-import {Breed} from "../../../dto/breed";
-import {BreedService} from "../../../service/breed.service";
-
+import { Component, OnInit } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, of } from 'rxjs';
+import { Horse } from 'src/app/dto/horse';
+import { Sex } from 'src/app/dto/sex';
+import { HorseService } from 'src/app/service/horse.service';
+import { Breed } from "../../../dto/breed";
+import { BreedService } from "../../../service/breed.service";
 
 export enum HorseCreateEditMode {
   create,
@@ -26,9 +25,9 @@ export class HorseCreateEditComponent implements OnInit {
   horse: Horse = {
     name: '',
     sex: Sex.female,
-    dateOfBirth: new Date(), // TODO this is bad
-    height: 0, // TODO this is bad
-    weight: 0, // TODO this is bad
+    dateOfBirth: new Date(),
+    height: 0,
+    weight: 0,
   };
 
   private heightSet: boolean = false;
@@ -68,7 +67,6 @@ export class HorseCreateEditComponent implements OnInit {
     this.horse.dateOfBirth = value;
   }
 
-
   constructor(
     private service: HorseService,
     private breedService: BreedService,
@@ -82,6 +80,8 @@ export class HorseCreateEditComponent implements OnInit {
     switch (this.mode) {
       case HorseCreateEditMode.create:
         return 'Create New Horse';
+      case HorseCreateEditMode.edit:
+        return 'Edit ' + this.horse?.name + "'s Details";
       default:
         return '?';
     }
@@ -91,6 +91,8 @@ export class HorseCreateEditComponent implements OnInit {
     switch (this.mode) {
       case HorseCreateEditMode.create:
         return 'Create';
+      case HorseCreateEditMode.edit:
+        return 'Update';
       default:
         return '?';
     }
@@ -99,7 +101,6 @@ export class HorseCreateEditComponent implements OnInit {
   get modeIsCreate(): boolean {
     return this.mode === HorseCreateEditMode.create;
   }
-
 
   get sex(): string {
     switch (this.horse.sex) {
@@ -113,6 +114,8 @@ export class HorseCreateEditComponent implements OnInit {
     switch (this.mode) {
       case HorseCreateEditMode.create:
         return 'created';
+      case HorseCreateEditMode.edit:
+        return 'updated';
       default:
         return '?';
     }
@@ -121,6 +124,22 @@ export class HorseCreateEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.mode = data.mode;
+      if (this.mode === HorseCreateEditMode.edit) {
+        // Load horse details for editing
+        this.route.paramMap.subscribe(params => {
+          const horseId = params.get('id');
+          if (horseId) {
+            this.service.getById(horseId).subscribe({
+              next: data => {
+                this.horse = data;
+              },
+              error: error => {
+                console.error('Error fetching horse details', error);
+              }
+            });
+          }
+        });
+      }
     });
   }
 
@@ -136,7 +155,7 @@ export class HorseCreateEditComponent implements OnInit {
 
   breedSuggestions = (input: string) => (input === '')
     ? of([])
-    :  this.breedService.breedsByName(input, 5);
+    : this.breedService.breedsByName(input, 5);
 
   public onSubmit(form: NgForm): void {
     console.log('is form valid?', form.valid, this.horse);
@@ -145,6 +164,9 @@ export class HorseCreateEditComponent implements OnInit {
       switch (this.mode) {
         case HorseCreateEditMode.create:
           observable = this.service.create(this.horse);
+          break;
+        case HorseCreateEditMode.edit:
+          observable = this.service.update(this.horse);
           break;
         default:
           console.error('Unknown HorseCreateEditMode', this.mode);
@@ -156,11 +178,10 @@ export class HorseCreateEditComponent implements OnInit {
           this.router.navigate(['/horses']);
         },
         error: error => {
-          console.error('Error creating horse', error);
+          console.error('Error handling horse', error);
           // TODO show an error message to the user. Include and sensibly present the info from the backend!
         }
       });
     }
   }
-
 }

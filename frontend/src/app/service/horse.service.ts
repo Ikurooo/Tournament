@@ -63,4 +63,16 @@ export class HorseService {
     );
   }
 
+
+  /**
+   * Update a horse in the system.
+   *
+   * @return an Observable for the updated horse
+   * @param horse
+   */
+  update(horse: Horse): Observable<Horse> {
+    return this.http.put<Horse>(`${baseUri}/${horse.id}`, horse);
+  }
+
+
 }

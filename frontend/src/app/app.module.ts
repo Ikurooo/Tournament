@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+  import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {HttpClientModule} from '@angular/common/http';
@@ -18,28 +18,31 @@ import {TournamentStandingsComponent} from './component/tournament/tournament-st
 import {TournamentStandingsBranchComponent} from './component/tournament/tournament-standings/tournament-standings-branch/tournament-standings-branch.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HorseComponent,
-    HorseCreateEditComponent,
-    AutocompleteComponent,
-    ConfirmDeleteDialogComponent,
-    TournamentCreateComponent,
-    TournamentStandingsComponent,
-    TournamentStandingsBranchComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ToastrModule.forRoot(),
-    // Needed for Toastr
-    BrowserAnimationsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HorseComponent,
+        HorseCreateEditComponent,
+        AutocompleteComponent,
+        ConfirmDeleteDialogComponent,
+        TournamentCreateComponent,
+        TournamentStandingsComponent,
+        TournamentStandingsBranchComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ToastrModule.forRoot(),
+        // Needed for Toastr
+        BrowserAnimationsModule,
+    ],
+    providers: [],
+    exports: [
+        AutocompleteComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
