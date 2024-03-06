@@ -28,17 +28,14 @@ export class EditHorseComponent implements OnInit {
   loadHorseDetails(): void {
     if (this.horseId) {
       // Use .subscribe() to get the result of the asynchronous operation
-      this.horseService.getById(this.horseId).subscribe(
-        (result: Horse) => {
-          // Assign the result to the horse property
-          this.horse = result;
-          console.log("loaded horse?");
+      this.horseService.getById(this.horseId).subscribe({
+        next: data => {
+          this.horse = data;
         },
-        (error) => {
-          console.error('Error fetching horse details: { horse ID: ', this.horseId, ' }');
-          // Handle error as needed
+        error: error => {
+          console.error('Error fetching horse', error);
         }
-      );
+      });
     }
   }
 }

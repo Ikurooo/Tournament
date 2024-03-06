@@ -43,7 +43,7 @@ public class HorseEndpoint {
   }
 
   @GetMapping("{id}")
-  public HorseDetailDto getById(@PathVariable long id) {
+  public HorseDetailDto getById(@PathVariable("id") long id) {
     LOG.info("GET " + BASE_PATH + "/{}", id);
     try {
       return service.getById(id);
