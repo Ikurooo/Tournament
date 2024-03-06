@@ -1,4 +1,13 @@
-<div *ngIf="horse">
+<!-- Import Angular Material typography styles -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Add Material Design styles for the components -->
+<style>
+  @import './path/to/horse-info.component.scss';
+</style>
+
+<!-- Horse Info Component HTML -->
+<div class="card" *ngIf="horse">
   <h2>Horse Information</h2>
   <ul>
     <li><strong>Name:</strong> {{ horse.name }}</li>
@@ -6,8 +15,13 @@
     <li><strong>Date of Birth:</strong> {{ horse.dateOfBirth }}</li>
     <!-- Add more properties as needed -->
   </ul>
+  <div class="buttons">
+    <button class="button delete-button" (click)="onDelete()">Delete</button>
+    <span class="spacer"></span>
+    <button class="button" routerLink="/horses/edit/{{ horse.id }}">Edit</button>
+  </div>
 </div>
 
-<div *ngIf="!horse">
+<div class="card" *ngIf="!horse">
   <p>No horse information available.</p>
 </div>

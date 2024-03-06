@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { HorseService } from '../../../service/horse.service'; // Update the import path
 import { Horse } from '../../../dto/horse';
 import {NgIf} from "@angular/common";
@@ -9,7 +9,8 @@ import {NgIf} from "@angular/common";
   templateUrl: './horse-info.component.html',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrls: ['./horse-info.component.scss']
 })
@@ -36,5 +37,9 @@ export class HorseInfoComponent implements OnInit {
         );
       }
     });
+  }
+
+  onDelete() {
+
   }
 }
