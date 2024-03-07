@@ -56,13 +56,13 @@ export class HorseInfoComponent implements OnInit {
           } else {
             console.error('Error deleting horse:', response.message);
             // Handle the error message or navigate as needed
-            this.router.navigate(['horses', 'deletion-successful']);
+            this.router.navigate(['horses', 'deletion-failed']);
           }
         },
         error: (error) => {
           console.error('Unexpected error:', error);
           // Handle other errors if needed
-          this.router.navigate(['horses', 'deletion-successful']);
+          this.router.navigate(['horses', 'deletion-failed']);
         }
       });
     }
