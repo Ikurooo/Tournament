@@ -48,7 +48,7 @@ export class HorseInfoComponent implements OnInit {
     console.log('onDelete called');
     if (this.horseId) {
       this.horseService.deleteHorse(this.horseId).subscribe({
-        next: (next) => {
+        next: () => {
           console.log('Horse deleted successfully');
           this.router.navigate(['deletion-successful']);
         },
