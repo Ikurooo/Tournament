@@ -5,6 +5,7 @@ import {environment} from 'src/environments/environment';
 import {Horse, HorseListDto} from '../dto/horse';
 import {HorseSearch} from '../dto/horse';
 import {formatIsoDate} from '../util/date-helper';
+import {DeletionResponseDto} from "../dto/deletion-response";
 
 const baseUri = environment.backendUrl + '/horses';
 
@@ -79,8 +80,9 @@ export class HorseService {
    * @param horseId the ID of the horse to be deleted
    * @return an Observable indicating the success of the deletion
    */
-  deleteHorse(horseId: string): Observable<void> {
+  deleteHorse(horseId: string): Observable<DeletionResponseDto> {
     const deleteUri = `${baseUri}/${horseId}`;
-    return this.http.delete<void>(deleteUri);
+    return this.http.delete<DeletionResponseDto>(deleteUri);
   }
+
 }

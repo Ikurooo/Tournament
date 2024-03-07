@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.DeletionResponseDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
@@ -88,16 +89,16 @@ public class HorseEndpoint {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteHorse(@PathVariable("id") long id) {
+  public ResponseEntity<DeletionResponseDto> deleteHorse(@PathVariable("id") long id) {
     try {
-      // Call your service to delete the horse by ID
       service.deleteHorseById(id);
-      return ResponseEntity.ok("Horse deleted successfully");
+      return ResponseEntity.ok(new DeletionResponseDto("Horse deleted successfully", true));
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-              .body("Error deleting horse: " + e.getMessage());
+              .body(new DeletionResponseDto("Error deleting horse: " + e.getMessage(), false));
     }
   }
+
 
   private void logClientError(HttpStatus status, String message, Exception e) {
     LOG.warn("{} {}: {}: {}", status.value(), message, e.getClass().getSimpleName(), e.getMessage());

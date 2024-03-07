@@ -3,6 +3,7 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { HorseService } from '../../../service/horse.service';
 import { Horse } from '../../../dto/horse';
 import {NgIf} from "@angular/common";
+import {DeletionResponseDto} from "../../../dto/deletion-response";
 
 
 @Component({
@@ -48,17 +49,22 @@ export class HorseInfoComponent implements OnInit {
     console.log('onDelete called');
     if (this.horseId) {
       this.horseService.deleteHorse(this.horseId).subscribe({
-        next: () => {
-          console.log('Horse deleted successfully');
-          this.router.navigate(['deletion-successful']);
+        next: (response: DeletionResponseDto) => {
+          if (response.success) {
+            console.log('Horse deleted successfully');
+            this.router.navigate(['horses','deletion-successful']);
+          } else {
+            console.error('Error deleting horse:', response.message);
+            // Handle the error message or navigate as needed
+            this.router.navigate(['horses', 'deletion-successful']);
+          }
         },
-      error: (error) =>
-      {
-        console.error('Error deleting horse:', error);
-      }
-    });
+        error: (error) => {
+          console.error('Unexpected error:', error);
+          // Handle other errors if needed
+          this.router.navigate(['horses', 'deletion-successful']);
+        }
+      });
     }
-    this.router.navigate(['/deletion-successful']);
-    // TODO: this is dogshit and doesn't even navigate where i need it to
   }
 }
