@@ -18,7 +18,11 @@
     <li><strong>Height:</strong> {{ horse.height ?? "Not Set"}} m</li>
   </ul>
   <div class="buttons">
-    <button class="button delete-button" (click)="onDelete()">Delete</button>
+    <button
+      class="button delete-button"
+      [routerLink]="['/horses/deletion-successful']"
+      (click)="onDelete()">Delete
+    </button>
     <span class="spacer"></span>
     <button class="button" routerLink="/horses/edit/{{ horse.id }}">Edit</button>
   </div>

@@ -40,13 +40,13 @@ export class HorseInfoComponent implements OnInit {
     });
   }
 
-  onDelete(): void {
+  onDelete() {
     if (this.horseId) {
       // Call the service method to delete the horse
       this.horseService.deleteHorse(this.horseId).subscribe(
         () => {
-          // After successful deletion, navigate to a different page or handle as needed
-          this.router.navigate(['/some-other-page']);
+          // After successful deletion, navigate to the deletion-successful route
+          this.router.navigate(['/horses/deletion-successful']);
         },
         (error) => {
           console.error('Error deleting horse:', error);

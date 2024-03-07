@@ -376,3 +376,1144 @@
 2024-03-07T01:38:23.813+01:00 r=8d9bff1f7153 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
 2024-03-07T01:38:23.815+01:00 r=8d9bff1f7153 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
 2024-03-07T01:38:23.820+01:00 r=8d9bff1f7153 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T01:46:18.361+01:00 r=35e4d0dd02fa ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:18.363+01:00 r=35e4d0dd02fa ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:46:18.366+01:00 r=35e4d0dd02fa ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:46:18.670+01:00 r=da4c52452b81 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:18.672+01:00 r=da4c52452b81 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:46:18.677+01:00 r=da4c52452b81 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T01:46:19.984+01:00 r=d7739b3d5d2c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/2 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:19.986+01:00 r=d7739b3d5d2c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/2
+2024-03-07T01:46:19.990+01:00 r=d7739b3d5d2c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/2 status=200 time=5ms
+2024-03-07T01:46:21.071+01:00 r=14bbcb53d260 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/2 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:21.072+01:00 r=14bbcb53d260 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/2 status=200 time=0ms
+2024-03-07T01:46:21.078+01:00 r=cb6199ac5455 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/2 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:21.080+01:00 r=cb6199ac5455 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 2
+2024-03-07T01:46:21.082+01:00 r=cb6199ac5455 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/2 status=200 time=2ms
+2024-03-07T01:46:25.135+01:00 r=e48fa9b09638 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/2 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:25.136+01:00 r=e48fa9b09638 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/2
+2024-03-07T01:46:25.137+01:00 r=e48fa9b09638 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 2 found
+2024-03-07T01:46:25.138+01:00 r=e48fa9b09638 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/2 status=404 time=2ms
+2024-03-07T01:46:27.353+01:00 r=25e3f9b3803c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:27.355+01:00 r=25e3f9b3803c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:46:27.360+01:00 r=25e3f9b3803c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T01:46:27.668+01:00 r=187c34cfe0ee ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:46:27.670+01:00 r=187c34cfe0ee ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:46:27.672+01:00 r=187c34cfe0ee ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:47:01.154+01:00 r=f8a6b9cc3e81 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:01.155+01:00 r=f8a6b9cc3e81 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:47:01.160+01:00 r=f8a6b9cc3e81 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T01:47:01.464+01:00 r=d575998e763a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:01.465+01:00 r=d575998e763a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:47:01.468+01:00 r=d575998e763a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:47:14.939+01:00 r=c36e35273fb0 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Anda&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:14.942+01:00 r=c36e35273fb0 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:47:14.949+01:00 r=c36e35273fb0 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Anda&limit=5 status=200 time=9ms
+2024-03-07T01:47:19.385+01:00 r=0571a18199f6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=An&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:19.387+01:00 r=0571a18199f6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:47:19.390+01:00 r=0571a18199f6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=An&limit=5 status=200 time=4ms
+2024-03-07T01:47:20.471+01:00 r=5a716db9c619 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:20.472+01:00 r=5a716db9c619 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:47:20.476+01:00 r=5a716db9c619 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=4ms
+2024-03-07T01:47:24.518+01:00 r=40294abf2261 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:24.519+01:00 r=40294abf2261 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses status=200 time=0ms
+2024-03-07T01:47:24.523+01:00 r=9dfa5afd43ed ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:24.572+01:00 r=9dfa5afd43ed ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T01:47:24.588+01:00 r=9dfa5afd43ed ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=64ms
+2024-03-07T01:47:24.588+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T01:47:26.329+01:00 r=b629aafc1ad4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:26.331+01:00 r=b629aafc1ad4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:47:26.337+01:00 r=b629aafc1ad4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=7ms
+2024-03-07T01:47:26.643+01:00 r=b9f807bbf775 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:26.645+01:00 r=b9f807bbf775 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:47:26.648+01:00 r=b9f807bbf775 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:47:29.434+01:00 r=4f1df7a03557 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/3 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:29.435+01:00 r=4f1df7a03557 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/3
+2024-03-07T01:47:29.437+01:00 r=4f1df7a03557 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/3 status=200 time=2ms
+2024-03-07T01:47:31.020+01:00 r=2f0d7cee8856 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/3 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:31.021+01:00 r=2f0d7cee8856 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/3 status=200 time=0ms
+2024-03-07T01:47:31.025+01:00 r=d681e2d4529e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/3 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:31.027+01:00 r=d681e2d4529e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 3
+2024-03-07T01:47:31.027+01:00 r=d681e2d4529e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/3 status=200 time=2ms
+2024-03-07T01:47:32.791+01:00 r=8ffffab7f8b8 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/3 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:32.792+01:00 r=8ffffab7f8b8 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/3
+2024-03-07T01:47:32.793+01:00 r=8ffffab7f8b8 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 3 found
+2024-03-07T01:47:32.793+01:00 r=8ffffab7f8b8 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/3 status=404 time=2ms
+2024-03-07T01:47:42.930+01:00 r=3c55223adef4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:42.933+01:00 r=3c55223adef4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:47:42.937+01:00 r=3c55223adef4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T01:47:43.237+01:00 r=346f43f40844 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:47:43.239+01:00 r=346f43f40844 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:47:43.241+01:00 r=346f43f40844 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T01:55:21.586+01:00 r=7557416b24af ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:21.588+01:00 r=7557416b24af ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:21.593+01:00 r=7557416b24af ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T01:55:22.603+01:00 r=7b72b95bfc93 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:22.605+01:00 r=7b72b95bfc93 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:22.607+01:00 r=7b72b95bfc93 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T01:55:26.349+01:00 r=67182157de80 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:26.351+01:00 r=67182157de80 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:26.355+01:00 r=67182157de80 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T01:55:26.656+01:00 r=8e3c671528fb ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:26.659+01:00 r=8e3c671528fb ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:26.662+01:00 r=8e3c671528fb ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T01:55:40.743+01:00 r=bb821d76b1ca ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=And&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:40.745+01:00 r=bb821d76b1ca ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:55:40.748+01:00 r=bb821d76b1ca ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=And&limit=5 status=200 time=4ms
+2024-03-07T01:55:41.856+01:00 r=7e94f0ad13e4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:41.857+01:00 r=7e94f0ad13e4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:55:41.861+01:00 r=7e94f0ad13e4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=4ms
+2024-03-07T01:55:44.298+01:00 r=d52d180c6163 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:44.301+01:00 r=d52d180c6163 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T01:55:44.307+01:00 r=d52d180c6163 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=8ms
+2024-03-07T01:55:44.308+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T01:55:46.108+01:00 r=9fe09a1b9a65 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:46.110+01:00 r=9fe09a1b9a65 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:46.113+01:00 r=9fe09a1b9a65 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:55:46.411+01:00 r=b6edcfdcf941 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:46.413+01:00 r=b6edcfdcf941 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:46.416+01:00 r=b6edcfdcf941 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:55:50.190+01:00 r=81c7d00164db ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/4 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:50.192+01:00 r=81c7d00164db ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/4
+2024-03-07T01:55:50.195+01:00 r=81c7d00164db ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/4 status=200 time=4ms
+2024-03-07T01:55:51.453+01:00 r=c2e38c38c2a2 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/4 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:51.454+01:00 r=c2e38c38c2a2 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/4 status=200 time=0ms
+2024-03-07T01:55:51.458+01:00 r=31aee4c56d77 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/4 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:51.461+01:00 r=31aee4c56d77 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 4
+2024-03-07T01:55:51.462+01:00 r=31aee4c56d77 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/4 status=200 time=3ms
+2024-03-07T01:55:54.991+01:00 r=81f428d9cfda ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/4 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:54.993+01:00 r=81f428d9cfda ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/4
+2024-03-07T01:55:54.994+01:00 r=81f428d9cfda ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 4 found
+2024-03-07T01:55:54.995+01:00 r=81f428d9cfda ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/4 status=404 time=4ms
+2024-03-07T01:55:56.938+01:00 r=25e977d30d53 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:56.939+01:00 r=25e977d30d53 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:56.942+01:00 r=25e977d30d53 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T01:55:57.248+01:00 r=6c483e8318af ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:55:57.250+01:00 r=6c483e8318af ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:55:57.253+01:00 r=6c483e8318af ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:57:36.036+01:00 r=41dd8933fbb0 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:36.038+01:00 r=41dd8933fbb0 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:57:36.041+01:00 r=41dd8933fbb0 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T01:57:36.343+01:00 r=28e80a383c80 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:36.344+01:00 r=28e80a383c80 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:57:36.346+01:00 r=28e80a383c80 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T01:57:48.361+01:00 r=7624000ea2c5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=And&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:48.363+01:00 r=7624000ea2c5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:57:48.366+01:00 r=7624000ea2c5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=And&limit=5 status=200 time=4ms
+2024-03-07T01:57:49.402+01:00 r=7c48b64fe091 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:49.404+01:00 r=7c48b64fe091 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T01:57:49.408+01:00 r=7c48b64fe091 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=5ms
+2024-03-07T01:57:50.747+01:00 r=1f5fc735115d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:50.750+01:00 r=1f5fc735115d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T01:57:50.754+01:00 r=1f5fc735115d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=6ms
+2024-03-07T01:57:50.754+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T01:57:52.219+01:00 r=8cb311cc85f9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:52.221+01:00 r=8cb311cc85f9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:57:52.224+01:00 r=8cb311cc85f9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:57:52.528+01:00 r=4bd23b17d645 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:52.530+01:00 r=4bd23b17d645 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:57:52.533+01:00 r=4bd23b17d645 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T01:57:54.543+01:00 r=f448cb7a869c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:54.544+01:00 r=f448cb7a869c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/5
+2024-03-07T01:57:54.546+01:00 r=f448cb7a869c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/5 status=200 time=2ms
+2024-03-07T01:57:55.699+01:00 r=baba6bb13f23 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:55.701+01:00 r=baba6bb13f23 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/5 status=200 time=1ms
+2024-03-07T01:57:55.705+01:00 r=3a292b44f6ce ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:55.706+01:00 r=3a292b44f6ce ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 5
+2024-03-07T01:57:55.708+01:00 r=3a292b44f6ce ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/5 status=200 time=2ms
+2024-03-07T01:57:57.141+01:00 r=c43156c531cb ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:57.146+01:00 r=c43156c531cb ip=127.0.0.1 ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/5 status=500 time=5ms
+2024-03-07T01:57:57.307+01:00 r=e62efe0b3fb2 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:57.312+01:00 r=e62efe0b3fb2 ip=127.0.0.1 ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/5 status=500 time=4ms
+2024-03-07T01:57:59.995+01:00 r=982abec0dcf9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:57:59.997+01:00 r=982abec0dcf9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:58:00.002+01:00 r=982abec0dcf9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T01:58:00.289+01:00 r=449556757a92 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:58:00.291+01:00 r=449556757a92 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:58:00.293+01:00 r=449556757a92 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T01:58:02.313+01:00 r=211b799b8acf ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:58:02.315+01:00 r=211b799b8acf ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:58:02.317+01:00 r=211b799b8acf ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T01:58:02.621+01:00 r=c62df2072e0b ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T01:58:02.623+01:00 r=c62df2072e0b ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T01:58:02.626+01:00 r=c62df2072e0b ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T02:00:07.232+01:00 r=c74d360f9cfd ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:07.234+01:00 r=c74d360f9cfd ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:00:07.237+01:00 r=c74d360f9cfd ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T02:00:07.540+01:00 r=0ffcd8601503 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:07.541+01:00 r=0ffcd8601503 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:00:07.544+01:00 r=0ffcd8601503 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:00:13.360+01:00 r=6539544e9d74 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=1&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:13.361+01:00 r=6539544e9d74 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:00:13.363+01:00 r=6539544e9d74 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=1&limit=5 status=200 time=2ms
+2024-03-07T02:00:16.743+01:00 r=145b3e2c9705 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=An&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:16.745+01:00 r=145b3e2c9705 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:00:16.747+01:00 r=145b3e2c9705 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=An&limit=5 status=200 time=3ms
+2024-03-07T02:00:17.807+01:00 r=f7f74a8c3f63 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:17.809+01:00 r=f7f74a8c3f63 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:00:17.811+01:00 r=f7f74a8c3f63 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=4ms
+2024-03-07T02:00:23.081+01:00 r=78feeec6b753 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:23.083+01:00 r=78feeec6b753 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T02:00:23.089+01:00 r=78feeec6b753 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=7ms
+2024-03-07T02:00:23.090+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T02:00:24.587+01:00 r=03ae9a29d530 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:24.589+01:00 r=03ae9a29d530 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:00:24.592+01:00 r=03ae9a29d530 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T02:00:24.892+01:00 r=d00297e50a1e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:24.893+01:00 r=d00297e50a1e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:00:24.896+01:00 r=d00297e50a1e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:00:30.200+01:00 r=d391bf1740a4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/6 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:30.202+01:00 r=d391bf1740a4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/6
+2024-03-07T02:00:30.205+01:00 r=d391bf1740a4 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/6 status=200 time=4ms
+2024-03-07T02:00:32.878+01:00 r=4d53efa43489 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/6 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:32.879+01:00 r=4d53efa43489 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/6 status=200 time=1ms
+2024-03-07T02:00:32.883+01:00 r=06d05100a52d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/6 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:00:32.885+01:00 r=06d05100a52d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 6
+2024-03-07T02:00:32.886+01:00 r=06d05100a52d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/6 status=200 time=2ms
+2024-03-07T02:02:45.207+01:00 r=2ab673ae55f3 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/6 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:02:45.209+01:00 r=2ab673ae55f3 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/6
+2024-03-07T02:02:45.209+01:00 r=2ab673ae55f3 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 6 found
+2024-03-07T02:02:45.210+01:00 r=2ab673ae55f3 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/6 status=404 time=2ms
+2024-03-07T02:02:48.900+01:00 r=afc4c69c7cd5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/6 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:02:48.902+01:00 r=afc4c69c7cd5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/6
+2024-03-07T02:02:48.902+01:00 r=afc4c69c7cd5 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 6 found
+2024-03-07T02:02:48.903+01:00 r=afc4c69c7cd5 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/6 status=404 time=2ms
+2024-03-07T02:02:50.302+01:00 r=444b247e6c0f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:02:50.304+01:00 r=444b247e6c0f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:02:50.307+01:00 r=444b247e6c0f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T02:02:50.613+01:00 r=048503a5c124 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:02:50.614+01:00 r=048503a5c124 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:02:50.616+01:00 r=048503a5c124 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:02:59.728+01:00 r=8c42f4b09100 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=A&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:02:59.730+01:00 r=8c42f4b09100 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:02:59.732+01:00 r=8c42f4b09100 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=A&limit=5 status=200 time=3ms
+2024-03-07T02:03:00.469+01:00 r=daf38a7e61f7 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=And&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:00.470+01:00 r=daf38a7e61f7 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:03:00.473+01:00 r=daf38a7e61f7 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=And&limit=5 status=200 time=3ms
+2024-03-07T02:03:01.773+01:00 r=c68eef98484c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:01.774+01:00 r=c68eef98484c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:03:01.776+01:00 r=c68eef98484c ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=3ms
+2024-03-07T02:03:03.099+01:00 r=555fd2de98a5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:03.101+01:00 r=555fd2de98a5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T02:03:03.105+01:00 r=555fd2de98a5 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=5ms
+2024-03-07T02:03:03.105+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T02:03:04.470+01:00 r=cb2446bff72a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:04.472+01:00 r=cb2446bff72a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:03:04.476+01:00 r=cb2446bff72a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T02:03:04.762+01:00 r=4c4405ff8a9d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:04.763+01:00 r=4c4405ff8a9d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:03:04.766+01:00 r=4c4405ff8a9d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:03:05.908+01:00 r=963b10d93afe ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/7 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:05.909+01:00 r=963b10d93afe ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/7
+2024-03-07T02:03:05.911+01:00 r=963b10d93afe ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/7 status=200 time=2ms
+2024-03-07T02:03:06.676+01:00 r=a2a3bafd4042 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/7 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:06.677+01:00 r=a2a3bafd4042 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/7 status=200 time=0ms
+2024-03-07T02:03:06.681+01:00 r=7959744e8d75 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/7 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:06.683+01:00 r=7959744e8d75 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 7
+2024-03-07T02:03:06.684+01:00 r=7959744e8d75 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/7 status=200 time=3ms
+2024-03-07T02:03:22.168+01:00 r=7520ee79091e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/7 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:03:22.169+01:00 r=7520ee79091e ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/7
+2024-03-07T02:03:22.169+01:00 r=7520ee79091e ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 7 found
+2024-03-07T02:03:22.169+01:00 r=7520ee79091e ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/7 status=404 time=1ms
+2024-03-07T02:06:45.857+01:00 r=fd78cf301804 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/7 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:06:45.858+01:00 r=fd78cf301804 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/7
+2024-03-07T02:06:45.859+01:00 r=fd78cf301804 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 7 found
+2024-03-07T02:06:45.859+01:00 r=fd78cf301804 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/7 status=404 time=1ms
+2024-03-07T02:06:46.793+01:00 r=055da0208565 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/7 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:06:46.794+01:00 r=055da0208565 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/7
+2024-03-07T02:06:46.795+01:00 r=055da0208565 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : 404 Horse to get details of not found: NotFoundException: No horse with ID 7 found
+2024-03-07T02:06:46.795+01:00 r=055da0208565 ip=127.0.0.1  WARN 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/7 status=404 time=2ms
+2024-03-07T02:06:48.953+01:00 r=93275cfe535f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:06:48.955+01:00 r=93275cfe535f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:06:48.958+01:00 r=93275cfe535f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T02:06:49.253+01:00 r=04371db4388a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:06:49.254+01:00 r=04371db4388a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:06:49.257+01:00 r=04371db4388a ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:07:00.188+01:00 r=549a226e1201 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Na&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:00.190+01:00 r=549a226e1201 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:07:00.193+01:00 r=549a226e1201 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Na&limit=5 status=200 time=4ms
+2024-03-07T02:07:01.221+01:00 r=25ef32bcc2c6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=and&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:01.223+01:00 r=25ef32bcc2c6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:07:01.225+01:00 r=25ef32bcc2c6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=and&limit=5 status=200 time=3ms
+2024-03-07T02:07:02.406+01:00 r=6c8da7f471a6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:02.408+01:00 r=6c8da7f471a6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:07:02.411+01:00 r=6c8da7f471a6 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=4ms
+2024-03-07T02:07:03.531+01:00 r=0ebcf1190b28 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:03.533+01:00 r=0ebcf1190b28 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T02:07:03.537+01:00 r=0ebcf1190b28 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=5ms
+2024-03-07T02:07:03.537+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T02:07:04.920+01:00 r=4e98fc838956 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:04.922+01:00 r=4e98fc838956 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:07:04.926+01:00 r=4e98fc838956 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T02:07:05.213+01:00 r=5284b1c5ffda ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:05.214+01:00 r=5284b1c5ffda ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:07:05.215+01:00 r=5284b1c5ffda ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=2ms
+2024-03-07T02:07:06.922+01:00 r=4ff71e053d0b ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/8 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:06.923+01:00 r=4ff71e053d0b ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/8
+2024-03-07T02:07:06.926+01:00 r=4ff71e053d0b ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/8 status=200 time=4ms
+2024-03-07T02:07:08.067+01:00 r=bef13cddb53f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/8 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:08.068+01:00 r=6867d9c71ada ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:08.068+01:00 r=bef13cddb53f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/8 status=200 time=0ms
+2024-03-07T02:07:08.069+01:00 r=6867d9c71ada ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:07:08.072+01:00 r=b47609afedf9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/8 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:08.072+01:00 r=6867d9c71ada ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T02:07:08.073+01:00 r=b47609afedf9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 8
+2024-03-07T02:07:08.075+01:00 r=b47609afedf9 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/8 status=200 time=2ms
+2024-03-07T02:07:08.380+01:00 r=214e2fcf7b31 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:08.389+01:00 r=214e2fcf7b31 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:07:08.393+01:00 r=214e2fcf7b31 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=13ms
+2024-03-07T02:07:59.609+01:00 r=799c0a6425f1 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:59.611+01:00 r=799c0a6425f1 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:07:59.616+01:00 r=799c0a6425f1 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=6ms
+2024-03-07T02:07:59.916+01:00 r=3abef1bf957f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:07:59.917+01:00 r=3abef1bf957f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:07:59.919+01:00 r=3abef1bf957f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:08:12.722+01:00 r=e5bdd58d2f76 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=and&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:12.723+01:00 r=e5bdd58d2f76 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:08:12.726+01:00 r=e5bdd58d2f76 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-4] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=and&limit=5 status=200 time=4ms
+2024-03-07T02:08:13.682+01:00 r=d71e6fb54e2f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : >>> GET /breeds?name=Andalusian&limit=5 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:13.684+01:00 r=d71e6fb54e2f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.rest.BreedEndpoint  : GET /breeds
+2024-03-07T02:08:13.686+01:00 r=d71e6fb54e2f ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-5] a.a.t.s.a.individual.config.LogFilter    : <<< GET /breeds?name=Andalusian&limit=5 status=200 time=3ms
+2024-03-07T02:08:18.112+01:00 r=23afca64f58d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : >>> POST /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:18.114+01:00 r=23afca64f58d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.rest.HorseEndpoint  : POST /horses
+2024-03-07T02:08:18.117+01:00 r=23afca64f58d ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] a.a.t.s.a.individual.config.LogFilter    : <<< POST /horses status=200 time=5ms
+2024-03-07T02:08:18.118+01:00 r= ip= ERROR 30317 --- [wendys-tournament-management] [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+at.ac.tuwien.sepr.assignment.individual.exception.FatalException: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.servlet.ServletException: Request processing failed: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at at.ac.tuwien.sepr.assignment.individual.config.LogFilter.doFilterInternal(LogFilter.java:47) ~[classes/:na]
+	... 31 common frames omitted
+Caused by: org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT LAST_INSERT_ID() AS id]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:103) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1548) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.queryForObject(JdbcTemplate.java:519) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao.create(HorseJdbcDao.java:98) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao$$SpringCGLIB$$0.create(<generated>) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl.create(HorseServiceImpl.java:60) ~[classes/:na]
+	at at.ac.tuwien.sepr.assignment.individual.rest.HorseEndpoint.create(HorseEndpoint.java:77) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	... 41 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "LAST_INSERT_ID" not found; SQL statement:
+SELECT LAST_INSERT_ID() AS id [90022-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFunction(Parser.java:3786) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readTerm(Parser.java:4834) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readFactor(Parser.java:3337) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readSum(Parser.java:3324) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readConcat(Parser.java:3289) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readCondition(Parser.java:3079) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.readExpression(Parser.java:2999) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2799) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseSelect(Parser.java:2817) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parseQuery(Parser.java:2498) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parsePrepared(Parser.java:627) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:592) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.parse(Parser.java:564) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:483) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:110) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	... 69 common frames omitted
+
+2024-03-07T02:08:19.920+01:00 r=71c1ce3fa2ae ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:19.921+01:00 r=71c1ce3fa2ae ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:08:19.925+01:00 r=71c1ce3fa2ae ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-7] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=4ms
+2024-03-07T02:08:20.229+01:00 r=820afc00cd90 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:20.231+01:00 r=820afc00cd90 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:08:20.233+01:00 r=820afc00cd90 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-8] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
+2024-03-07T02:08:21.702+01:00 r=5ba21f330ed2 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses/9 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:21.703+01:00 r=5ba21f330ed2 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses/9
+2024-03-07T02:08:21.705+01:00 r=5ba21f330ed2 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-9] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses/9 status=200 time=3ms
+2024-03-07T02:08:22.749+01:00 r=605a848ce839 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : >>> OPTIONS /horses/9 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:22.750+01:00 r=605a848ce839 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-10] a.a.t.s.a.individual.config.LogFilter    : <<< OPTIONS /horses/9 status=200 time=0ms
+2024-03-07T02:08:22.750+01:00 r=4bc5575add65 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:22.751+01:00 r=4bc5575add65 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:08:22.754+01:00 r=febbf1733eb3 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : >>> DELETE /horses/9 UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:22.756+01:00 r=4bc5575add65 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-1] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=5ms
+2024-03-07T02:08:22.756+01:00 r=febbf1733eb3 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.i.p.impl.HorseJdbcDao          : Deleted horse with ID: 9
+2024-03-07T02:08:22.758+01:00 r=febbf1733eb3 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-2] a.a.t.s.a.individual.config.LogFilter    : <<< DELETE /horses/9 status=200 time=3ms
+2024-03-07T02:08:23.047+01:00 r=4d6c8c8a30a8 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : >>> GET /horses UA=Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0
+2024-03-07T02:08:23.049+01:00 r=4d6c8c8a30a8 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.rest.HorseEndpoint  : GET /horses
+2024-03-07T02:08:23.051+01:00 r=4d6c8c8a30a8 ip=127.0.0.1  INFO 30317 --- [wendys-tournament-management] [http-nio-8080-exec-3] a.a.t.s.a.individual.config.LogFilter    : <<< GET /horses status=200 time=3ms
