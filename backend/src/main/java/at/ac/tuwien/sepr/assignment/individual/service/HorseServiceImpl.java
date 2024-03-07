@@ -81,6 +81,12 @@ public class HorseServiceImpl implements HorseService {
     return mapper.entityToDetailDto(horse, breeds);
   }
 
+  @Override
+  public void deleteHorseById(long id) throws NotFoundException {
+    LOG.trace("delete({})", id);
+    dao.delete(id);
+  }
+
   private Map<Long, BreedDto> breedMapForSingleHorse(Horse horse) {
     return breedMapForHorses(Collections.singleton(horse.getBreedId()));
   }

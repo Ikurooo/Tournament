@@ -3,17 +3,19 @@
 
 <!-- Add Material Design styles for the components -->
 <style>
-  @import './path/to/horse-info.component.scss';
+  @import './horse-info.component.scss';
 </style>
 
 <!-- Horse Info Component HTML -->
 <div class="card" *ngIf="horse">
   <h2>Horse Information</h2>
   <ul>
-    <li><strong>Name:</strong> {{ horse.name }}</li>
-    <li><strong>Sex:</strong> {{ horse.sex }}</li>
+    <li><strong>Name:</strong> {{ horse.name ?? "Not Set" }}</li>
+    <li><strong>Sex:</strong> {{ horse.sex ?? "Not Set" }}</li>
     <li><strong>Date of Birth:</strong> {{ horse.dateOfBirth }}</li>
-    <!-- Add more properties as needed -->
+    <li><strong>Breed:</strong> {{ horse.breed?.name ?? "Not Set" }}</li>
+    <li><strong>Weight:</strong> {{ horse.weight ?? "Not Set" }} kg</li>
+    <li><strong>Height:</strong> {{ horse.height ?? "Not Set"}} m</li>
   </ul>
   <div class="buttons">
     <button class="button delete-button" (click)="onDelete()">Delete</button>

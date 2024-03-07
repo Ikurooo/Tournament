@@ -57,4 +57,13 @@ public interface HorseService {
    * @throws NotFoundException if the horse with the given ID does not exist in the persistent data store
    */
   HorseDetailDto getById(long id) throws NotFoundException;
+
+  /**
+   * Get the horse with given ID, with more detail information.
+   * This includes the breed of the horse.
+   *
+   * @param id the ID of the horse to get
+   * @throws NotFoundException if the horse with the given ID does not exist in the persistent data store
+   */
+  void deleteHorseById(long id) throws NotFoundException;
 }

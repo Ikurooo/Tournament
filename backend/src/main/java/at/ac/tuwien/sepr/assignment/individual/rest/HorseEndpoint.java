@@ -14,14 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping(path = HorseEndpoint.BASE_PATH)
@@ -54,7 +55,6 @@ public class HorseEndpoint {
     }
   }
 
-
   @PutMapping("{id}")
   public HorseDetailDto update(@PathVariable("id") long id, @RequestBody HorseDetailDto toUpdate) throws ValidationException, ConflictException {
     LOG.info("PUT " + BASE_PATH + "/{}", toUpdate);
@@ -67,7 +67,6 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
-
 
   @PostMapping
   public ResponseEntity<HorseDetailDto> create(@RequestBody HorseDetailDto toCreate) {
@@ -88,6 +87,17 @@ public class HorseEndpoint {
     }
   }
 
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteHorse(@PathVariable("id") long id) {
+    try {
+      // Call your service to delete the horse by ID
+      service.deleteHorseById(id);
+      return ResponseEntity.ok("Horse deleted successfully");
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .body("Error deleting horse: " + e.getMessage());
+    }
+  }
 
   private void logClientError(HttpStatus status, String message, Exception e) {
     LOG.warn("{} {}: {}: {}", status.value(), message, e.getClass().getSimpleName(), e.getMessage());
