@@ -8,6 +8,7 @@ import { Sex } from 'src/app/dto/sex';
 import { HorseService } from 'src/app/service/horse.service';
 import { Breed } from "../../../dto/breed";
 import { BreedService } from "../../../service/breed.service";
+import {DeletionResponseDto} from "../../../dto/deletion-response";
 
 export enum HorseCreateEditMode {
   create,
@@ -33,6 +34,8 @@ export class HorseCreateEditComponent implements OnInit {
   private heightSet: boolean = false;
   private weightSet: boolean = false;
   private dateOfBirthSet: boolean = false;
+
+  private horseId: string | null = null;
 
   get height(): number | null {
     return this.heightSet
@@ -127,9 +130,9 @@ export class HorseCreateEditComponent implements OnInit {
       if (this.mode === HorseCreateEditMode.edit) {
         // Load horse details for editing
         this.route.paramMap.subscribe(params => {
-          const horseId = params.get('id');
-          if (horseId) {
-            this.service.getById(horseId).subscribe({
+          this.horseId = params.get('id');
+          if (this.horseId) {
+            this.service.getById(this.horseId).subscribe({
               next: data => {
                 this.horse = data;
               },
@@ -180,6 +183,29 @@ export class HorseCreateEditComponent implements OnInit {
         error: error => {
           console.error('Error handling horse', error);
           // TODO show an error message to the user. Include and sensibly present the info from the backend!
+        }
+      });
+    }
+  }
+
+  onDelete() {
+    console.log('onDelete called');
+    if (this.horseId) {
+      this.service.deleteHorse(this.horseId).subscribe({
+        next: (response: DeletionResponseDto) => {
+          if (response.success) {
+            console.log('Horse deleted successfully');
+            this.router.navigate(['horses','deletion-successful']);
+          } else {
+            console.error('Error deleting horse:', response.message);
+            // Handle the error message or navigate as needed
+            this.router.navigate(['horses', 'deletion-failed']);
+          }
+        },
+        error: (error) => {
+          console.error('Unexpected error:', error);
+          // Handle other errors if needed
+          this.router.navigate(['horses', 'deletion-failed']);
         }
       });
     }
