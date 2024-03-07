@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'create', component: HorseCreateEditComponent, data: { mode: HorseCreateEditMode.create } },
       { path: 'edit/:id', component: HorseCreateEditComponent, data: { mode: HorseCreateEditMode.edit } },
       { path: 'info/:id', component: HorseInfoComponent },
-      { path: 'horses/deletion-successful', component: HorseDeletedComponent },
+      { path: 'deletion-successful', component: HorseDeletedComponent },
     ]
   },
   {

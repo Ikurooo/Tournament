@@ -83,5 +83,4 @@ export class HorseService {
     const deleteUri = `${baseUri}/${horseId}`;
     return this.http.delete<void>(deleteUri);
   }
-
 }

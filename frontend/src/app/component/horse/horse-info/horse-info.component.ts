@@ -20,7 +20,11 @@ export class HorseInfoComponent implements OnInit {
   horseId: string | null = null;
   horse: Horse | null = null;
 
-  constructor(private route: ActivatedRoute, private horseService: HorseService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private horseService: HorseService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -41,18 +45,20 @@ export class HorseInfoComponent implements OnInit {
   }
 
   onDelete() {
+    console.log('onDelete called');
     if (this.horseId) {
-      // Call the service method to delete the horse
-      this.horseService.deleteHorse(this.horseId).subscribe(
-        () => {
-          // After successful deletion, navigate to the deletion-successful route
-          this.router.navigate(['/horses/deletion-successful']);
+      this.horseService.deleteHorse(this.horseId).subscribe({
+        next: (next) => {
+          console.log('Horse deleted successfully');
+          this.router.navigate(['deletion-successful']);
         },
-        (error) => {
-          console.error('Error deleting horse:', error);
-          // Handle error as needed
-        }
-      );
+      error: (error) =>
+      {
+        console.error('Error deleting horse:', error);
+      }
+    });
     }
+    this.router.navigate(['/deletion-successful']);
+    // TODO: this is dogshit and doesn't even navigate where i need it to
   }
 }
