@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
-import { HorseService } from '../../../service/horse.service'; // Update the import path
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import { HorseService } from '../../../service/horse.service';
 import { Horse } from '../../../dto/horse';
 import {NgIf} from "@angular/common";
+
 
 @Component({
   selector: 'app-horse-info',
   templateUrl: './horse-info.component.html',
   standalone: true,
   imports: [
-    NgIf,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   styleUrls: ['./horse-info.component.scss']
 })
@@ -19,7 +20,7 @@ export class HorseInfoComponent implements OnInit {
   horseId: string | null = null;
   horse: Horse | null = null;
 
-  constructor(private route: ActivatedRoute, private horseService: HorseService) { }
+  constructor(private route: ActivatedRoute, private horseService: HorseService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -39,7 +40,19 @@ export class HorseInfoComponent implements OnInit {
     });
   }
 
-  onDelete() {
-
+  onDelete(): void {
+    if (this.horseId) {
+      // Call the service method to delete the horse
+      this.horseService.deleteHorse(this.horseId).subscribe(
+        () => {
+          // After successful deletion, navigate to a different page or handle as needed
+          this.router.navigate(['/some-other-page']);
+        },
+        (error) => {
+          console.error('Error deleting horse:', error);
+          // Handle error as needed
+        }
+      );
+    }
   }
 }
