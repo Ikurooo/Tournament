@@ -7,7 +7,7 @@ import {HorseSearch} from '../dto/horse';
 import {formatIsoDate} from '../util/date-helper';
 import {DeletionResponseDto} from "../dto/deletion-response";
 
-const baseUri = environment.backendUrl + '/horses';
+const baseUri = `${environment.backendUrl}/horses`;
 
 @Injectable({
   providedIn: 'root'
