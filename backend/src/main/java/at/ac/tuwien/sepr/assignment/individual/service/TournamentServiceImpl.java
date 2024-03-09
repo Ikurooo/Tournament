@@ -21,12 +21,11 @@ public class TournamentServiceImpl implements TournamentService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final TournamentDao dao;
   private final TournamentMapper mapper;
-  private final TournamentValidator validator;
+  // TODO: private final TournamentValidator validator;
 
-  public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper, TournamentValidator validator) {
+  public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper) {
     this.dao = dao;
     this.mapper = mapper;
-    this.validator = validator;
   }
 
   @Override

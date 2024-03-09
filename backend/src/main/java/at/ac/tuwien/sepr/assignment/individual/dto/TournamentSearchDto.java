@@ -8,6 +8,7 @@ public record TournamentSearchDto(
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         LocalDate start,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        LocalDate end
+        LocalDate end,
+        Integer limit
 ) {
 }

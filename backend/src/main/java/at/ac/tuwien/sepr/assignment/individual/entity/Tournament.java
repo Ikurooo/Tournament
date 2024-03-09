@@ -2,48 +2,68 @@ package at.ac.tuwien.sepr.assignment.individual.entity;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a tournament in the persistent data store.
+ */
 public class Tournament {
   private long id;
   private String name;
   private LocalDate startDate;
   private LocalDate endDate;
-
-  public Tournament(long id, String name, LocalDate startDate, LocalDate endDate) {
-    this.id = id;
-    this.name = name;
-    this.startDate = startDate;
-    this.endDate = endDate;
+  private int maxParticipants;
+  public long getId() {
+    return id;
   }
 
-  public long getId() {
-        return id;
-    }
-
-  public void setId(long id) {
-        this.id = id;
-    }
+  public Tournament setId(long id) {
+    this.id = id;
+    return this;
+  }
 
   public String getName() {
-        return name;
-    }
+    return name;
+  }
 
-  public void setName(String name) {
-        this.name = name;
-    }
+  public Tournament setName(String name) {
+    this.name = name;
+    return this;
+  }
 
   public LocalDate getStartDate() {
-        return startDate;
-    }
+    return startDate;
+  }
 
-  public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+  public Tournament setStartDate(LocalDate startDate) {
+    this.startDate = startDate;
+    return this;
+  }
 
   public LocalDate getEndDate() {
-        return endDate;
-    }
+    return endDate;
+  }
 
-  public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+  public Tournament setEndDate(LocalDate endDate) {
+    this.endDate = endDate;
+    return this;
+  }
+
+  public int getMaxParticipants() {
+    return maxParticipants;
+  }
+
+  public Tournament setMaxParticipants(int maxParticipants) {
+    this.maxParticipants = maxParticipants;
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    return "Tournament{"
+            + "id=" + id
+            + ", name='" + name + '\''
+            + ", startDate=" + startDate
+            + ", endDate=" + endDate
+            + ", maxParticipants=" + maxParticipants
+            + '}';
+  }
 }
