@@ -8,6 +8,8 @@ import at.ac.tuwien.sepr.assignment.individual.service.TournamentService;
 
 import java.lang.invoke.MethodHandles;
 import java.util.stream.Stream;
+
+import at.ac.tuwien.sepr.assignment.individual.service.TournamentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
