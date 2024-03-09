@@ -1,26 +1,16 @@
-// Import necessary Angular modules and components
 import { Component, OnInit } from '@angular/core';
-import {AppModule} from "../../app.module";
-import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { TournamentService } from "../../service/tournament.service";
+import { debounceTime, Subject } from "rxjs";
 import {TournamentListDto, TournamentSearchParams} from "../../dto/tournament";
-import {ToastrService} from "ngx-toastr";
-import {TournamentService} from "../../service/tournament.service";
-import {debounceTime, Subject} from "rxjs";
 
 @Component({
-    selector: 'app-tournament',
-    templateUrl: './tournament.component.html',
-    styleUrls: ['./tournament.component.scss'],
-    standalone: true,
-    imports: [
-        AppModule,
-        FormsModule,
-        NgForOf,
-        RouterLink
-    ],
+  selector: 'app-tournament',
+  templateUrl: './tournament.component.html',
+  styleUrls: ['./tournament.component.scss'],
+  standalone: true
 })
+
 export class TournamentComponent implements OnInit {
 
   search = false;
