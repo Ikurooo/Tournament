@@ -26,7 +26,6 @@ export class TournamentComponent implements OnInit {
     private notification: ToastrService,
   ) { }
 
-
   ngOnInit(): void {
     console.log("This was reached")
     this.reloadTournaments();
@@ -65,8 +64,4 @@ export class TournamentComponent implements OnInit {
   searchChanged(): void {
     this.searchChangedObservable.next();
   }
-
-  // Add component methods or event handlers as needed
-  // ...
-
 }
