@@ -1,10 +1,10 @@
 <div class="d-flex flex-row w-auto">
-  <button class="btn btn-primary mr-1" (click)="reloadTournaments()" aria-label="Reload horses">
+  <button class="btn btn-primary mr-1" (click)="reloadTournaments()" aria-label="Reload tournaments">
     <i class="bi bi-arrow-clockwise"></i>
     Reload
   </button>
   <span style="flex: 1"></span>
-  <a class="btn btn-secondary" routerLink="create" aria-label="New horse">
+  <a class="btn btn-secondary" routerLink="create" aria-label="New tournament">
     <i class="bi bi-plus-lg"></i>
     New horse
   </a>
@@ -15,23 +15,23 @@
        to reload the horses, is possible -->
   <button type="submit" hidden="hidden">submit</button>
   <div class="flex-grow-1">
-    <label for="searchHorseName" class="col-form-label">
+    <label for="searchTournamentName" class="col-form-label">
       Name
     </label>
-    <input type="text" id="searchHorseName" name="searchHorseName"
+    <input type="text" id="searchTournamentName" name="searchTournamentName"
            class="form-control"
            [(ngModel)]="searchParams.name"
            (ngModelChange)="searchChanged()"
     >
   </div>
   <div class="ms-1">
-    <label for="searchHorseBornEarliest" class="col-form-label">
+    <label for="searchBeginEarliest" class="col-form-label">
       Earliest Date Of Birth
     </label>
     <!-- pattern and placeholder are fallbacks for browser, that use a simple text input for type="date"
          The date format of the plain HTML date input, in browser that support it is, sadly, not changeable in a cross-browser way
       -->
-    <input type="date" id="searchHorseBornEarliest" name="searchHorseBornEarliest"
+    <input type="date" id="searchBeginEarliest" name="searchBeginEarliest"
            pattern="\d{4}-\d{2}-\d{2}"
            placeholder="yyyy-mm-dd"
            class="form-control"
@@ -40,13 +40,13 @@
     >
   </div>
   <div class="ms-1">
-    <label for="searchHorseBornLatest" class="col-form-label">
+    <label for="searchEndLatest" class="col-form-label">
       Latest Date Of Birth
     </label>
     <!-- pattern and placeholder are fallbacks for browser, that use a simple text input for type="date"
          The date format of the plain HTML date input, in browser that support it is, sadly, not changeable in a cross-browser way
       -->
-    <input type="date" id="searchHorseBornLatest" name="searchHorseBornLatest"
+    <input type="date" id="searchEndLatest" name="searchEndLatest"
            pattern="\d{4}-\d{2}-\d{2}"
            placeholder="yyyy-mm-dd"
            class="form-control"
@@ -61,9 +61,8 @@
     <thead>
     <tr>
       <th>Name</th>
-      <th>Sex</th>
-      <th>Date of Birth</th>
-      <th>Breed</th>
+      <th>Start</th>
+      <th>End</th>
       <th class="min-width">Actions</th>
     </tr>
     </thead>
@@ -74,12 +73,12 @@
         <div class="btn-group">
           <a class="btn btn-sm responsive-info-button"
              [routerLink]="['info', tournament.id]"
-             aria-label="Show horse details">
+             aria-label="Show tournament details">
             <i class="bi bi-info-lg"></i>
           </a>
           <a class="btn btn-sm responsive-warning-button"
              [routerLink]="['edit', tournament.id]"
-             aria-label="Edit horse">
+             aria-label="Edit tournament">
             <i class="bi bi-pencil"></i>
           </a>
         </div>

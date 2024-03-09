@@ -3,11 +3,19 @@ import { ToastrService } from "ngx-toastr";
 import { TournamentService } from "../../service/tournament.service";
 import { debounceTime, Subject } from "rxjs";
 import {TournamentListDto, TournamentSearchParams} from "../../dto/tournament";
+import {NgForOf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-tournament',
   templateUrl: './tournament.component.html',
   styleUrls: ['./tournament.component.scss'],
+  imports: [
+    NgForOf,
+    RouterLink,
+    FormsModule
+  ],
   standalone: true
 })
 
