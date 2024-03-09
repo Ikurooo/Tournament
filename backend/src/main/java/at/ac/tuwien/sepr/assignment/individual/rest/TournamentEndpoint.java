@@ -1,6 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
-import at.ac.tuwien.sepr.assignment.individual.dto.DeletionResponseDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.*;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
@@ -33,5 +33,12 @@ public class TournamentEndpoint {
   private final TournamentService service;
   public TournamentEndpoint(TournamentService service) {
     this.service = service;
+  }
+
+  @GetMapping
+  public Stream<TournamentListDto> searchTournaments(TournamentSearchDto searchParameters) {
+    LOG.info("GET " + BASE_PATH);
+    LOG.debug("request parameters: {}", searchParameters);
+    return service.search(searchParameters);
   }
 }

@@ -52,7 +52,6 @@ public class HorseServiceImpl implements HorseService {
         .map(horse -> mapper.entityToListDto(horse, breedsPerId));
   }
 
-
   @Override
   public HorseDetailDto create(HorseDetailDto horse) throws ValidationException, ConflictException {
     LOG.trace("create({})", horse);
@@ -62,7 +61,6 @@ public class HorseServiceImpl implements HorseService {
     return mapper.entityToDetailDto(createdHorse, breeds);
   }
 
-
   @Override
   public HorseDetailDto update(HorseDetailDto horse) throws NotFoundException, ValidationException, ConflictException {
     LOG.trace("update({})", horse);
@@ -71,7 +69,6 @@ public class HorseServiceImpl implements HorseService {
     var breeds = breedMapForSingleHorse(updatedHorse);
     return mapper.entityToDetailDto(updatedHorse, breeds);
   }
-
 
   @Override
   public HorseDetailDto getById(long id) throws NotFoundException {
