@@ -4,6 +4,7 @@ import { HorseService } from '../../../service/horse.service';
 import { Horse } from '../../../dto/horse';
 import {NgIf} from "@angular/common";
 import {DeletionResponseDto} from "../../../dto/deletion-response";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -20,11 +21,13 @@ export class HorseInfoComponent implements OnInit {
 
   horseId: string | null = null;
   horse: Horse | null = null;
+  bannerError: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private horseService: HorseService,
-    private router: Router
+    private router: Router,
+    private notification: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +41,11 @@ export class HorseInfoComponent implements OnInit {
           },
           (error) => {
             console.error('Error fetching horse details:', error);
-            // Handle error as needed
+            this.bannerError = 'Could not fetch horses: ' + error.message;
+            const errorMessage = error.status === 0
+              ? 'Is the backend up?'
+              : error.message.message;
+            this.notification.error(errorMessage, 'Could Not Fetch Horses');
           }
         );
       }
@@ -55,13 +62,11 @@ export class HorseInfoComponent implements OnInit {
             this.router.navigate(['horses','deletion-successful']);
           } else {
             console.error('Error deleting horse:', response.message);
-            // Handle the error message or navigate as needed
             this.router.navigate(['horses', 'deletion-failed']);
           }
         },
         error: (error) => {
           console.error('Unexpected error:', error);
-          // Handle other errors if needed
           this.router.navigate(['horses', 'deletion-failed']);
         }
       });
