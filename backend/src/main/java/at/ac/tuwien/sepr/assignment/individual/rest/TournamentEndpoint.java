@@ -27,12 +27,11 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping(path = TournamentEndpoint.BASE_PATH)
 public class TournamentEndpoint {
-    private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    static final String BASE_PATH = "/tournaments";
+  private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  static final String BASE_PATH = "/tournaments";
 
-    private final TournamentService service;
-
-    public TournamentEndpoint(TournamentService service) {
-        this.service = service;
-    }
+  private final TournamentService service;
+  public TournamentEndpoint(TournamentService service) {
+    this.service = service;
+  }
 }
