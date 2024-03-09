@@ -4,8 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { formatIsoDate } from '../util/date-helper';
-import { TournamentCreateDto, TournamentDetailDto, TournamentListDto } from '../dto/tournament';
-import {HorseSearch} from "../dto/horse";
+import {TournamentCreateDto, TournamentDetailDto, TournamentListDto, TournamentSearchParams} from '../dto/tournament';
 
 const baseUri = `${environment.backendUrl}/tournaments`;
 
@@ -20,23 +19,23 @@ export class TournamentService {
     return throwError(() => ({ message: 'Not implemented yet' }));
   }
 
-  search(searchParams: HorseSearch): Observable<TournamentListDto[]> {
+  search(searchParams: TournamentSearchParams): Observable<TournamentListDto[]> {
     let params = new HttpParams();
 
     if (searchParams.name) {
       params = params.append('name', searchParams.name);
     }
-    if (searchParams.bornEarliest) {
-      params = params.append('bornEarliest', formatIsoDate(searchParams.bornEarliest));
+    if (searchParams.startDate) {
+      params = params.append('startDate', formatIsoDate(searchParams.startDate));
     }
-    if (searchParams.bornLastest) {
-      params = params.append('bornLatest', formatIsoDate(searchParams.bornLastest));
+    if (searchParams.endDate) {
+      params = params.append('endDate', formatIsoDate(searchParams.endDate));
     }
 
     return this.http.get<TournamentListDto[]>(baseUri, { params }).pipe(
       map(tournaments => tournaments.map(tournament => ({
         ...tournament,
-        dateOfBirth: new Date(tournament.endDate) // Parse date string
+        endDate: new Date(tournament.endDate) // Parse date string
       })))
     );
   }

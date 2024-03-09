@@ -7,6 +7,7 @@ import {RouterLink} from "@angular/router";
 import {TournamentListDto, TournamentSearchParams} from "../../dto/tournament";
 import {ToastrService} from "ngx-toastr";
 import {TournamentService} from "../../service/tournament.service";
+import {debounceTime, Subject} from "rxjs";
 
 @Component({
     selector: 'app-tournament',
@@ -28,6 +29,7 @@ export class TournamentComponent implements OnInit {
   searchParams: TournamentSearchParams = {};
   searchBeginEarliest: string | null = null;
   searchEndLatest: string | null = null;
+  searchChangedObservable = new Subject<void>();
 
   constructor(
     private service: TournamentService,
@@ -36,7 +38,11 @@ export class TournamentComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // Initialization logic, if needed
+    console.log("This was reached")
+    this.reloadTournaments();
+    this.searchChangedObservable
+      .pipe(debounceTime(300))
+      .subscribe({next: () => this.reloadTournaments()});
   }
 
   reloadTournaments() {
@@ -64,6 +70,10 @@ export class TournamentComponent implements OnInit {
           this.notification.error(errorMessage, 'Could Not Fetch Tournaments');
         }
       });
+  }
+
+  searchChanged(): void {
+    this.searchChangedObservable.next();
   }
 
   // Add component methods or event handlers as needed

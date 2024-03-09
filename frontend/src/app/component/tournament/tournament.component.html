@@ -35,7 +35,7 @@
            pattern="\d{4}-\d{2}-\d{2}"
            placeholder="yyyy-mm-dd"
            class="form-control"
-           [(ngModel)]="searchBornEarliest"
+           [(ngModel)]="searchBeginEarliest"
            (ngModelChange)="searchChanged()"
     >
   </div>
@@ -50,7 +50,7 @@
            pattern="\d{4}-\d{2}-\d{2}"
            placeholder="yyyy-mm-dd"
            class="form-control"
-           [(ngModel)]="searchBornLatest"
+           [(ngModel)]="searchEndLatest"
            (ngModelChange)="searchChanged()"
     >
   </div>
@@ -68,20 +68,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let horse of horses" class="center-td">
-      <td>{{horse.name}}</td>
-      <td>{{horse.sex === 'FEMALE' ? 'Female' : 'Male'}}</td>
-      <td>{{horse.dateOfBirth.toLocaleDateString()}}</td>
-      <td>{{horse.breed?.name ?? ""}}</td>
+    <tr *ngFor="let tournament of tournaments" class="center-td">
+      <td>{{tournament.name}}</td>
       <td>
         <div class="btn-group">
           <a class="btn btn-sm responsive-info-button"
-             [routerLink]="['info', horse.id]"
+             [routerLink]="['info', tournament.id]"
              aria-label="Show horse details">
             <i class="bi bi-info-lg"></i>
           </a>
           <a class="btn btn-sm responsive-warning-button"
-             [routerLink]="['edit', horse.id]"
+             [routerLink]="['edit', tournament.id]"
              aria-label="Edit horse">
             <i class="bi bi-pencil"></i>
           </a>

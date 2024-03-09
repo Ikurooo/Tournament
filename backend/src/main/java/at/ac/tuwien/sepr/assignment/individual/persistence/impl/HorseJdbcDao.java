@@ -3,6 +3,7 @@ package at.ac.tuwien.sepr.assignment.individual.persistence.impl;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseDao;
@@ -92,10 +93,18 @@ public class HorseJdbcDao implements HorseDao {
     if (update != 1) {
       // Handle the failure to insert a new horse
       LOG.error("Failed to insert a new horse. Rows affected: {}", update);
+      throw new FailedToCreateException("Failed to insert a new horse.");
     }
 
-    // Fetch the newly created horse from the database
-    return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID() AS id", this::mapRow);
+    return new Horse()
+            .setId(horse.id())
+            .setName(horse.name())
+            .setSex(horse.sex())
+            .setDateOfBirth(horse.dateOfBirth())
+            .setHeight(horse.height())
+            .setWeight(horse.weight())
+            .setBreedId(horse.breed().id())
+            ;
   }
 
   @Override
