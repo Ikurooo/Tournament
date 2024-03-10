@@ -4,9 +4,11 @@ import at.ac.tuwien.sepr.assignment.individual.dto.BreedDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.BreedSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.mapper.BreedMapper;
 import at.ac.tuwien.sepr.assignment.individual.persistence.BreedDao;
+
 import java.lang.invoke.MethodHandles;
 import java.util.Set;
 import java.util.stream.Stream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

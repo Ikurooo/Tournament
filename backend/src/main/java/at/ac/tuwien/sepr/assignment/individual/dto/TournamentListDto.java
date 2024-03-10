@@ -7,4 +7,5 @@ public record TournamentListDto(
     String name,
     LocalDate start,
     LocalDate end
-) {}
+) {
+}

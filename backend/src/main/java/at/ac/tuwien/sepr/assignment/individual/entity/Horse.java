@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.entity;
 
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
+
 import java.time.LocalDate;
 
 /**

@@ -1,7 +1,9 @@
 package at.ac.tuwien.sepr.assignment.individual.dto;
 
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
+
 import java.time.LocalDate;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**

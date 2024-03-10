@@ -32,14 +32,17 @@ public class TournamentServiceImpl implements TournamentService {
   public Stream<TournamentListDto> search(TournamentSearchDto searchParameters) {
     return Stream.empty();
   }
+
   @Override
   public TournamentDetailDto create(TournamentDetailDto tournament) throws ValidationException, ConflictException {
     return null;
   }
+
   @Override
   public TournamentDetailDto update(TournamentDetailDto tournament) throws NotFoundException, ValidationException, ConflictException {
     return null;
   }
+
   @Override
   public TournamentDetailDto getById(long id) throws NotFoundException {
     return null;

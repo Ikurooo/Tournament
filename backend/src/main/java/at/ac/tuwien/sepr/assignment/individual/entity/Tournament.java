@@ -11,6 +11,7 @@ public class Tournament {
   private LocalDate startDate;
   private LocalDate endDate;
   private int maxParticipants;
+
   public long getId() {
     return id;
   }
@@ -59,11 +60,11 @@ public class Tournament {
   @Override
   public String toString() {
     return "Tournament{"
-            + "id=" + id
-            + ", name='" + name + '\''
-            + ", startDate=" + startDate
-            + ", endDate=" + endDate
-            + ", maxParticipants=" + maxParticipants
-            + '}';
+        + "id=" + id
+        + ", name='" + name + '\''
+        + ", startDate=" + startDate
+        + ", endDate=" + endDate
+        + ", maxParticipants=" + maxParticipants
+        + '}';
   }
 }

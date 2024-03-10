@@ -11,6 +11,7 @@ import at.ac.tuwien.sepr.assignment.individual.service.HorseService;
 
 import java.lang.invoke.MethodHandles;
 import java.util.stream.Stream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -95,7 +96,7 @@ public class HorseEndpoint {
       return ResponseEntity.ok(new DeletionResponseDto("Horse deleted successfully", true));
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-              .body(new DeletionResponseDto("Error deleting horse: " + e.getMessage(), false));
+          .body(new DeletionResponseDto("Error deleting horse: " + e.getMessage(), false));
     }
   }
 

@@ -32,6 +32,7 @@ public class TournamentEndpoint {
   static final String BASE_PATH = "/tournaments";
 
   private final TournamentService service;
+
   public TournamentEndpoint(TournamentService service) {
     this.service = service;
   }

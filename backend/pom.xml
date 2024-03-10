@@ -62,6 +62,10 @@
             <scope>test</scope>
             <version>${junit-jupiter.version}</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

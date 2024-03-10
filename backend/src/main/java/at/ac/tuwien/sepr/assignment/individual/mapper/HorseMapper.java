@@ -5,9 +5,11 @@ import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
+
 import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ public class HorseMapper {
    * Convert a horse entity object to a {@link HorseListDto}.
    * The given map of breeds needs to contain the breed of {@code horse}.
    *
-   * @param horse the horse to convert
+   * @param horse  the horse to convert
    * @param breeds a map of breeds identified by their id, required for mapping horses
    * @return the converted {@link HorseListDto}
    */

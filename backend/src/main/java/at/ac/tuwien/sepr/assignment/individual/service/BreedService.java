@@ -2,6 +2,7 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.BreedDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.BreedSearchDto;
+
 import java.util.Set;
 import java.util.stream.Stream;
 

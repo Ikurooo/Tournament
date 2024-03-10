@@ -1,8 +1,11 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence.impl;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 import org.slf4j.Logger;
@@ -10,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.lang.invoke.MethodHandles;
@@ -24,23 +29,22 @@ public class TournamentJdbcDao implements TournamentDao {
   private static final String TABLE_NAME = "tournament";
   private static final String SQL_SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
   private static final String SQL_SELECT_SEARCH = "SELECT "
-        + "    t.id as \"id\", t.name as \"name\", t.start_date as \"start_date\""
-        + "    , t.end_date as \"end_date\", t.max_participants as \"max_participants\""
-        + " FROM " + TABLE_NAME + " t"
-        + " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER('%'||:name||'%'))"
-        + "  AND (:startDate IS NULL OR :startDate <= t.start_date)"
-        + "  AND (:endDate IS NULL OR :endDate >= t.end_date)"
-        + "  AND (:maxParticipants IS NULL OR :maxParticipants = t.max_participants)";
+      + "    t.id as \"id\", t.name as \"name\", t.start_date as \"start_date\""
+      + "    , t.end_date as \"end_date\", t.max_participants as \"max_participants\""
+      + " FROM " + TABLE_NAME + " t"
+      + " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER('%'||:name||'%'))"
+      + "  AND (:startDate IS NULL OR :startDate <= t.start_date)"
+      + "  AND (:endDate IS NULL OR :endDate >= t.end_date)"
+      + "  AND (:maxParticipants IS NULL OR :maxParticipants = t.max_participants)";
 
   private static final String SQL_LIMIT_CLAUSE = " LIMIT :limit";
 
   private static final String SQL_UPDATE = "UPDATE " + TABLE_NAME
-        + " SET name = ?"
-        + "  , start_date = ?"
-        + "  , end_date = ?"
-        + "  , max_participants = ?"
-        + " WHERE id = ?";
-
+      + " SET name = ?"
+      + "  , start_date = ?"
+      + "  , end_date = ?"
+      + "  , max_participants = ?"
+      + " WHERE id = ?";
 
   private final JdbcTemplate jdbcTemplate;
   private final NamedParameterJdbcTemplate jdbcNamed;
@@ -74,7 +78,27 @@ public class TournamentJdbcDao implements TournamentDao {
 
   @Override
   public Tournament create(TournamentDetailDto tournament) {
-    return null;
+    LOG.trace("create({})", tournament);
+
+    var update = jdbcTemplate.update("INSERT INTO " + TABLE_NAME
+            + " (name, start_date, end_date)"
+            + " VALUES (?, ?, ?)",
+        tournament.name(),
+        tournament.start(),
+        tournament.end());
+
+    if (update != 1) {
+      // Handle the failure to insert a new horse
+      LOG.error("Failed to insert a new horse. Rows affected: {}", update);
+      throw new FailedToCreateException("Failed to insert a new horse.");
+    }
+
+    return new Tournament()
+        .setId(tournament.id())
+        .setName(tournament.name())
+        .setStartDate(tournament.start())
+        .setEndDate(tournament.end())
+        ;
   }
 
   @Override
@@ -84,11 +108,11 @@ public class TournamentJdbcDao implements TournamentDao {
 
   private Tournament mapRow(ResultSet result, int rownum) throws SQLException {
     return new Tournament()
-            .setId(result.getLong("id"))
-            .setName(result.getString("name"))
-            .setStartDate(result.getDate("start_date").toLocalDate())
-            .setEndDate(result.getDate("end_date").toLocalDate())
-            .setMaxParticipants(result.getInt("max_participants"))
-            ;
+        .setId(result.getLong("id"))
+        .setName(result.getString("name"))
+        .setStartDate(result.getDate("start_date").toLocalDate())
+        .setEndDate(result.getDate("end_date").toLocalDate())
+        .setMaxParticipants(result.getInt("max_participants"))
+        ;
   }
 }
