@@ -50,8 +50,13 @@ public class TournamentEndpoint {
   // TODO: remove test stub
   @PostMapping
   public ResponseEntity<TournamentDetailDto> create(@RequestBody TournamentDetailDto toCreate) {
-    LocalDate date = LocalDate.now();
-    TournamentDetailDto createdTournament = new TournamentDetailDto(12L, "Name", date, date.plusDays(13));
-    return new ResponseEntity<>(createdTournament, HttpStatus.CREATED);
+    try {
+      TournamentDetailDto createdTournament = service.create(toCreate);
+      return new ResponseEntity<>(createdTournament, HttpStatus.CREATED);
+    } catch (ValidationException e) {
+      throw new RuntimeException(e);
+    } catch (ConflictException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

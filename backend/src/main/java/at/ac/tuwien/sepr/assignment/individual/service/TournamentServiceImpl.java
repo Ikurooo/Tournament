@@ -35,7 +35,10 @@ public class TournamentServiceImpl implements TournamentService {
 
   @Override
   public TournamentDetailDto create(TournamentDetailDto tournament) throws ValidationException, ConflictException {
-    return null;
+    LOG.trace("create({})", tournament);
+    // validator.validateForCreate(tournament); TODO: add backend validation
+    var createdTournament = dao.create(tournament);
+    return mapper.entityToDetailDto(createdTournament);
   }
 
   @Override
