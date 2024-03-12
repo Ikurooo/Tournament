@@ -1,5 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
@@ -8,6 +10,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.service.TournamentService;
 
 import java.lang.invoke.MethodHandles;
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import at.ac.tuwien.sepr.assignment.individual.service.TournamentServiceImpl;
@@ -42,5 +45,13 @@ public class TournamentEndpoint {
     LOG.info("GET " + BASE_PATH);
     LOG.debug("request parameters: {}", searchParameters);
     return service.search(searchParameters);
+  }
+
+  // TODO: remove test stub
+  @PostMapping
+  public ResponseEntity<TournamentDetailDto> create(@RequestBody TournamentDetailDto toCreate) {
+    LocalDate date = LocalDate.now();
+    TournamentDetailDto createdTournament = new TournamentDetailDto(12L, "Name", date, date.plusDays(13));
+    return new ResponseEntity<>(createdTournament, HttpStatus.CREATED);
   }
 }

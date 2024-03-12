@@ -15,8 +15,7 @@ export class TournamentService {
   constructor(private http: HttpClient) {}
 
   create(tournament: TournamentCreateDto): Observable<TournamentDetailDto> {
-    // TODO: Implement the actual API call for creating a tournament
-    return throwError(() => ({ message: 'Not implemented yet' }));
+    return this.http.post<TournamentDetailDto>(baseUri, tournament);
   }
 
   search(searchParams: TournamentSearchParams): Observable<TournamentListDto[]> {
