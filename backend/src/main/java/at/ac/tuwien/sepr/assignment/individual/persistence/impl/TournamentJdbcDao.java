@@ -2,6 +2,7 @@ package at.ac.tuwien.sepr.assignment.individual.persistence.impl;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
@@ -30,12 +31,11 @@ public class TournamentJdbcDao implements TournamentDao {
   private static final String SQL_SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
   private static final String SQL_SELECT_SEARCH = "SELECT "
       + "    t.id as \"id\", t.name as \"name\", t.start_date as \"start_date\""
-      + "    , t.end_date as \"end_date\", t.max_participants as \"max_participants\""
+      + "    , t.end_date as \"end_date\""
       + " FROM " + TABLE_NAME + " t"
       + " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER('%'||:name||'%'))"
       + "  AND (:startDate IS NULL OR :startDate <= t.start_date)"
-      + "  AND (:endDate IS NULL OR :endDate >= t.end_date)"
-      + "  AND (:maxParticipants IS NULL OR :maxParticipants = t.max_participants)";
+      + "  AND (:endDate IS NULL OR :endDate >= t.end_date)";
 
   private static final String SQL_LIMIT_CLAUSE = " LIMIT :limit";
 
@@ -43,7 +43,6 @@ public class TournamentJdbcDao implements TournamentDao {
       + " SET name = ?"
       + "  , start_date = ?"
       + "  , end_date = ?"
-      + "  , max_participants = ?"
       + " WHERE id = ?";
 
   private final JdbcTemplate jdbcTemplate;
@@ -84,20 +83,18 @@ public class TournamentJdbcDao implements TournamentDao {
             + " (name, start_date, end_date)"
             + " VALUES (?, ?, ?)",
         tournament.name(),
-        tournament.start(),
-        tournament.end());
+        tournament.startDate(),
+        tournament.endDate());
 
     if (update != 1) {
-      // Handle the failure to insert a new horse
       LOG.error("Failed to insert a new horse. Rows affected: {}", update);
       throw new FailedToCreateException("Failed to insert a new horse.");
     }
 
     return new Tournament()
-        .setId(tournament.id())
         .setName(tournament.name())
-        .setStartDate(tournament.start())
-        .setEndDate(tournament.end())
+        .setStartDate(tournament.startDate())
+        .setEndDate(tournament.endDate())
         ;
   }
 
@@ -112,7 +109,6 @@ public class TournamentJdbcDao implements TournamentDao {
         .setName(result.getString("name"))
         .setStartDate(result.getDate("start_date").toLocalDate())
         .setEndDate(result.getDate("end_date").toLocalDate())
-        .setMaxParticipants(result.getInt("max_participants"))
         ;
   }
 }

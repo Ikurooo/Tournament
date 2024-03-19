@@ -50,6 +50,11 @@ public class TournamentEndpoint {
   // TODO: remove test stub
   @PostMapping
   public ResponseEntity<TournamentDetailDto> create(@RequestBody TournamentDetailDto toCreate) {
+    LOG.info("POST " + BASE_PATH);
+    LOG.debug("Body of request:\n{}", toCreate);
+
+    LOG.info(toCreate.toString());
+
     try {
       TournamentDetailDto createdTournament = service.create(toCreate);
       return new ResponseEntity<>(createdTournament, HttpStatus.CREATED);

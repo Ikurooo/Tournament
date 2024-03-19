@@ -46,7 +46,6 @@ public class TournamentMapper {
     }
 
     return new TournamentDetailDto(
-        tournament.getId(),
         tournament.getName(),
         tournament.getStartDate(),
         tournament.getEndDate()

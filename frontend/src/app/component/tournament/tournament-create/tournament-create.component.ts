@@ -55,7 +55,6 @@ export class TournamentCreateComponent {
     }
   }
 
-
   public constructor(
     private service: TournamentService,
     private horseService: HorseService,
@@ -69,12 +68,13 @@ export class TournamentCreateComponent {
     console.log(form.valid, this.tournament);
     if (form.invalid)
       return;
-    const participants= <HorseSelection[]>this.participants
+    const participants = <HorseSelection[]>this.participants
       .filter(x => x != null);
     if (participants.length != 8) {
       this.notification.error("A tournament must have exactly 8 participants", "Not Enough Participants");
       return;
     }
+
     this.tournament.participants = participants;
     this.service.create(this.tournament)
       .subscribe({

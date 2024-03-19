@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public record TournamentSearchDto(
     String name,
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate start,
+    LocalDate startDate,
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate end,
+    LocalDate endDate,
     Integer limit
 ) {
 }

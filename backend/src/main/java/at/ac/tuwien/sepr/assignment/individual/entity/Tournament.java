@@ -10,7 +10,6 @@ public class Tournament {
   private String name;
   private LocalDate startDate;
   private LocalDate endDate;
-  private int maxParticipants;
 
   public long getId() {
     return id;
@@ -48,15 +47,6 @@ public class Tournament {
     return this;
   }
 
-  public int getMaxParticipants() {
-    return maxParticipants;
-  }
-
-  public Tournament setMaxParticipants(int maxParticipants) {
-    this.maxParticipants = maxParticipants;
-    return this;
-  }
-
   @Override
   public String toString() {
     return "Tournament{"
@@ -64,7 +54,6 @@ public class Tournament {
         + ", name='" + name + '\''
         + ", startDate=" + startDate
         + ", endDate=" + endDate
-        + ", maxParticipants=" + maxParticipants
         + '}';
   }
 }
