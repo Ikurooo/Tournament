@@ -107,8 +107,8 @@ public class TournamentJdbcDao implements TournamentDao {
     return new Tournament()
         .setId(result.getLong("id"))
         .setName(result.getString("name"))
-        .setStartDate(result.getDate("start_date").toLocalDate())
-        .setEndDate(result.getDate("end_date").toLocalDate())
+        .setStartDate(result.getDate("startDate").toLocalDate())
+        .setEndDate(result.getDate("endDate").toLocalDate())
         ;
   }
 }
