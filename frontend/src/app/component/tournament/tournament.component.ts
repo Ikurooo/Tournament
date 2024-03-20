@@ -62,6 +62,7 @@ export class TournamentComponent implements OnInit {
             endDate:
               new Date(tournament.endDate)     // Convert endDate string to Date
           }))
+          this.tournaments.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
         },
         error: error => {
           console.error('Error fetching tournaments', error);
