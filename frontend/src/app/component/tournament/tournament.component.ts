@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from "ngx-toastr";
-import { TournamentService } from "../../service/tournament.service";
-import { debounceTime, Subject } from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from "ngx-toastr";
+import {TournamentService} from "../../service/tournament.service";
+import {debounceTime, Subject} from "rxjs";
 import {TournamentListDto, TournamentSearchParams} from "../../dto/tournament";
 import {NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
@@ -32,7 +32,8 @@ export class TournamentComponent implements OnInit {
   constructor(
     private service: TournamentService,
     private notification: ToastrService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.reloadTournaments();
@@ -55,14 +56,12 @@ export class TournamentComponent implements OnInit {
     this.service.search(this.searchParams)
       .subscribe({
         next: data => {
-          this.tournaments = data;
-
-          // TODO: debug
-          for (const datum of data) {
-            console.debug(datum)
-            console.debug(typeof datum)
-          }
-
+          this.tournaments = data.map(tournament => ({
+            ...tournament,
+            startDate: new Date(tournament.startDate), // Convert startDate string to Date
+            endDate:
+              new Date(tournament.endDate)     // Convert endDate string to Date
+          }))
         },
         error: error => {
           console.error('Error fetching tournaments', error);
@@ -75,7 +74,9 @@ export class TournamentComponent implements OnInit {
       });
   }
 
-  searchChanged(): void {
+  searchChanged()
+    :
+    void {
     this.searchChangedObservable.next();
   }
 }
