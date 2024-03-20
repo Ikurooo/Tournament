@@ -35,7 +35,6 @@ export class TournamentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("This was reached")
     this.reloadTournaments();
     this.searchChangedObservable
       .pipe(debounceTime(300))
@@ -57,6 +56,13 @@ export class TournamentComponent implements OnInit {
       .subscribe({
         next: data => {
           this.tournaments = data;
+
+          // TODO: debug
+          for (const datum of data) {
+            console.debug(datum)
+            console.debug(typeof datum)
+          }
+
         },
         error: error => {
           console.error('Error fetching tournaments', error);

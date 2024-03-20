@@ -31,11 +31,6 @@ export class TournamentService {
       params = params.append('endDate', formatIsoDate(searchParams.endDate));
     }
 
-    return this.http.get<TournamentListDto[]>(baseUri, { params }).pipe(
-      map(tournaments => tournaments.map(tournament => ({
-        ...tournament,
-        endDate: new Date(tournament.endDate) // Parse date string
-      })))
-    );
+    return this.http.get<TournamentListDto[]>(baseUri, { params })
   }
 }

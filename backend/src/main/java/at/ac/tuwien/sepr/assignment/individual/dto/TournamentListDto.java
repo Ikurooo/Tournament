@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public record TournamentListDto(
     Long id,
     String name,
-    LocalDate start,
-    LocalDate end
+    LocalDate startDate,
+    LocalDate endDate
 ) {
 }
