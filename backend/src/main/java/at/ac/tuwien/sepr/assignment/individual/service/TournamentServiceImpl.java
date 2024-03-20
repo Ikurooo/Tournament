@@ -30,7 +30,8 @@ public class TournamentServiceImpl implements TournamentService {
 
   @Override
   public Stream<TournamentListDto> search(TournamentSearchDto searchParameters) {
-    return Stream.empty();
+    var tournaments = dao.search(searchParameters);
+    return tournaments.stream().map(mapper::entityToListDto);
   }
 
   @Override

@@ -33,7 +33,7 @@ public class TournamentJdbcDao implements TournamentDao {
       + "    t.id as \"id\", t.name as \"name\", t.start_date as \"start_date\""
       + "    , t.end_date as \"end_date\""
       + " FROM " + TABLE_NAME + " t"
-      + " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER('%'||:name||'%'))"
+      + " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER(concat('%', :name, '%')))"
       + "  AND (:startDate IS NULL OR :startDate <= t.start_date)"
       + "  AND (:endDate IS NULL OR :endDate >= t.end_date)";
 
@@ -107,8 +107,8 @@ public class TournamentJdbcDao implements TournamentDao {
     return new Tournament()
         .setId(result.getLong("id"))
         .setName(result.getString("name"))
-        .setStartDate(result.getDate("startDate").toLocalDate())
-        .setEndDate(result.getDate("endDate").toLocalDate())
+        .setStartDate(result.getDate("start_date").toLocalDate())
+        .setEndDate(result.getDate("end_date").toLocalDate())
         ;
   }
 }
