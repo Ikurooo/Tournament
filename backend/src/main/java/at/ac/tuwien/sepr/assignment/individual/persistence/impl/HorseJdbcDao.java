@@ -96,6 +96,7 @@ public class HorseJdbcDao implements HorseDao {
       throw new FailedToCreateException("Failed to insert a new horse.");
     }
 
+    // TODO: goofy shit
     return new Horse()
         .setId(horse.id())
         .setName(horse.name())
