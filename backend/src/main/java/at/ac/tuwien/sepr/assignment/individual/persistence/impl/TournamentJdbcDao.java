@@ -94,6 +94,7 @@ public class TournamentJdbcDao implements TournamentDao {
       throw new FailedToCreateException("Failed to insert a new horse.");
     }
 
+    // TODO: retrieve tournament id
     return new Tournament()
         .setName(tournament.name())
         .setStartDate(tournament.startDate())
