@@ -1,13 +1,24 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
+import at.ac.tuwien.sepr.assignment.individual.dto.BreedDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
+import at.ac.tuwien.sepr.assignment.individual.service.BreedService;
+import at.ac.tuwien.sepr.assignment.individual.service.HorseService;
+import at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +31,21 @@ public class HorseDaoTest extends TestBase {
 
   @Autowired
   HorseDao horseDao;
+
+  @Autowired
+  HorseMapper horseMapper;
+
+  @Autowired
+  BreedService breedService;
+
+  private void assertHorsesEqual(Horse expected, Horse actual) {
+    assertEquals(expected.getName(), actual.getName());
+    assertEquals(expected.getSex(), actual.getSex());
+    assertEquals(expected.getDateOfBirth(), actual.getDateOfBirth());
+    assertEquals(expected.getHeight(), actual.getHeight(), 0.01f);
+    assertEquals(expected.getWeight(), actual.getWeight());
+    assertEquals(expected.getBreedId(), actual.getBreedId());
+  }
 
   @Test
   public void searchByBreedWelFindsThreeHorses() {
