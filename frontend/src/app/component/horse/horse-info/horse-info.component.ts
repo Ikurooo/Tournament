@@ -53,7 +53,6 @@ export class HorseInfoComponent implements OnInit {
   }
 
   onDelete() {
-    console.log('onDelete called');
     if (this.horseId) {
       this.horseService.deleteHorse(this.horseId).subscribe({
         next: (response: DeletionResponseDto) => {

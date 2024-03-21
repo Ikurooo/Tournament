@@ -81,8 +81,7 @@ export class HorseService {
    * @return an Observable indicating the success of the deletion
    */
   deleteHorse(horseId: string): Observable<DeletionResponseDto> {
-    const deleteUri = `${baseUri}/${horseId}`;
-    return this.http.delete<DeletionResponseDto>(deleteUri);
+    return this.http.delete<DeletionResponseDto>(`${baseUri}/${horseId}`);
   }
 
 }

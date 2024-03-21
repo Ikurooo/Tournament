@@ -10,6 +10,7 @@ import { TournamentStandingsComponent } from "./component/tournament/tournament-
 import {HorseDeletedComponent} from "./component/horse/horse-deleted/horse-deleted.component";
 import {TournamentComponent} from "./component/tournament/tournament.component";
 import {HorseDeletionFailedComponent} from "./component/horse/horse-deletion-failed/horse-deletion-failed.component";
+import {TournamentEditComponent} from "./component/tournament/tournament-edit/tournament-edit.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'horses', pathMatch: 'full' },
@@ -27,7 +28,9 @@ const routes: Routes = [
     path: 'tournaments', children: [
       { path: '', component: TournamentComponent },
       { path: 'create', component: TournamentCreateComponent },
-      { path: 'standings/:id', component: TournamentStandingsComponent }
+      { path: 'standings/:id', component: TournamentStandingsComponent },
+      // TODO: this is monkey mode
+      { path: 'edit/:id', component: TournamentEditComponent }
     ]
   },
   { path: '**', redirectTo: 'horses' },
