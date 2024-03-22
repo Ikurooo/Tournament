@@ -9,5 +9,8 @@ public class BreedMapper {
   public BreedDto entityToDto(Breed breed) {
     return new BreedDto(breed.getId(), breed.getName());
   }
-  public Breed DtoToBreed(BreedDto breedDto) {return new Breed().setId(breedDto.id());}
+
+  public Breed dtoToBreed(BreedDto breedDto) {
+    return new Breed().setId(breedDto.id());
+  }
 }

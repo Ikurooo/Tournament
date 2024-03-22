@@ -59,10 +59,9 @@ export class TournamentComponent implements OnInit {
           this.tournaments = data.map(tournament => ({
             ...tournament,
             startDate: new Date(tournament.startDate), // Convert startDate string to Date
-            endDate:
-              new Date(tournament.endDate)     // Convert endDate string to Date
+            endDate: new Date(tournament.endDate)     // Convert endDate string to Date
           }))
-          this.tournaments.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
+          this.tournaments.sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
         },
         error: error => {
           console.error('Error fetching tournaments', error);
@@ -75,9 +74,7 @@ export class TournamentComponent implements OnInit {
       });
   }
 
-  searchChanged()
-    :
-    void {
+  searchChanged(): void {
     this.searchChangedObservable.next();
   }
 }

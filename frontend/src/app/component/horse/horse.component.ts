@@ -5,6 +5,7 @@ import {Horse, HorseListDto} from '../../dto/horse';
 import {HorseSearch} from '../../dto/horse';
 import {debounceTime, map, Observable, of, Subject} from 'rxjs';
 import {BreedService} from "../../service/breed.service";
+import {DeletionResponseDto} from "../../dto/deletion-response";
 
 @Component({
   selector: 'app-horse',
@@ -24,6 +25,7 @@ export class HorseComponent implements OnInit {
   constructor(
     private service: HorseService,
     private breedService: BreedService,
+    private horseService: HorseService,
     private notification: ToastrService,
   ) { }
 
@@ -62,6 +64,23 @@ export class HorseComponent implements OnInit {
   }
   searchChanged(): void {
     this.searchChangedObservable.next();
+  }
+
+  onDelete(horseId: string) {
+    if (horseId) {
+      this.horseService.deleteHorse(horseId).subscribe({
+        next: (response: DeletionResponseDto) => {
+          if (response.success) {
+            this.notification.success("Horse deleted successfully.")
+          }
+          this.reloadHorses();
+        },
+        error: (error) => {
+          this.notification.error("Failed to delete horse: ", error);
+        },
+      });
+      this.reloadHorses();
+    }
   }
 
   breedSuggestions = (input: string): Observable<string[]> =>

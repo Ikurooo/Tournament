@@ -57,16 +57,13 @@ export class HorseInfoComponent implements OnInit {
       this.horseService.deleteHorse(this.horseId).subscribe({
         next: (response: DeletionResponseDto) => {
           if (response.success) {
-            console.log('Horse deleted successfully');
             this.router.navigate(['horses','deletion-successful']);
           } else {
-            console.error('Error deleting horse:', response.message);
-            this.router.navigate(['horses', 'deletion-failed']);
+            this.notification.error("Failed deleting horse: " + response.message)
           }
         },
         error: (error) => {
-          console.error('Unexpected error:', error);
-          this.router.navigate(['horses', 'deletion-failed']);
+          this.notification.error("Failed deleting horse: " + error)
         }
       });
     }

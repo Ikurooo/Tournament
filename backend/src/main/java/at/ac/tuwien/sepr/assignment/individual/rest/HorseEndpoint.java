@@ -29,9 +29,8 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping(path = HorseEndpoint.BASE_PATH)
 public class HorseEndpoint {
-  private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   static final String BASE_PATH = "/horses";
-
+  private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final HorseService service;
 
   public HorseEndpoint(HorseService service) {
@@ -99,7 +98,6 @@ public class HorseEndpoint {
           .body(new DeletionResponseDto("Error deleting horse: " + e.getMessage(), false));
     }
   }
-
 
   private void logClientError(HttpStatus status, String message, Exception e) {
     LOG.warn("{} {}: {}: {}", status.value(), message, e.getClass().getSimpleName(), e.getMessage());
