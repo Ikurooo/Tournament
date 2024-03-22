@@ -7,12 +7,28 @@ import java.util.Collection;
 import java.util.Set;
 
 public interface BreedDao {
-  // TODO comment
+
+  /**
+   * Retrieves all breeds stored in the database.
+   *
+   * @return Collection of all breeds
+   */
   Collection<Breed> allBreeds();
 
-  // TODO comment
+  /**
+   * Finds breeds by their unique identifiers.
+   *
+   * @param breedIds Set of breed IDs to search for
+   * @return Collection of breeds matching the provided IDs
+   */
   Collection<Breed> findBreedsById(Set<Long> breedIds);
 
-  // TODO comment
+  /**
+   * Searches for breeds based on the provided search parameters.
+   *
+   * @param searchParams Object containing parameters for breed search
+   * @return Collection of breeds matching the search criteria
+   */
   Collection<Breed> search(BreedSearchDto searchParams);
 }
+
