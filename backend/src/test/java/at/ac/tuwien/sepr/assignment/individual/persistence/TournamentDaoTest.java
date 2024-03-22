@@ -49,8 +49,8 @@ public class TournamentDaoTest extends TestBase {
   @Test
   public void searchBetweenTwoDays() {
     var searchDto = new TournamentSearchDto(null,
-        LocalDate.of(2001, 1, 1),
-        LocalDate.of(2005, 12, 31),
+        LocalDate.of(2011, 1, 1),
+        LocalDate.of(2015, 1, 1),
         null);
     var tournaments = tournamentDao.search(searchDto);
     assertNotNull(tournaments);
@@ -58,17 +58,13 @@ public class TournamentDaoTest extends TestBase {
         .usingRecursiveFieldByFieldElementComparator()
         .containsExactlyInAnyOrder(
             (new Tournament())
-                .setId(-1).setName("Rainbow Road")
-                .setStartDate(LocalDate.of(2001, 1, 1))
-                .setEndDate(LocalDate.of(2002, 3, 2)),
+                .setId(-7).setName("Banana Cup")
+                .setStartDate(LocalDate.of(2013, 2, 15))
+                .setEndDate(LocalDate.of(2014, 4, 30)),
             (new Tournament())
-                .setId(-2).setName("Star Cup")
-                .setStartDate(LocalDate.of(2003, 5, 15))
-                .setEndDate(LocalDate.of(2004, 7, 20)),
-            (new Tournament())
-                .setId(-3).setName("Mushroom Cup")
-                .setStartDate(LocalDate.of(2005, 9, 10))
-                .setEndDate(LocalDate.of(2006, 11, 25))
+                .setId(-6).setName("Shell Cup")
+                .setStartDate(LocalDate.of(2011, 10, 5))
+                .setEndDate(LocalDate.of(2012, 12, 28))
         );
   }
 

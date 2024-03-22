@@ -47,7 +47,6 @@ public class TournamentEndpoint {
     return service.search(searchParameters);
   }
 
-  // TODO: remove test stub
   @PostMapping
   public ResponseEntity<TournamentDetailDto> create(@RequestBody TournamentDetailDto toCreate) {
     LOG.info("POST " + BASE_PATH);
@@ -59,9 +58,17 @@ public class TournamentEndpoint {
       TournamentDetailDto createdTournament = service.create(toCreate);
       return new ResponseEntity<>(createdTournament, HttpStatus.CREATED);
     } catch (ValidationException e) {
-      throw new RuntimeException(e);
+      HttpStatus status = HttpStatus.BAD_REQUEST;
+      logClientError(status, "Validation issue during creation", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (ConflictException e) {
-      throw new RuntimeException(e);
+      HttpStatus status = HttpStatus.CONFLICT;
+      logClientError(status, "Conflict issue during creation", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     }
+  }
+
+  private void logClientError(HttpStatus status, String message, Exception e) {
+    LOG.warn("{} {}: {}: {}", status.value(), message, e.getClass().getSimpleName(), e.getMessage());
   }
 }
