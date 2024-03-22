@@ -57,7 +57,7 @@ public class HorseServiceImpl implements HorseService {
   @Override
   public HorseDetailDto create(HorseDetailDto horse) throws ValidationException, ConflictException {
     LOG.trace("create({})", horse);
-    validator.validateForCreate(horse);  // Add validation for create operation if needed
+    validator.validateForCreate(horse);
     var createdHorse = dao.create(horse);
     var breeds = breedMapForSingleHorse(createdHorse);
     return mapper.entityToDetailDto(createdHorse, breeds);
