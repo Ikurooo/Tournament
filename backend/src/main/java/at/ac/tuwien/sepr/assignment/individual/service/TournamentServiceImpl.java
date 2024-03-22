@@ -17,15 +17,15 @@ import java.util.stream.Stream;
 
 @Service
 public class TournamentServiceImpl implements TournamentService {
-
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final TournamentDao dao;
   private final TournamentMapper mapper;
-  // TODO: private final TournamentValidator validator;
+  private final TournamentValidator validator;
 
-  public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper) {
+  public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper, TournamentValidator validator) {
     this.dao = dao;
     this.mapper = mapper;
+    this.validator = validator;
   }
 
   @Override
@@ -37,8 +37,8 @@ public class TournamentServiceImpl implements TournamentService {
 
   @Override
   public TournamentDetailDto create(TournamentDetailDto tournament) throws ValidationException, ConflictException {
+    validator.validateForCreate(tournament);
     LOG.trace("create({})", tournament);
-    // validator.validateForCreate(tournament); TODO: add backend validation
     var createdTournament = dao.create(tournament);
     return mapper.entityToDetailDto(createdTournament);
   }
