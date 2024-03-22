@@ -97,4 +97,50 @@ public class TournamentDaoTest extends TestBase {
     assertTournamentsEqual(rogerTogger, createdRogerTogger);
     assertTournamentsEqual(billyWilly, createdBillyWilly);
   }
+
+  @Test
+  public void onlyEndDateGivenTest() {
+    var searchDto = new TournamentSearchDto(
+        null,
+        null,
+        LocalDate.of(2003, 12, 31),
+        null);
+    var tournaments = tournamentDao.search(searchDto);
+    assertNotNull(tournaments);
+    assertThat(tournaments)
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactlyInAnyOrder(
+            (new Tournament())
+                .setId(-1).setName("Rainbow Road")
+                .setStartDate(LocalDate.of(2001, 1, 1))
+                .setEndDate(LocalDate.of(2002, 3, 2)),
+            (new Tournament())
+                .setId(-2).setName("Star Cup")
+                .setStartDate(LocalDate.of(2003, 5, 15))
+                .setEndDate(LocalDate.of(2004, 7, 20))
+        );
+  }
+
+  @Test
+  public void onlyStartDateGivenTest() {
+    var searchDto = new TournamentSearchDto(
+        null,
+        LocalDate.of(2016, 1, 1),
+        null,
+        null);
+    var tournaments = tournamentDao.search(searchDto);
+    assertNotNull(tournaments);
+    assertThat(tournaments)
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactlyInAnyOrder(
+            (new Tournament())
+                .setId(-8).setName("Leaf Cup")
+                .setStartDate(LocalDate.of(2015, 6, 25))
+                .setEndDate(LocalDate.of(2016, 8, 22)),
+            (new Tournament())
+                .setId(-9).setName("Lightning Cup")
+                .setStartDate(LocalDate.of(2017, 10, 10))
+                .setEndDate(LocalDate.of(2018, 12, 15))
+        );
+  }
 }

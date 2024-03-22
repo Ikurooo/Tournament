@@ -30,13 +30,14 @@ public class TournamentJdbcDao implements TournamentDao {
   private static final String TABLE_NAME = "tournament";
   private static final String SQL_SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
   private static final String SQL_SELECT_SEARCH = "SELECT "
-        +  "    t.id as \"id\", t.name as \"name\", t.start_date as \"start_date\", t.end_date as \"end_date\""
-        +  " FROM " + TABLE_NAME + " t"
-        +  " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER(concat('%', :name, '%')))"
-        +  "  AND ((:startDate IS NULL AND :endDate IS NULL) OR "
-        +  "       (:startDate IS NULL AND t.end_date >= :startDate) OR "
-        +  "       (:endDate IS NULL AND t.start_date <= :endDate) OR "
-        +  "       (t.start_date <= :endDate AND t.end_date >= :startDate))";
+      + "    t.id as \"id\", t.name as \"name\", t.start_date as \"start_date\", t.end_date as \"end_date\""
+      + " FROM " + TABLE_NAME + " t"
+      + " WHERE (:name IS NULL OR UPPER(t.name) LIKE UPPER(concat('%', :name, '%')))"
+      + "  AND ((:startDate IS NULL AND :endDate IS NULL) OR "
+      + "       (t.start_date <= :endDate AND t.end_date >= :startDate) OR"
+      + "       (:startDate is NULL AND t.start_date <= :endDate) OR"
+      + "       (:endDate is NULL AND t.end_date >= :startDate)"
+      + "      )";
 
 
   private static final String SQL_LIMIT_CLAUSE = " LIMIT :limit";
