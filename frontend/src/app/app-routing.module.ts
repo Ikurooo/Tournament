@@ -10,7 +10,6 @@ import { TournamentStandingsComponent } from "./component/tournament/tournament-
 import {HorseDeletedComponent} from "./component/horse/horse-deleted/horse-deleted.component";
 import {TournamentComponent} from "./component/tournament/tournament.component";
 import {HorseDeletionFailedComponent} from "./component/horse/horse-deletion-failed/horse-deletion-failed.component";
-import {TournamentEditComponent} from "./component/tournament/tournament-edit/tournament-edit.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'horses', pathMatch: 'full' },

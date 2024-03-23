@@ -7,6 +7,7 @@ import {debounceTime, map, Observable, of, Subject} from 'rxjs';
 import {BreedService} from "../../service/breed.service";
 import {DeletionResponseDto} from "../../dto/deletion-response";
 import {HorseDeletedComponent} from "./horse-deleted/horse-deleted.component";
+import {ErrorFormatterService} from "../../service/error-formatter.service";
 
 @Component({
   selector: 'app-horse',
@@ -28,6 +29,7 @@ export class HorseComponent implements OnInit {
     private breedService: BreedService,
     private horseService: HorseService,
     private notification: ToastrService,
+    private errorFormatter: ErrorFormatterService,
   ) { }
 
   ngOnInit(): void {
@@ -74,8 +76,9 @@ export class HorseComponent implements OnInit {
           this.horseForDeletion = horse;
 
         },
-        error: (error) => {
-          this.notification.error("Failed to fetch horse: ", error);
+        error: (err) => {
+          const errorMessage = this.errorFormatter.logError(err);
+          this.notification.error("Failure", errorMessage);
         },
       }
     )
@@ -90,8 +93,9 @@ export class HorseComponent implements OnInit {
           }
           this.reloadHorses();
         },
-        error: (error) => {
-          this.notification.error("Failed to delete horse: ", error);
+        error: (err) => {
+          const errorMessage = this.errorFormatter.logError(err);
+          this.notification.error("Failure", errorMessage);
         },
       });
       this.reloadHorses();

@@ -44,7 +44,8 @@ export class TournamentStandingsComponent implements OnInit {
             console.log(this.standings.tree);
           },
           error: err => {
-            this.notification.error('Error fetching horse details', err);
+            const errorMessage = this.errorFormatter.logError(err);
+            this.notification.error("Failure", errorMessage);
           }
         });
       }
@@ -60,16 +61,18 @@ export class TournamentStandingsComponent implements OnInit {
     console.log(this.standings.tree);
 
     this.service.update(this.standings, this.standings.id.toString()).subscribe({
-    next: data => {
-      // TODO: reload page with received data.
-      this.notification.success("Update sent.");
-    },
-    error: (err) => {
-      console.error("Error updating standings:", err);
-      this.notification.error("Failed to update standings.", this.errorFormatter.format(err));
-      this.ngOnInit() // TODO temp
-    }
-  });
+      next: data => {
+        this.standings = data;
+        this.notification.success("Update successful.");
+      },
+      error: (err) => {
+        this.notification.error(this.errorFormatter.format(err), "Failed To Update", {
+          enableHtml: true,
+          timeOut: 10000,
+        });
+        this.ngOnInit();
+      }
+    });
   }
 
   generateFirstRound() {
@@ -94,8 +97,11 @@ export class TournamentStandingsComponent implements OnInit {
           this.sortAndMapParticipants();
           this.populateLeaves();
         },
-        error: err => {
-          this.notification.error("Error fetching rounds reached");
+        error: error => {
+          this.notification.error(this.errorFormatter.format(error), "Could Not Generate First Round", {
+            enableHtml: true,
+            timeOut: 10000,
+          });
         }
       }
     )
@@ -105,7 +111,7 @@ export class TournamentStandingsComponent implements OnInit {
     this.standings?.participants
       .forEach(participant => {
         if (participant.entryNumber !== undefined && participant.entryNumber !== 0)
-        this.entryMap.set(participant.entryNumber, participant);
+          this.entryMap.set(participant.entryNumber, participant);
       });
   }
 
@@ -190,7 +196,8 @@ export class TournamentStandingsComponent implements OnInit {
       this.participantCounter += 1;
       if (participant !== null) {
         participant.entryNumber = this.participantCounter;
-        participant.roundReached = depth;
+        const entry = this.entryMap.get(participant.entryNumber);
+        participant.roundReached = entry && entry.roundReached ? entry.roundReached : depth;
         this.entryMap.set(participant.entryNumber, participant);
       }
       return;
@@ -201,9 +208,6 @@ export class TournamentStandingsComponent implements OnInit {
       return;
     }
 
-    this.updateTreeRecursively(depth + 1, branch.branches[0], maxDepth);
-    this.updateTreeRecursively(depth + 1, branch.branches[1], maxDepth);
-
     if (participant !== null && participant.entryNumber !== undefined) {
       const entry = this.entryMap.get(participant.entryNumber);
       if (entry && entry.roundReached) {
@@ -211,5 +215,8 @@ export class TournamentStandingsComponent implements OnInit {
         participant.roundReached = Math.min(depth, entry.roundReached);
       }
     }
+
+    this.updateTreeRecursively(depth + 1, branch.branches[0], maxDepth);
+    this.updateTreeRecursively(depth + 1, branch.branches[1], maxDepth);
   }
 }

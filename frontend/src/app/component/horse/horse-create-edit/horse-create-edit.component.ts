@@ -9,6 +9,7 @@ import { HorseService } from 'src/app/service/horse.service';
 import { Breed } from "../../../dto/breed";
 import { BreedService } from "../../../service/breed.service";
 import { DeletionResponseDto } from "../../../dto/deletion-response";
+import {ErrorFormatterService} from "../../../service/error-formatter.service";
 
 export enum HorseCreateEditMode {
   create,
@@ -75,6 +76,7 @@ export class HorseCreateEditComponent implements OnInit {
     private breedService: BreedService,
     private router: Router,
     private route: ActivatedRoute,
+    private errorFormatter: ErrorFormatterService,
     private notification: ToastrService,
   ) {
   }
@@ -136,8 +138,9 @@ export class HorseCreateEditComponent implements OnInit {
               next: data => {
                 this.horse = data;
               },
-              error: error => {
-                console.error('Error fetching horse details', error);
+              error: err => {
+                const errorMessage = this.errorFormatter.logError(err);
+                this.notification.error("Failure", errorMessage);
               }
             });
           }
@@ -181,22 +184,8 @@ export class HorseCreateEditComponent implements OnInit {
           this.router.navigate(['/horses']);
         },
         error: err => {
-          let errorMessage = 'An error occurred';
-          if (err.error instanceof ErrorEvent) {
-            // Client-side error
-            errorMessage = `Client-side error: ${err.error.message}`;
-          } else if (err.error && typeof err.error === 'object') {
-            // Server-side error
-            const errorObject = err.error;
-            if (errorObject.errors && Array.isArray(errorObject.errors)) {
-              errorMessage = errorObject.errors.join(', ');
-            } else if (errorObject.message) {
-              errorMessage = errorObject.message;
-            }
-          } else {
-            // Other types of errors
-            errorMessage = `Server-side error: ${err.statusText}`;
-          }
+          const errorMessage = this.errorFormatter.logError(err);
+          this.notification.error("Failure", errorMessage);
           this.notification.error("Failure", errorMessage);
         }
       });
@@ -217,9 +206,9 @@ export class HorseCreateEditComponent implements OnInit {
             this.router.navigate(['horses', 'deletion-failed']);
           }
         },
-        error: (error) => {
-          console.error('Unexpected error:', error);
-          // Handle other errors if needed
+        error: err => {
+          const errorMessage = this.errorFormatter.logError(err);
+          this.notification.error("Failure", errorMessage);
           this.router.navigate(['horses', 'deletion-failed']);
         }
       });

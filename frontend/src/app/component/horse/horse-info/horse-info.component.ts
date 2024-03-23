@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import { HorseService } from '../../../service/horse.service';
-import { Horse } from '../../../dto/horse';
-import { DeletionResponseDto } from "../../../dto/deletion-response";
-import { ToastrService } from "ngx-toastr";
+import {HorseService} from '../../../service/horse.service';
+import {Horse} from '../../../dto/horse';
+import {DeletionResponseDto} from "../../../dto/deletion-response";
+import {ToastrService} from "ngx-toastr";
+import {ErrorFormatterService} from "../../../service/error-formatter.service";
 
 
 @Component({
@@ -22,8 +23,10 @@ export class HorseInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private horseService: HorseService,
     private router: Router,
-    private notification: ToastrService
-  ) { }
+    private notification: ToastrService,
+    private errorFormatter: ErrorFormatterService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -52,13 +55,14 @@ export class HorseInfoComponent implements OnInit {
       this.horseService.deleteHorse(this.horseId).subscribe({
         next: (response: DeletionResponseDto) => {
           if (response.success) {
-            this.router.navigate(['horses','deletion-successful']);
+            this.router.navigate(['horses', 'deletion-successful']);
           } else {
             this.notification.error("Failed deleting horse: " + response.message)
           }
         },
-        error: (error) => {
-          this.notification.error("Failed deleting horse: " + error)
+        error: (err) => {
+          const errorMessage = this.errorFormatter.logError(err);
+          this.notification.error("Failure", errorMessage);
         }
       });
     }

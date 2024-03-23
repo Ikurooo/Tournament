@@ -74,6 +74,7 @@ public class StandingsValidator {
   }
 
   // TODO: add map to see if the entry numbers / rounds reached are correct or differ in any place; Map<Long, Long>
+  // TODO: check on the way down instead of on the way up ?
   // TODO: sum of hours
 
   private void validateTreeRecursively(int depth, TournamentStandingsTreeDto branch, int maxDepth, ValidationContext context, Map<Long, Long> numbers) {
@@ -86,6 +87,7 @@ public class StandingsValidator {
       }
 
       if (branch.getThisParticipant() == null || branch.getThisParticipant().getEntryNumber() == null) {
+        // TODO uwu
         return;
       }
 
