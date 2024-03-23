@@ -56,7 +56,7 @@ export class TournamentCreateComponent {
   }
 
   public constructor(
-    private service: TournamentService,
+    private tournamentService: TournamentService,
     private horseService: HorseService,
     private notification: ToastrService,
     private errorFormatter: ErrorFormatterService,
@@ -76,11 +76,12 @@ export class TournamentCreateComponent {
     }
 
     this.tournament.participants = participants;
-    this.service.create(this.tournament)
+
+
+    this.tournamentService.create(this.tournament)
       .subscribe({
         next: data => {
           this.notification.success(`Tournament ${this.tournament.name} created`, "Tournament created successfully");
-          this.location.back();
         },
         error: error => {
           console.error(error.message, error);
