@@ -23,4 +23,11 @@ CREATE TABLE IF NOT EXISTS tournament
     name       VARCHAR(255) NOT NULL,
     start_date DATE         NOT NULL,
     end_date   DATE         NOT NULL
-)
+);
+
+CREATE TABLE IF NOT EXISTS horse_tourney_linker
+(
+    horse_id BIGINT REFERENCES horse (id),
+    tournament_id BIGINT REFERENCES tournament (id),
+
+);
