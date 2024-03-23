@@ -1,6 +1,3 @@
-
-<!-- TODO: add default values to edit mode-->
-
 <h1 class="display-1">{{heading}}</h1>
 
 <form #form="ngForm" [class.was-validated]="form.submitted" (ngSubmit)="onSubmit(form)">
@@ -48,7 +45,7 @@
                  placeholder="yyyy-mm-dd"
                  class="form-control"
                  [class]="dynamicCssClassesForInput(horseDateOfBirthModel)"
-                 [(ngModel)]="dateOfBirth"
+                 [(ngModel)]="horse.dateOfBirth"
                  #horseDateOfBirthModel="ngModel"
                  required
                  >
@@ -124,7 +121,7 @@
                  id="horseHeight"
                  name="horseHeight"
                  step="0.01"
-                 [(ngModel)]="height"
+                 [(ngModel)]="horse.height"
                  required
                  >
         </div>
@@ -145,7 +142,7 @@
                  id="horseWeight"
                  name="horseWeight"
                  step="1"
-                 [(ngModel)]="weight"
+                 [(ngModel)]="horse.weight"
                  required
                  >
         </div>
