@@ -28,6 +28,6 @@ CREATE TABLE IF NOT EXISTS tournament
 CREATE TABLE IF NOT EXISTS horse_tourney_linker
 (
     horse_id BIGINT REFERENCES horse (id),
-    tournament_id BIGINT REFERENCES tournament (id),
+    tournament_id BIGINT REFERENCES tournament (id)
 
 );

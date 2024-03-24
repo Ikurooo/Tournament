@@ -2,17 +2,28 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
+import at.ac.tuwien.sepr.assignment.individual.mapper.BreedMapper;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
+import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
+
 import java.time.LocalDate;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
 
 @ActiveProfiles({"test", "datagen"}) // enable "test" spring profile during test execution in order to pick up configuration from application-test.yml
 @SpringBootTest
@@ -20,6 +31,15 @@ public class HorseServiceTest extends TestBase {
 
   @Autowired
   HorseService horseService;
+
+  @Autowired
+  HorseMapper horseMapper;
+
+  @Autowired
+  BreedService breedService;
+
+  @Autowired
+  BreedMapper breedMapper;
 
   @Test
   public void searchByBreedWelFindsThreeHorses() {
@@ -35,6 +55,30 @@ public class HorseServiceTest extends TestBase {
             tuple(-21L, "Bella", Sex.FEMALE, LocalDate.of(2003, 7, 6), "Welsh Cob"),
             tuple(-2L, "Hugo", Sex.MALE, LocalDate.of(2020, 2, 20), "Welsh Pony")
         );
+  }
+
+  @Test
+  public void invalidHorseExceptionTest() {
+    var horse = new HorseDetailDto(
+        -30L,
+        ">>>>",
+        Sex.MALE,
+        LocalDate.of(1899, 1, 1),
+        -1.0f,
+        -1.0f,
+        null
+        );
+
+    var breeds = breedService.allBreeds();
+    var expected = assertThrows(ValidationException.class, () ->
+        horseService.create(horse));
+
+    assertEquals("Validation of horse for create failed. " +
+        "Failed validations: Horse name must contain only alphanumeric characters., " +
+        "Date of birth cannot be before 1900-01-01., " +
+        "Height must be greater than zero., " +
+        "Weight must be greater than zero., " +
+        "Invalid horse sex specified..", expected.getMessage());
   }
 
   @Test

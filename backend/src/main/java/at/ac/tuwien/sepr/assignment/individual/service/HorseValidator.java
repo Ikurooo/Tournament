@@ -76,12 +76,7 @@ public class HorseValidator {
       validationErrors.add("Weight must be greater than zero.");
     }
 
-    if (horse.breed() == null) {
-      validationErrors.add("Breed cannot be null.");
-      throw new ValidationException("Validation of horse for create failed", validationErrors);
-    }
-
-    if (breeds.noneMatch(b -> b.equals(horse.breed()))) {
+    if (horse.breed() != null && breeds.noneMatch(b -> b.equals(horse.breed()))) {
       validationErrors.add("Invalid breed specified.");
     }
 

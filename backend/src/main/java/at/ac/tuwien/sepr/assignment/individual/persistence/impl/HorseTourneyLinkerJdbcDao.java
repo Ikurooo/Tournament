@@ -24,7 +24,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private JdbcTemplate jdbcTemplate;
   private NamedParameterJdbcTemplate jdbcNamed;
 
-  public void HorseTourneyLinkerDao(
+  public void horseTourneyLinkerDao(
       NamedParameterJdbcTemplate jdbcNamed,
       JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;

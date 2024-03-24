@@ -45,10 +45,12 @@ public class TournamentMapper {
       return null;
     }
 
+    // TODO
     return new TournamentDetailDto(
         tournament.getName(),
         tournament.getStartDate(),
-        tournament.getEndDate()
+        tournament.getEndDate(),
+        null
     );
   }
 }
