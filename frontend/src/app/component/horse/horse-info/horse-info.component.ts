@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { HorseService } from '../../../service/horse.service';
 import { Horse } from '../../../dto/horse';
-import {NgIf} from "@angular/common";
-import {DeletionResponseDto} from "../../../dto/deletion-response";
-import {ToastrService} from "ngx-toastr";
+import { DeletionResponseDto } from "../../../dto/deletion-response";
+import { ToastrService } from "ngx-toastr";
 
 
 @Component({
   selector: 'app-horse-info',
   templateUrl: './horse-info.component.html',
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgIf
-  ],
   styleUrls: ['./horse-info.component.scss']
 })
+
 export class HorseInfoComponent implements OnInit {
 
   horseId: string | null = null;

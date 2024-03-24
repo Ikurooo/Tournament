@@ -8,7 +8,7 @@ import { Sex } from 'src/app/dto/sex';
 import { HorseService } from 'src/app/service/horse.service';
 import { Breed } from "../../../dto/breed";
 import { BreedService } from "../../../service/breed.service";
-import {DeletionResponseDto} from "../../../dto/deletion-response";
+import { DeletionResponseDto } from "../../../dto/deletion-response";
 
 export enum HorseCreateEditMode {
   create,

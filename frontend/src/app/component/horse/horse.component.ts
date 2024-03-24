@@ -6,6 +6,7 @@ import {HorseSearch} from '../../dto/horse';
 import {debounceTime, map, Observable, of, Subject} from 'rxjs';
 import {BreedService} from "../../service/breed.service";
 import {DeletionResponseDto} from "../../dto/deletion-response";
+import {HorseDeletedComponent} from "./horse-deleted/horse-deleted.component";
 
 @Component({
   selector: 'app-horse',
@@ -64,6 +65,20 @@ export class HorseComponent implements OnInit {
   }
   searchChanged(): void {
     this.searchChangedObservable.next();
+  }
+
+  setHorseForDeletion(id: string): void {
+    this.horseService.getById(id).subscribe(
+      {
+        next: (horse: Horse) => {
+          this.horseForDeletion = horse;
+
+        },
+        error: (error) => {
+          this.notification.error("Failed to fetch horse: ", error);
+        },
+      }
+    )
   }
 
   onDelete(horseId: string) {

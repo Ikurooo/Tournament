@@ -156,10 +156,18 @@
   </div>
 
   <div class="mt-4 d-flex flex-row">
+    <app-confirm-delete-dialog
+      [deleteWhat]="horse?.name"
+      (confirm)="onDelete()"
+      id="del_confirm_view"
+      tabindex="-1"
+      role="dialog"
+    ></app-confirm-delete-dialog>
     <button type="button"
             class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#del_confirm_view"
             *ngIf="!modeIsCreate"
-            (click)="onDelete()"
             >
       <i class="bi bi-trash"></i>
       Delete

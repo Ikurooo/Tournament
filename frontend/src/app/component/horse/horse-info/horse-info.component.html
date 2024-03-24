@@ -18,9 +18,19 @@
     <li><strong>Height:</strong> {{ horse.height ?? "Not Set"}} m</li>
   </ul>
   <div class="buttons">
+    <app-confirm-delete-dialog
+      (confirm)="onDelete()"
+      [deleteWhat]="horse?.name"
+      id="del_confirm_view"
+      role="dialog"
+      tabindex="-1"
+    ></app-confirm-delete-dialog>
     <button
       class="button delete-button"
-      (click)="onDelete()">Delete
+      data-bs-toggle="modal"
+      data-bs-target="#del_confirm_view"
+    >
+      Delete
     </button>
     <span class="spacer"></span>
     <button class="button" routerLink="/horses/edit/{{ horse.id }}">Edit</button>
