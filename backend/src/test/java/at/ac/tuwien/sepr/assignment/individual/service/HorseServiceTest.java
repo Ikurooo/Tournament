@@ -67,18 +67,18 @@ public class HorseServiceTest extends TestBase {
         -1.0f,
         -1.0f,
         null
-        );
+    );
 
     var breeds = breedService.allBreeds();
     var expected = assertThrows(ValidationException.class, () ->
         horseService.create(horse));
 
-    assertEquals("Validation of horse for create failed. " +
-        "Failed validations: Horse name must contain only alphanumeric characters., " +
-        "Date of birth cannot be before 1900-01-01., " +
-        "Height must be greater than zero., " +
-        "Weight must be greater than zero., " +
-        "Invalid horse sex specified..", expected.getMessage());
+    assertEquals("Validation of horse for create failed. "
+        + "Failed validations: Horse name must contain only alphanumeric characters., "
+        + "Date of birth cannot be before 1900-01-01., "
+        + "Height must be greater than zero., "
+        + "Weight must be greater than zero., "
+        + "Invalid horse sex specified..", expected.getMessage());
   }
 
   @Test

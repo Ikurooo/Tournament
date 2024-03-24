@@ -9,7 +9,7 @@ public interface HorseTourneyLinkerDao {
   /**
    * Create a new horse with the provided data and store it in the persistent data store.
    *
-   * @param horse the horse to create
+   * @param tournament the horse to create
    * @return the created horse
    */
   // TODO: this thingy
