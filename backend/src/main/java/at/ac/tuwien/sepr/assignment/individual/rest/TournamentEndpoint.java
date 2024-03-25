@@ -4,6 +4,8 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.service.TournamentService;
 
@@ -36,24 +38,37 @@ public class TournamentEndpoint {
   public Stream<TournamentListDto> searchTournaments(TournamentSearchDto searchParameters) {
     LOG.info("GET " + BASE_PATH);
     LOG.debug("request parameters: {}", searchParameters);
-    return service.search(searchParameters);
+    try {
+      return service.search(searchParameters);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    }
   }
 
   @PostMapping
-  public ResponseEntity<TournamentDetailDto> create(@RequestBody TournamentDetailDto toCreate) {
+  public TournamentDetailDto create(@RequestBody TournamentDetailDto toCreate) {
     LOG.info("POST " + BASE_PATH);
     LOG.debug("Body of request:\n{}", toCreate);
 
     try {
-      TournamentDetailDto createdTournament = service.create(toCreate);
-      return new ResponseEntity<>(createdTournament, HttpStatus.CREATED);
+      return service.create(toCreate);
     } catch (ValidationException e) {
       HttpStatus status = HttpStatus.BAD_REQUEST;
-      logClientError(status, "Validation issue during creation", e);
+      logClientError(status, "Validation issue during creation.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (ConflictException e) {
       HttpStatus status = HttpStatus.CONFLICT;
-      logClientError(status, "Conflict issue during creation", e);
+      logClientError(status, "Conflict issue during creation.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch(FailedToCreateException e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Failed to insert tournament.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    }catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error. ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
@@ -62,3 +77,4 @@ public class TournamentEndpoint {
     LOG.warn("{} {}: {}: {}", status.value(), message, e.getClass().getSimpleName(), e.getMessage());
   }
 }
+
