@@ -91,7 +91,7 @@ public class TournamentJdbcDao implements TournamentDao {
 
     if (update != 1) {
       LOG.error("Failed to insert a new horse. Rows affected: {}", update);
-      throw new FailedToCreateException("Failed to insert a new horse.");
+      throw new FailedToCreateException("Failed to insert a new tournament.");
     }
 
     // TODO: retrieve tournament id

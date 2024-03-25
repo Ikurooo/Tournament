@@ -5,6 +5,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.service.HorseService;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping(path = HorseEndpoint.BASE_PATH)
@@ -41,7 +41,13 @@ public class HorseEndpoint {
   public Stream<HorseListDto> searchHorses(HorseSearchDto searchParameters) {
     LOG.info("GET " + BASE_PATH);
     LOG.debug("request parameters: {}", searchParameters);
-    return service.search(searchParameters);
+    try {
+      return service.search(searchParameters);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error.  ", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    }
   }
 
   @GetMapping("{id}")
@@ -52,6 +58,10 @@ public class HorseEndpoint {
     } catch (NotFoundException e) {
       HttpStatus status = HttpStatus.NOT_FOUND;
       logClientError(status, "Horse to get details of not found", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error.  ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
@@ -66,17 +76,24 @@ public class HorseEndpoint {
       HttpStatus status = HttpStatus.NOT_FOUND;
       logClientError(status, "Horse to update not found", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (ConflictException e) {
+      HttpStatus status = HttpStatus.CONFLICT;
+      logClientError(status, "Conflict issue during creation", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error.  ", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
 
   @PostMapping
-  public ResponseEntity<HorseDetailDto> create(@RequestBody HorseDetailDto toCreate) {
+  public HorseDetailDto create(@RequestBody HorseDetailDto toCreate) {
     LOG.info("POST " + BASE_PATH);
     LOG.debug("Body of request:\n{}", toCreate);
 
     try {
-      HorseDetailDto createdHorse = service.create(toCreate);
-      return new ResponseEntity<>(createdHorse, HttpStatus.CREATED);
+      return service.create(toCreate);
     } catch (ValidationException e) {
       HttpStatus status = HttpStatus.BAD_REQUEST;
       logClientError(status, "Validation issue during creation", e);
@@ -85,17 +102,30 @@ public class HorseEndpoint {
       HttpStatus status = HttpStatus.CONFLICT;
       logClientError(status, "Conflict issue during creation", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (FailedToCreateException e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Failed to insert horse.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<DeletionResponseDto> deleteHorse(@PathVariable("id") long id) {
+  public DeletionResponseDto deleteHorse(@PathVariable("id") long id) {
     try {
       service.deleteHorseById(id);
-      return ResponseEntity.ok(new DeletionResponseDto("Horse deleted successfully", true));
+      return new DeletionResponseDto("Horse deleted successfully", true);
+    } catch (NotFoundException e) {
+      HttpStatus status = HttpStatus.NOT_FOUND;
+      logClientError(status, "Horse to delete not found", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .body(new DeletionResponseDto("Error deleting horse: " + e.getMessage(), false));
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Error deleting horse", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
 
@@ -103,3 +133,4 @@ public class HorseEndpoint {
     LOG.warn("{} {}: {}: {}", status.value(), message, e.getClass().getSimpleName(), e.getMessage());
   }
 }
+
