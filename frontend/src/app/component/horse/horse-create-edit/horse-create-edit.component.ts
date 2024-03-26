@@ -185,9 +185,17 @@ export class HorseCreateEditComponent implements OnInit {
           if (err.error instanceof ErrorEvent) {
             // Client-side error
             errorMessage = `Client-side error: ${err.error.message}`;
-          } else {
+          } else if (err.error && typeof err.error === 'object') {
             // Server-side error
-            errorMessage = `Server-side error: ${err.error.message || err.statusText}`;
+            const errorObject = err.error;
+            if (errorObject.errors && Array.isArray(errorObject.errors)) {
+              errorMessage = errorObject.errors.join(', ');
+            } else if (errorObject.message) {
+              errorMessage = errorObject.message;
+            }
+          } else {
+            // Other types of errors
+            errorMessage = `Server-side error: ${err.statusText}`;
           }
           this.notification.error("Failure", errorMessage);
         }
