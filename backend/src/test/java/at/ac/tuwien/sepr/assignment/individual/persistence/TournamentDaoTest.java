@@ -7,6 +7,7 @@ import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
@@ -14,6 +15,9 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ActiveProfiles({"test", "datagen"})
 @SpringBootTest
@@ -29,7 +33,6 @@ public class TournamentDaoTest extends TestBase {
     assertEquals(expected.getStartDate(), actual.getStartDate());
     assertEquals(expected.getEndDate(), actual.getEndDate());
   }
-
 
   @Test
   public void searchByName() {
