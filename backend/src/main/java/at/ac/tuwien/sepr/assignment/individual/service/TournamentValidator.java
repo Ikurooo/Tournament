@@ -3,20 +3,28 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
 import java.lang.invoke.MethodHandles;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+/**
+ * Validator class for validating tournament details.
+ */
 @Component
 public class TournamentValidator {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final LocalDate minDate = GlobalConstants.minDate;
 
+  /**
+   * Validates tournament details for creation.
+   *
+   * @param tournament The tournament details to validate
+   * @throws ValidationException if validation fails
+   */
   public void validateForCreate(TournamentDetailDto tournament) throws ValidationException {
     LOG.trace("validateForCreate({})", tournament);
     List<String> validationErrors = new ArrayList<>();

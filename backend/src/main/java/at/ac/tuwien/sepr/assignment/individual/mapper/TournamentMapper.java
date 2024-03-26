@@ -3,12 +3,14 @@ package at.ac.tuwien.sepr.assignment.individual.mapper;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import java.lang.invoke.MethodHandles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.lang.invoke.MethodHandles;
-
+/**
+ * Mapper class responsible for converting Tournament entities to DTOs.
+ */
 @Component
 public class TournamentMapper {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -45,7 +47,7 @@ public class TournamentMapper {
       return null;
     }
 
-    // TODO
+    // TODO: Implement mapping from Tournament to TournamentDetailDto
     return new TournamentDetailDto(
         tournament.getName(),
         tournament.getStartDate(),
