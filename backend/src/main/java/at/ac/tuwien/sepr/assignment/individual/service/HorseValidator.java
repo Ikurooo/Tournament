@@ -21,16 +21,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class HorseValidator {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private final Stream<BreedDto> breeds;
+  private final BreedService breedService;
   private final LocalDate minDate = GlobalConstants.minDate;
 
   public HorseValidator(BreedService breedService) {
-    this.breeds = breedService.allBreeds();
+    this.breedService = breedService;
   }
 
   public void validateForUpdate(HorseDetailDto horse) throws ValidationException {
     LOG.trace("validateForUpdate({})", horse);
     List<String> validationErrors = new ArrayList<>();
+
+    var breeds = breedService.allBreeds();
 
     if (breeds.noneMatch(b -> b.equals(horse.breed()))) {
       validationErrors.add("Invalid breed specified.");
@@ -75,6 +77,8 @@ public class HorseValidator {
     if (horse.weight() <= 0) {
       validationErrors.add("Weight must be greater than zero.");
     }
+
+    var breeds = breedService.allBreeds();
 
     if (horse.breed() != null && breeds.noneMatch(b -> b.equals(horse.breed()))) {
       validationErrors.add("Invalid breed specified.");

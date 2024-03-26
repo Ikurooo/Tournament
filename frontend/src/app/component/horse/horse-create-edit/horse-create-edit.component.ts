@@ -180,9 +180,16 @@ export class HorseCreateEditComponent implements OnInit {
           this.notification.success(`Horse ${this.horse.name} successfully ${this.modeActionFinished}.`);
           this.router.navigate(['/horses']);
         },
-        error: error => {
-          console.error('Error handling horse', error);
-          // TODO show an error message to the user. Include and sensibly present the info from the backend!
+        error: err => {
+          let errorMessage = 'An error occurred';
+          if (err.error instanceof ErrorEvent) {
+            // Client-side error
+            errorMessage = `Client-side error: ${err.error.message}`;
+          } else {
+            // Server-side error
+            errorMessage = `Server-side error: ${err.error.message || err.statusText}`;
+          }
+          this.notification.error("Failure", errorMessage);
         }
       });
     }
