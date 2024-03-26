@@ -3,17 +3,25 @@ package at.ac.tuwien.sepr.assignment.individual.persistence;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
 import at.ac.tuwien.sepr.assignment.individual.dto.BreedDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
+import at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao;
 import at.ac.tuwien.sepr.assignment.individual.service.BreedService;
 import at.ac.tuwien.sepr.assignment.individual.service.HorseService;
 import at.ac.tuwien.sepr.assignment.individual.service.HorseServiceImpl;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.function.Function;
@@ -38,13 +46,30 @@ public class HorseDaoTest extends TestBase {
   @Autowired
   BreedService breedService;
 
-  private void assertHorsesEqual(Horse expected, Horse actual) {
-    assertEquals(expected.getName(), actual.getName());
-    assertEquals(expected.getSex(), actual.getSex());
-    assertEquals(expected.getDateOfBirth(), actual.getDateOfBirth());
-    assertEquals(expected.getHeight(), actual.getHeight(), 0.01f);
-    assertEquals(expected.getWeight(), actual.getWeight());
-    assertEquals(expected.getBreedId(), actual.getBreedId());
+  @Test
+  public void getByIdThrowsNotFoundExceptionWhenNoHorseFound() {
+    assertThrows(NotFoundException.class, () -> horseDao.getById(1L));
+  }
+
+  @Test
+  public void deleteByIdThrowsNotFoundException() {
+    assertThrows(NotFoundException.class, () -> horseDao.delete(1L));
+  }
+
+  @Test
+  public void updateNonexistentHorseThrowsNotFoundException() {
+    var horseDto = new HorseDetailDto(
+        -50L,
+        "Nonexistent Horse",
+        Sex.MALE,
+        LocalDate.of(2020, 1, 1),
+        1.5f,
+        500,
+        new BreedDto(-1L, "Some Breed")
+    );
+
+    var exception = assertThrows(NotFoundException.class, () -> horseDao.update(horseDto));
+    assertEquals("Could not update horse with ID -50, because it does not exist", exception.getMessage());
   }
 
   @Test

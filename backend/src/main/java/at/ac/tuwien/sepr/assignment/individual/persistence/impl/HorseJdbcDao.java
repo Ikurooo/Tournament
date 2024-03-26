@@ -69,8 +69,8 @@ public class HorseJdbcDao implements HorseDao {
     if (horses.isEmpty()) {
       throw new NotFoundException("No horse with ID %d found".formatted(id));
     }
+
     if (horses.size() > 1) {
-      // This should never happen!!
       throw new FatalException("Too many horses with ID %d found".formatted(id));
     }
 
@@ -118,7 +118,6 @@ public class HorseJdbcDao implements HorseDao {
       throw new NotFoundException("No horse with ID %d found for deletion".formatted(id));
     }
 
-    // Log or handle the successful deletion
     LOG.info("Deleted horse with ID: {}", id);
   }
 

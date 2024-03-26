@@ -46,7 +46,7 @@ public class BreedDaoTest extends TestBase {
   }
 
   @Test
-  public void searchForOneExistingAndOneNonexistingBreedSuccessfullyFindsExistingBreed() {
+  public void searchForOneExistingAndOneNonexistentBreedSuccessfullyFindsExistingBreed() {
     var foundBreeds = dao.findBreedsById(Set.of(-1L, -99999L));
     assertNotNull(foundBreeds);
     assertThat(foundBreeds)
@@ -55,7 +55,7 @@ public class BreedDaoTest extends TestBase {
   }
 
   @Test
-  public void searchForOneNonexistingBreedSuccessfullyFindsNothing() {
+  public void searchForOneNonexistentBreedSuccessfullyFindsNothing() {
     var foundBreeds = dao.findBreedsById(Set.of(-99999L));
     assertNotNull(foundBreeds);
     assertThat(foundBreeds).isEmpty();
