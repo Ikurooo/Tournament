@@ -75,10 +75,8 @@ public class HorseServiceTest extends TestBase {
 
     assertEquals("Validation of horse for create failed. "
         + "Failed validations: Horse name must contain only alphanumeric characters., "
-        + "Date of birth cannot be before 1900-01-01., "
-        + "Height must be greater than zero., "
-        + "Weight must be greater than zero., "
-        + "Invalid horse sex specified..", expected.getMessage());
+        + "Date of birth cannot be before 1900-01-01., Height must be greater than zero., "
+        + "Weight must be greater than zero..", expected.getMessage());
   }
 
   @Test

@@ -85,7 +85,9 @@ public class HorseValidator {
       throw new ValidationException("Validation of horse for create failed", validationErrors);
     }
 
-    if (horse.sex() == Sex.MALE || horse.sex() == Sex.FEMALE) {
+    LOG.info("{}", horse.sex());
+
+    if (!(horse.sex().equals(Sex.FEMALE) || horse.sex().equals(Sex.MALE))) {
       validationErrors.add("Invalid horse sex specified.");
     }
 
