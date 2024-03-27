@@ -56,7 +56,8 @@ public class TournamentJdbcDao implements TournamentDao {
   private final JdbcTemplate jdbcTemplate;
   private final NamedParameterJdbcTemplate jdbcNamed;
 
-  public TournamentJdbcDao(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate jdbcNamed) {
+  public TournamentJdbcDao(JdbcTemplate jdbcTemplate,
+                           NamedParameterJdbcTemplate jdbcNamed) {
     this.jdbcTemplate = jdbcTemplate;
     this.jdbcNamed = jdbcNamed;
   }

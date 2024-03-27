@@ -8,6 +8,6 @@ public record TournamentDetailDto(
     String name,
     LocalDate startDate,
     LocalDate endDate,
-    Horse[] horses
+    Horse[] participants
 ) {
 }

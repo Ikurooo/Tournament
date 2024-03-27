@@ -28,10 +28,10 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private static final String HORSE_TABLE_NAME = "horse";
   private static final String TOURNAMENT_TABLE_NAME = "tournament";
   private static final String LINKER_TABLE_NAME = "horse_tourney_linker";
-  private JdbcTemplate jdbcTemplate;
-  private NamedParameterJdbcTemplate jdbcNamed;
+  private final JdbcTemplate jdbcTemplate;
+  private final NamedParameterJdbcTemplate jdbcNamed;
 
-  public void horseTourneyLinkerDao(
+  public HorseTourneyLinkerJdbcDao(
       NamedParameterJdbcTemplate jdbcNamed,
       JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
@@ -70,7 +70,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
           .setStartDate(tournament.startDate())
           .setEndDate(tournament.endDate());
 
-      for (Horse horse : tournament.horses()) {
+      for (Horse horse : tournament.participants()) {
         var rowsAffectedLinker = jdbcTemplate.update("INSERT INTO " + LINKER_TABLE_NAME
                 + " (horse_id, tournament_id) VALUES (?, ?)",
             createdTournament.getId(), horse.getId());

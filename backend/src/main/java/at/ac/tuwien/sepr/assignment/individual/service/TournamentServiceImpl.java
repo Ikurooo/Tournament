@@ -8,6 +8,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
+import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 
 import java.lang.invoke.MethodHandles;
@@ -29,7 +30,7 @@ public class TournamentServiceImpl implements TournamentService {
   private final TournamentDao dao;
   private final TournamentMapper mapper;
   private final TournamentValidator validator;
-  private final HorseService horseService;
+  private final HorseTourneyLinkerDao horseTourneyLinkerDao;
 
   /**
    * Constructor for TournamentServiceImpl.
@@ -37,15 +38,15 @@ public class TournamentServiceImpl implements TournamentService {
    * @param dao       The TournamentDao instance
    * @param mapper    The TournamentMapper instance
    * @param validator The TournamentValidator instance
-   * @param horseService The HorseService instance
+   * @param horseTourneyLinkerDao The HorseTourneyLinkerDao instance
    */
   public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper,
                                TournamentValidator validator,
-                               HorseService horseService) {
+                               HorseTourneyLinkerDao horseTourneyLinkerDao) {
     this.dao = dao;
     this.mapper = mapper;
     this.validator = validator;
-    this.horseService = horseService;
+    this.horseTourneyLinkerDao = horseTourneyLinkerDao;
   }
 
   @Override
@@ -59,10 +60,8 @@ public class TournamentServiceImpl implements TournamentService {
   public TournamentDetailDto create(TournamentDetailDto tournament)
       throws ValidationException, ConflictException, NotFoundException {
     validator.validateForCreate(tournament);
-
-
     LOG.trace("create({})", tournament);
-    var createdTournament = dao.create(tournament);
+    var createdTournament = horseTourneyLinkerDao.create(tournament);
     return mapper.entityToDetailDto(createdTournament);
   }
 

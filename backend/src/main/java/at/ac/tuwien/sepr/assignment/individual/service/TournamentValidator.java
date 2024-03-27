@@ -60,7 +60,7 @@ public class TournamentValidator {
       validationErrors.add(String.format("Start date and end date must be after %s.", minDate));
     }
 
-    for (Horse horse : tournament.horses()) {
+    for (Horse horse : tournament.participants()) {
       horseService.getById(horse.getId());
     }
 
