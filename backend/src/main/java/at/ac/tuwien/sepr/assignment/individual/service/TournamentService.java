@@ -35,7 +35,7 @@ public interface TournamentService {
    *                             (e.g., breed does not exist)
    */
   TournamentDetailDto create(TournamentDetailDto tournament)
-      throws ValidationException, ConflictException;
+      throws ValidationException, ConflictException, NotFoundException;
 
   /**
    * Updates the tournament with the ID given in {@code tournament}
