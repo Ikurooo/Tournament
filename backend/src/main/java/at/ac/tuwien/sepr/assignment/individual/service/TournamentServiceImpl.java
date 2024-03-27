@@ -22,20 +22,24 @@ public class TournamentServiceImpl implements TournamentService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final TournamentDao dao;
   private final TournamentMapper mapper;
-  private final TournamentValidator validator;
+  private final TournamentValidator tournamentValidator;
+  private final HorseValidator horseValidator;
 
   /**
    * Constructor for TournamentServiceImpl.
    *
    * @param dao       The TournamentDao instance
    * @param mapper    The TournamentMapper instance
-   * @param validator The TournamentValidator instance
+   * @param tournamentValidator The TournamentValidator instance
+   * @param horseValidator The HorseValidator instance
    */
   public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper,
-                               TournamentValidator validator) {
+                               TournamentValidator tournamentValidator,
+                               HorseValidator horseValidator) {
     this.dao = dao;
     this.mapper = mapper;
-    this.validator = validator;
+    this.tournamentValidator = tournamentValidator;
+    this.horseValidator = horseValidator;
   }
 
   @Override
@@ -47,8 +51,9 @@ public class TournamentServiceImpl implements TournamentService {
 
   @Override
   public TournamentDetailDto create(TournamentDetailDto tournament)
-      throws ValidationException, ConflictException {
-    validator.validateForCreate(tournament);
+      throws ValidationException, ConflictException, NotFoundException {
+    tournamentValidator.validateForCreate(tournament);
+    horseValidator.validateForExistence(tournament.horses());
     LOG.trace("create({})", tournament);
     var createdTournament = dao.create(tournament);
     return mapper.entityToDetailDto(createdTournament);

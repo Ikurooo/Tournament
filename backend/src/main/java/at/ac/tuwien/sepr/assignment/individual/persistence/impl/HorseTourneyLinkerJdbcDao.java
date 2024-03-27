@@ -10,10 +10,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.invoke.MethodHandles;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Objects;
 
+@Repository
 public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -37,35 +44,46 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   public Tournament create(TournamentDetailDto tournament) {
     LOG.trace("create({})", tournament);
 
-
     try {
-      var rowsAffectedTournament = jdbcTemplate.update("INSERT INTO " + TOURNAMENT_TABLE_NAME
-              + " (name, start_date, end_date)"
-              + " VALUES (?, ?, ?)",
-          tournament.name(),
-          tournament.startDate(),
-          tournament.endDate());
+      KeyHolder keyHolder = new GeneratedKeyHolder();
 
-      if (rowsAffectedTournament < 1) {
-        LOG.warn("Failed to create tournament {}", tournament);
+      int rowsAffectedTournament = jdbcTemplate.update(connection -> {
+        PreparedStatement ps = connection.prepareStatement(
+            "INSERT INTO " + TOURNAMENT_TABLE_NAME + " (name, start_date, end_date) VALUES (?, ?, ?)",
+            Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, tournament.name());
+        ps.setDate(2, java.sql.Date.valueOf(tournament.startDate()));
+        ps.setDate(3, java.sql.Date.valueOf(tournament.endDate()));
+        return ps;
+      }, keyHolder);
+
+      if (rowsAffectedTournament != 1) {
+        LOG.error("Failed to insert a new tournament. Rows affected: {}", rowsAffectedTournament);
+        throw new FailedToCreateException("Failed to insert a new tournament.");
       }
+
+      long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
+
+      Tournament createdTournament = new Tournament()
+          .setId(generatedId)
+          .setName(tournament.name())
+          .setStartDate(tournament.startDate())
+          .setEndDate(tournament.endDate());
 
       for (Horse horse : tournament.horses()) {
         var rowsAffectedLinker = jdbcTemplate.update("INSERT INTO " + LINKER_TABLE_NAME
-                + " (id, id)"
-                + " VALUES ( ?, ?)",
-            horse);
+                + " (horse_id, tournament_id) VALUES (?, ?)",
+            createdTournament.getId(), horse.getId());
 
         if (rowsAffectedLinker < 1) {
           LOG.warn("Failed to link horse with tournament: {}", horse);
         }
       }
+      return createdTournament;
 
     } catch (Exception e) {
-      LOG.error("Failed to insert a new horse. Rows affected: {}", e.toString());
-      throw new FailedToCreateException("Failed to insert a new horse.");
+      LOG.error("Failed to insert a new tournament: {}", e.toString());
+      throw new FailedToCreateException("Failed to insert a new tournament.");
     }
-
-    return null;
   }
 }

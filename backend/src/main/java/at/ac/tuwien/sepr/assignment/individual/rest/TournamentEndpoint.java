@@ -3,10 +3,12 @@ package at.ac.tuwien.sepr.assignment.individual.rest;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
+import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.service.TournamentService;
 
 import java.lang.invoke.MethodHandles;
@@ -28,10 +30,12 @@ import org.springframework.http.ResponseEntity;
 public class TournamentEndpoint {
   static final String BASE_PATH = "/tournaments";
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private final TournamentService service;
+  private final TournamentService tournamentService;
+  private final HorseTourneyLinkerDao horseTourneyLinkerDao;
 
-  public TournamentEndpoint(TournamentService service) {
-    this.service = service;
+  public TournamentEndpoint(TournamentService tournamentService, HorseTourneyLinkerDao horseTourneyLinkerDao) {
+    this.tournamentService = tournamentService;
+    this.horseTourneyLinkerDao = horseTourneyLinkerDao;
   }
 
   @GetMapping
@@ -39,7 +43,7 @@ public class TournamentEndpoint {
     LOG.info("GET " + BASE_PATH);
     LOG.debug("request parameters: {}", searchParameters);
     try {
-      return service.search(searchParameters);
+      return tournamentService.search(searchParameters);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       logClientError(status, "Internal server error.", e);
@@ -48,12 +52,12 @@ public class TournamentEndpoint {
   }
 
   @PostMapping
-  public TournamentDetailDto create(@RequestBody TournamentDetailDto toCreate) {
+  public Tournament create(@RequestBody TournamentDetailDto toCreate) {
     LOG.info("POST " + BASE_PATH);
     LOG.debug("Body of request:\n{}", toCreate);
 
     try {
-      return service.create(toCreate);
+      return horseTourneyLinkerDao.create(toCreate);
     } catch (ValidationException e) {
       HttpStatus status = HttpStatus.BAD_REQUEST;
       logClientError(status, "Validation issue during creation.", e);

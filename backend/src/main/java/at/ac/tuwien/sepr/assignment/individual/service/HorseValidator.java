@@ -2,6 +2,8 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.BreedDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
 import java.lang.invoke.MethodHandles;
@@ -22,10 +24,12 @@ import org.springframework.stereotype.Component;
 public class HorseValidator {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final BreedService breedService;
+  private final HorseService horseService;
   private final LocalDate minDate = GlobalConstants.minDate;
 
-  public HorseValidator(BreedService breedService) {
+  public HorseValidator(BreedService breedService, HorseService horseService) {
     this.breedService = breedService;
+    this.horseService = horseService;
   }
 
   public void validateForUpdate(HorseDetailDto horse) throws ValidationException {
@@ -100,4 +104,9 @@ public class HorseValidator {
     }
   }
 
+  public void validateForExistence(Horse[] horses) throws NotFoundException {
+    for(Horse horse: horses) {
+      var exists = horseService.getById(horse.getId());
+    }
+  }
 }

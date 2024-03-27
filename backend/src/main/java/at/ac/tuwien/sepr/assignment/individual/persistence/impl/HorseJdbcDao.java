@@ -10,17 +10,22 @@ import at.ac.tuwien.sepr.assignment.individual.persistence.HorseDao;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 
 import java.lang.invoke.MethodHandles;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -77,35 +82,42 @@ public class HorseJdbcDao implements HorseDao {
     return horses.getFirst();
   }
 
+
   @Override
   public Horse create(HorseDetailDto horse) {
     LOG.trace("create({})", horse);
 
-    var update = jdbcTemplate.update("INSERT INTO " + TABLE_NAME
-            + " (name, sex, date_of_birth, height, weight, breed_id)"
-            + " VALUES (?, ?, ?, ?, ?, ?)",
-        horse.name(),
-        horse.sex().toString(),
-        horse.dateOfBirth(),
-        horse.height(),
-        horse.weight(),
-        horse.breed().id());
+    KeyHolder keyHolder = new GeneratedKeyHolder();
+
+    int update = jdbcTemplate.update(connection -> {
+      PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE_NAME
+              + " (name, sex, date_of_birth, height, weight, breed_id)"
+              + " VALUES (?, ?, ?, ?, ?, ?)",
+          Statement.RETURN_GENERATED_KEYS);
+      ps.setString(1, horse.name());
+      ps.setString(2, horse.sex().toString());
+      ps.setDate(3, java.sql.Date.valueOf(horse.dateOfBirth()));
+      ps.setDouble(4, horse.height());
+      ps.setDouble(5, horse.weight());
+      ps.setLong(6, horse.breed().id());
+      return ps;
+    }, keyHolder);
 
     if (update != 1) {
       LOG.error("Failed to insert a new horse. Rows affected: {}", update);
       throw new FailedToCreateException("Failed to insert a new horse.");
     }
 
-    // TODO: goofy shit
+    long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
+
     return new Horse()
-        .setId(horse.id())
+        .setId(generatedId)
         .setName(horse.name())
         .setSex(horse.sex())
         .setDateOfBirth(horse.dateOfBirth())
         .setHeight(horse.height())
         .setWeight(horse.weight())
-        .setBreedId(horse.breed().id())
-        ;
+        .setBreedId(horse.breed().id());
   }
 
   @Override
