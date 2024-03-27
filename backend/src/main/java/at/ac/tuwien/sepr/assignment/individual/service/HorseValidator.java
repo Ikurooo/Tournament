@@ -24,12 +24,10 @@ import org.springframework.stereotype.Component;
 public class HorseValidator {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final BreedService breedService;
-  private final HorseService horseService;
   private final LocalDate minDate = GlobalConstants.minDate;
 
-  public HorseValidator(BreedService breedService, HorseService horseService) {
+  public HorseValidator(BreedService breedService) {
     this.breedService = breedService;
-    this.horseService = horseService;
   }
 
   public void validateForUpdate(HorseDetailDto horse) throws ValidationException {
@@ -101,12 +99,6 @@ public class HorseValidator {
 
     if (!validationErrors.isEmpty()) {
       throw new ValidationException("Validation of horse for create failed", validationErrors);
-    }
-  }
-
-  public void validateForExistence(Horse[] horses) throws NotFoundException {
-    for(Horse horse: horses) {
-      var exists = horseService.getById(horse.getId());
     }
   }
 }
