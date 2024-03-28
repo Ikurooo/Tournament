@@ -71,9 +71,10 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
           .setEndDate(tournament.endDate());
 
       for (Horse horse : tournament.participants()) {
+        LOG.debug("Horse Details: {}", horse);
         var rowsAffectedLinker = jdbcTemplate.update("INSERT INTO " + LINKER_TABLE_NAME
                 + " (horse_id, tournament_id) VALUES (?, ?)",
-            createdTournament.getId(), horse.getId());
+            horse.getId(), createdTournament.getId());
 
         if (rowsAffectedLinker < 1) {
           LOG.warn("Failed to link horse with tournament: {}", horse);
