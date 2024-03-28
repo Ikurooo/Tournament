@@ -4,10 +4,22 @@
 
 // TODO temporary delete everything for testing
 
-DELETE FROM horse_tourney_linker; //WHERE horse_id < 0 OR tournament_id < 0;
-DELETE FROM tournament; // WHERE id < 0;
-DELETE FROM horse; // WHERE id < 0;
-DELETE FROM breed; // WHERE id < 0;
+-- Delete negative IDs from tables
+-- Drop foreign key constraint in horse_tourney_linker table
+ALTER TABLE horse_tourney_linker DROP CONSTRAINT IF EXISTS horse_id;
+
+-- Delete from horse_tourney_linker table first to avoid referential integrity constraint violation
+DELETE FROM horse_tourney_linker WHERE horse_id < 0;
+
+-- Delete from horse table
+DELETE FROM horse WHERE id < 0;
+
+-- Re-add foreign key constraint in horse_tourney_linker table
+ALTER TABLE horse_tourney_linker ADD CONSTRAINT IF NOT EXISTS fk_horse_id FOREIGN KEY (horse_id) REFERENCES horse(id);
+
+DELETE FROM breed WHERE id < 0;
+DELETE FROM tournament WHERE id < 0;
+
 
 INSERT INTO breed (id, name)
 VALUES
@@ -79,3 +91,16 @@ VALUES
     (-7, 'Banana Cup', '2013-02-15', '2014-04-30'),
     (-8, 'Leaf Cup', '2015-06-25', '2016-08-22'),
     (-9, 'Lightning Cup', '2017-10-10', '2018-12-15');
+
+INSERT INTO horse_tourney_linker (tournament_id, horse_id)
+VALUES
+    ( -1, -1 ),
+    ( -1, -2 ),
+    ( -1, -3 ),
+    ( -1, -4 ),
+    ( -1, -5 ),
+    ( -1, -6 ),
+    ( -1, -7 ),
+    ( -1, -8 ),
+    ( -2, -1 ),
+    ( -9, -7 );
