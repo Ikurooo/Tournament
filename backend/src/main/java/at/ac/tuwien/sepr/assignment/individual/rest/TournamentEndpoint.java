@@ -69,7 +69,7 @@ public class TournamentEndpoint {
   }
 
   @PostMapping
-  public TournamentDetailDto create(@RequestBody TournamentDetailDto toCreate) {
+  public Tournament create(@RequestBody TournamentDetailDto toCreate) {
     LOG.info("POST " + BASE_PATH);
     LOG.debug("Body of request:\n{}", toCreate);
 

@@ -4,6 +4,7 @@ import at.ac.tuwien.sepr.assignment.individual.TestBase;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
@@ -63,8 +64,8 @@ public class LinkerDaoTest extends TestBase {
         LocalDate.of(2002, 1, 1),
         participantArray
     );
-    TournamentDetailDto createdTournament = horseTourneyLinkerDao.create(toCreate);
+    Tournament createdTournament = horseTourneyLinkerDao.create(toCreate);
 
-    assertArrayEquals(expectedParticipants.toArray(), createdTournament.participants());
+    assertArrayEquals(expectedParticipants.toArray(), createdTournament.getParticipants());
   }
 }

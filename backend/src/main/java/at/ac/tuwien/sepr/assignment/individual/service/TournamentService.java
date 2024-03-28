@@ -4,6 +4,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
@@ -35,7 +36,7 @@ public interface TournamentService {
    * @throws ConflictException   if there is a conflict with the existing data in the system
    *                             (e.g., breed does not exist)
    */
-  TournamentDetailDto create(TournamentDetailDto tournament)
+  Tournament create(TournamentDetailDto tournament)
       throws ValidationException, ConflictException, NotFoundException;
 
 

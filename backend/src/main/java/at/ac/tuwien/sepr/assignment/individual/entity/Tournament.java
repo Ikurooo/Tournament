@@ -10,6 +10,16 @@ public class Tournament {
   private String name;
   private LocalDate startDate;
   private LocalDate endDate;
+  private Horse[] participants;
+
+  public Tournament setParticipants(Horse[] participants) {
+    this.participants = participants;
+    return this;
+  }
+
+  public Horse[] getParticipants() {
+    return participants;
+  }
 
   public long getId() {
     return id;

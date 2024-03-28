@@ -49,7 +49,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
   @Transactional
   @Override
-  public TournamentDetailDto create(TournamentDetailDto tournament) {
+  public Tournament create(TournamentDetailDto tournament) {
     LOG.trace("create({})", tournament);
 
     try {
@@ -72,28 +72,25 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
       long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
 
-      TournamentDetailDto createdTournament = new TournamentDetailDto(
-          generatedId,
-          tournament.name(),
-          tournament.startDate(),
-          tournament.endDate(),
-          tournament.participants()
-      );
-
       for (Horse horse : tournament.participants()) {
         LOG.debug("Horse Details: {}", horse);
         int rowsAffectedLinker = jdbcTemplate.update("INSERT INTO " + LINKER_TABLE_NAME
                 + " (horse_id, tournament_id) VALUES (?, ?)",
-            horse.getId(), createdTournament.id());
+            horse.getId(), generatedId);
 
         if (rowsAffectedLinker < 1) {
-          String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.getId(), createdTournament.id());
+          String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.getId(), generatedId);
           LOG.warn(errorMessage);
           throw new FailedToCreateException(errorMessage);
 
         }
       }
-      return createdTournament;
+      return new Tournament()
+          .setId(generatedId)
+          .setName(tournament.name())
+          .setStartDate(tournament.startDate())
+          .setEndDate(tournament.endDate())
+          .setParticipants(tournament.participants());
 
     } catch (DataAccessException e) {
       LOG.error("Failed to insert a new tournament: {}", e.getMessage());

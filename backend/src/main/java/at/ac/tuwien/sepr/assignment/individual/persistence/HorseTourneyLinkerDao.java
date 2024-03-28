@@ -20,7 +20,7 @@ public interface HorseTourneyLinkerDao {
    * @throws ConflictException if there is a conflict when creating the tournament
    * @throws FailedToCreateException if the tournament creation process fails
    */
-  TournamentDetailDto create(TournamentDetailDto tournament) throws ValidationException, ConflictException, FailedToCreateException;
+  Tournament create(TournamentDetailDto tournament) throws ValidationException, ConflictException, FailedToCreateException;
 
   /**
    * Retrieve the list of participants (horses) for the tournament with the specified ID.

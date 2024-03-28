@@ -57,7 +57,7 @@ public class TournamentServiceImpl implements TournamentService {
   }
 
   @Override
-  public TournamentDetailDto create(TournamentDetailDto tournament)
+  public Tournament create(TournamentDetailDto tournament)
       throws ValidationException, ConflictException, NotFoundException {
     validator.validateForCreate(tournament);
     LOG.trace("create({})", tournament);
