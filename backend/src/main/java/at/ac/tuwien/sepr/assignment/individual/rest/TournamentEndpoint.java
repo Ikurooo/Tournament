@@ -44,10 +44,13 @@ public class TournamentEndpoint {
   @GetMapping("{id}")
   public TournamentStandingsDto getById(@PathVariable("id") long id) {
     LOG.info("GET " + BASE_PATH + "/{}", id);
+    LOG.info("Tournament ID: {}", id);
     try {
-      return  tournamentService.getById(id);
+      return tournamentService.getById(id);
     } catch (NotFoundException e) {
-      throw new RuntimeException(e);
+      HttpStatus status = HttpStatus.NOT_FOUND;
+      logClientError(status, "Tournament not found", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     }
     // TODO: more robust error handling
   }
@@ -66,7 +69,7 @@ public class TournamentEndpoint {
   }
 
   @PostMapping
-  public Tournament create(@RequestBody TournamentDetailDto toCreate) {
+  public TournamentDetailDto create(@RequestBody TournamentDetailDto toCreate) {
     LOG.info("POST " + BASE_PATH);
     LOG.debug("Body of request:\n{}", toCreate);
 

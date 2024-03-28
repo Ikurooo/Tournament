@@ -2,6 +2,9 @@ package at.ac.tuwien.sepr.assignment.individual.rest;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +22,16 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants.expectedParticipants;
 
 @ActiveProfiles({"test", "datagen"}) // enable "test" spring profile during test execution in order to pick up configuration from application-test.yml
 @SpringBootTest
@@ -32,11 +39,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class TournamentEndpointTest extends TestBase {
   @Autowired
+  ObjectMapper objectMapper;
+  @Autowired
   private WebApplicationContext webAppContext;
   private MockMvc mockMvc;
-
-  @Autowired
-  ObjectMapper objectMapper;
 
   @BeforeEach
   public void setup() {
@@ -49,6 +55,31 @@ public class TournamentEndpointTest extends TestBase {
         .perform(MockMvcRequestBuilders
             .get("/asdf123")
         ).andExpect(status().isNotFound());
+  }
+
+  @Test
+  public void getInvalidTournamentIdThrowsNotFoundException() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders
+            .get("/tournaments/42069")
+            .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isNotFound());
+  }
+
+  @Test
+  public void getTournamentAndThe8HorsesThatBelongToIt() throws Exception {
+    byte[] body = mockMvc.perform(MockMvcRequestBuilders
+            .get("/tournaments/-1")
+            .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andReturn().getResponse().getContentAsByteArray();
+
+    TournamentStandingsDto tournamentStandingsDto = objectMapper.readValue(body, TournamentStandingsDto.class);
+    assertNotNull(tournamentStandingsDto);
+    assertNotNull(tournamentStandingsDto.participants());
+    assertEquals(8, tournamentStandingsDto.participants().length);
+    assertThat(tournamentStandingsDto.participants())
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactlyInAnyOrderElementsOf(expectedParticipants);
   }
 
   @Test

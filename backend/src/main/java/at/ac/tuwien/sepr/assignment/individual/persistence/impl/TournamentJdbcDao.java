@@ -4,6 +4,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 import java.lang.invoke.MethodHandles;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -75,15 +77,20 @@ public class TournamentJdbcDao implements TournamentDao {
   }
 
   @Override
-  public Tournament update(TournamentDetailDto tournament) throws NotFoundException {
-    return null;
-  }
-
-  @Override
   public Tournament getById(long id) throws NotFoundException {
-    return null;
-  }
+    LOG.trace("getById({})", id);
+    List<Tournament> tournament = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
+    if (tournament.isEmpty()) {
+      throw new NotFoundException("No horse with ID %d found".formatted(id));
+    }
+
+    if (tournament.size() > 1) {
+      throw new FatalException("Too many horses with ID %d found".formatted(id));
+    }
+
+    return tournament.getFirst();
+  }
 
   @Override
   public Tournament create(TournamentDetailDto tournament) {
@@ -113,11 +120,6 @@ public class TournamentJdbcDao implements TournamentDao {
         .setName(tournament.name())
         .setStartDate(tournament.startDate())
         .setEndDate(tournament.endDate());
-  }
-
-  @Override
-  public void delete(long id) throws NotFoundException {
-
   }
 
   private Tournament mapRow(ResultSet result, int rownum) throws SQLException {
