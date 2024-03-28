@@ -14,6 +14,7 @@ import {ErrorFormatterService} from "../../../service/error-formatter.service";
 })
 export class TournamentStandingsComponent implements OnInit {
   standings: TournamentStandingsDto | undefined;
+  tournamentId: string | null = null;
 
   public constructor(
     private service: TournamentService,
@@ -25,7 +26,19 @@ export class TournamentStandingsComponent implements OnInit {
   }
 
   public ngOnInit() {
-    // TODO to be implemented.
+    this.route.paramMap.subscribe(params => {
+      this.tournamentId = params.get('id');
+      if (this.tournamentId) {
+        this.service.getById(this.tournamentId).subscribe({
+          next: data => {
+            this.standings = data;
+          },
+          error: error => {
+            console.error('Error fetching horse details', error);
+          }
+        });
+      }
+    });
   }
 
   public submit(form: NgForm) {

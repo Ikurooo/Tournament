@@ -4,10 +4,13 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
+import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,7 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.invoke.MethodHandles;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
+import java.util.List;
 import java.util.Objects;
 
 @Repository
@@ -86,5 +93,26 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
       LOG.error("Failed to insert a new tournament: {}", e.toString());
       throw new FailedToCreateException("Failed to insert a new tournament.");
     }
+  }
+
+  public List<Horse> findParticipantsByTournamentId(long id) {
+    String sql = "SELECT h.* "
+        + "FROM " + HORSE_TABLE_NAME + " h "
+        + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
+        + "WHERE l.tournament_id = ?";
+
+    return jdbcTemplate.query(sql, this::mapRow, id);
+  }
+
+  private Horse mapRow(ResultSet result, int rownum) throws SQLException {
+    return new Horse()
+        .setId(result.getLong("id"))
+        .setName(result.getString("name"))
+        .setSex(Sex.valueOf(result.getString("sex")))
+        .setDateOfBirth(result.getDate("date_of_birth").toLocalDate())
+        .setHeight(result.getFloat("height"))
+        .setWeight(result.getFloat("weight"))
+        .setBreedId(result.getObject("breed_id", Long.class))
+        ;
   }
 }

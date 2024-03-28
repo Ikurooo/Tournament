@@ -3,6 +3,7 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
@@ -64,7 +65,7 @@ public interface TournamentService {
    * @throws NotFoundException if the tournament with the given
    *                           ID does not exist in the persistent data store
    */
-  TournamentDetailDto getById(long id) throws NotFoundException;
+  TournamentStandingsDto getById(long id) throws NotFoundException;
 
   /**
    * Deletes the tournament with the given ID from the persistent data store.

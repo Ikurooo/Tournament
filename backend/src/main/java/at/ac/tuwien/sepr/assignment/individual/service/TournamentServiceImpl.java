@@ -3,6 +3,9 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
@@ -11,6 +14,7 @@ import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 
 import java.lang.invoke.MethodHandles;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -69,9 +73,10 @@ public class TournamentServiceImpl implements TournamentService {
   }
 
   @Override
-  public TournamentDetailDto getById(long id) throws NotFoundException {
-    // Implementation of getById method
-    return null;
+  public TournamentStandingsDto getById(long id) throws NotFoundException {
+    Tournament tournament = dao.getById(id);
+    List<Horse> participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
+    return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new Horse[0]));
   }
 
   @Override

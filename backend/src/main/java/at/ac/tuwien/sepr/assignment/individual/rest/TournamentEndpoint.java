@@ -1,8 +1,10 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
@@ -18,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +39,17 @@ public class TournamentEndpoint {
   public TournamentEndpoint(TournamentService tournamentService, HorseTourneyLinkerDao horseTourneyLinkerDao) {
     this.tournamentService = tournamentService;
     this.horseTourneyLinkerDao = horseTourneyLinkerDao;
+  }
+
+  @GetMapping("{id}")
+  public TournamentStandingsDto getById(@PathVariable("id") long id) {
+    LOG.info("GET " + BASE_PATH + "/{}", id);
+    try {
+      return  tournamentService.getById(id);
+    } catch (NotFoundException e) {
+      throw new RuntimeException(e);
+    }
+    // TODO: more robust error handling
   }
 
   @GetMapping

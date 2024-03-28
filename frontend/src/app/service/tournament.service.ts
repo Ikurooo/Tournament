@@ -4,7 +4,13 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { formatIsoDate } from '../util/date-helper';
-import {TournamentCreateDto, TournamentDetailDto, TournamentListDto, TournamentSearchParams} from '../dto/tournament';
+import {
+  TournamentCreateDto,
+  TournamentDetailDto,
+  TournamentListDto,
+  TournamentSearchParams,
+  TournamentStandingsDto
+} from '../dto/tournament';
 
 const baseUri = `${environment.backendUrl}/tournaments`;
 
@@ -16,6 +22,10 @@ export class TournamentService {
 
   create(tournament: TournamentCreateDto): Observable<TournamentDetailDto> {
     return this.http.post<TournamentDetailDto>(baseUri, tournament);
+  }
+
+  getById(id: string) {
+    return this.http.get<TournamentStandingsDto>(`${baseUri}/${id}`);
   }
 
   search(searchParams: TournamentSearchParams): Observable<TournamentListDto[]> {
