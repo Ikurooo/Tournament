@@ -2,10 +2,12 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 
 import java.time.LocalDate;
@@ -14,6 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import static at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants.expectedParticipants;
 
 @ActiveProfiles({"test", "datagen"}) // enable "test" spring profile during test execution in order to pick up configuration from application-test.yml
 @SpringBootTest
@@ -24,6 +28,17 @@ public class TournamentServiceTest extends TestBase {
 
   @Autowired
   TournamentMapper tournamentMapper;
+
+  @Test
+  public void getTournamentAndThe8HorsesThatBelongToIt() throws NotFoundException {
+    var tournament = tournamentService.getById(-1L);
+    assertNotNull(tournament);
+    assertNotNull(tournament.participants());
+    assertEquals(8, tournament.participants().length);
+    assertThat(tournament.participants())
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactlyInAnyOrderElementsOf(expectedParticipants);
+  }
 
   @Test
   public void searchByNameFindsOneTournament() {

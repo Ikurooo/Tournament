@@ -82,7 +82,6 @@ public class HorseJdbcDao implements HorseDao {
     return horses.getFirst();
   }
 
-
   @Override
   public Horse create(HorseDetailDto horse) {
     LOG.trace("create({})", horse);
@@ -130,7 +129,6 @@ public class HorseJdbcDao implements HorseDao {
       throw new NotFoundException("No horse with ID %d found for deletion".formatted(id));
     }
 
-    // Log or handle the successful deletion
     LOG.info("Deleted horse with ID: {}", id);
   }
 
@@ -146,7 +144,6 @@ public class HorseJdbcDao implements HorseDao {
 
     return jdbcNamed.query(query, params, this::mapRow);
   }
-
 
   @Override
   public Horse update(HorseDetailDto horse) throws NotFoundException {
@@ -173,7 +170,6 @@ public class HorseJdbcDao implements HorseDao {
         .setBreedId(horse.breed().id())
         ;
   }
-
 
   private Horse mapRow(ResultSet result, int rownum) throws SQLException {
     return new Horse()

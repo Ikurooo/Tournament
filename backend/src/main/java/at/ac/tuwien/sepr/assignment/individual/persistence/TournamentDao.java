@@ -24,17 +24,6 @@ public interface TournamentDao {
   Collection<Tournament> search(TournamentSearchDto searchParameters);
 
   /**
-   * Update the tournament with the ID given in {@code tournament}
-   * with the data given in {@code tournament}
-   * in the persistent data store.
-   *
-   * @param tournament the tournament to update
-   * @return the updated tournament
-   * @throws NotFoundException if the Tournament with the given ID does not exist in the persistent data store
-   */
-  Tournament update(TournamentDetailDto tournament) throws NotFoundException;
-
-  /**
    * Get a tournament by its ID from the persistent data store.
    *
    * @param id the ID of the tournament to get
@@ -50,12 +39,4 @@ public interface TournamentDao {
    * @return the created tournament
    */
   Tournament create(TournamentDetailDto tournament);
-
-  /**
-   * Delete a tournament with the provided ID from the persistent data store.
-   *
-   * @param id the ID of the tournament to delete
-   * @throws NotFoundException if the Tournament with the given ID does not exist in the persistent data store
-   */
-  void delete(long id) throws NotFoundException;
 }

@@ -61,15 +61,7 @@ public class TournamentServiceImpl implements TournamentService {
       throws ValidationException, ConflictException, NotFoundException {
     validator.validateForCreate(tournament);
     LOG.trace("create({})", tournament);
-    var createdTournament = horseTourneyLinkerDao.create(tournament);
-    return mapper.entityToDetailDto(createdTournament);
-  }
-
-  @Override
-  public TournamentDetailDto update(TournamentDetailDto tournament)
-      throws NotFoundException, ValidationException, ConflictException {
-    // Implementation of update method
-    return null;
+    return horseTourneyLinkerDao.create(tournament);
   }
 
   @Override
@@ -77,10 +69,5 @@ public class TournamentServiceImpl implements TournamentService {
     Tournament tournament = dao.getById(id);
     List<Horse> participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
     return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new Horse[0]));
-  }
-
-  @Override
-  public void deleteTournamentById(long id) throws NotFoundException {
-    // Implementation of deleteTournamentById method
   }
 }

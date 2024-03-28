@@ -38,23 +38,6 @@ public interface TournamentService {
   TournamentDetailDto create(TournamentDetailDto tournament)
       throws ValidationException, ConflictException, NotFoundException;
 
-  /**
-   * Updates the tournament with the ID given in {@code tournament}
-   * with the data given in {@code tournament}
-   * in the persistent data store.
-   *
-   * @param tournament the tournament to update
-   * @return the updated tournament
-   * @throws NotFoundException   if the tournament with the given ID does not
-   *                             exist in the persistent data store
-   * @throws ValidationException if the update data given for the tournament is
-   *                             in itself incorrect (no name, name too long, etc.)
-   * @throws ConflictException   if the update data given for the tournament is
-   *                             in conflict with the data currently in the system
-   *                             (e.g., breed does not exist)
-   */
-  TournamentDetailDto update(TournamentDetailDto tournament)
-      throws NotFoundException, ValidationException, ConflictException;
 
   /**
    * Get the tournament with the given ID, with more detailed information.
@@ -66,13 +49,4 @@ public interface TournamentService {
    *                           ID does not exist in the persistent data store
    */
   TournamentStandingsDto getById(long id) throws NotFoundException;
-
-  /**
-   * Deletes the tournament with the given ID from the persistent data store.
-   *
-   * @param id the ID of the tournament to delete
-   * @throws NotFoundException if the tournament with the given
-   *                           ID does not exist in the persistent data store
-   */
-  void deleteTournamentById(long id) throws NotFoundException;
 }
