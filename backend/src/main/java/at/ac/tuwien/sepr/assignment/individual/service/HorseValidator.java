@@ -94,7 +94,7 @@ public class HorseValidator {
   private void validateName(HorseDetailDto horse, ValidationContext context) {
     if (horse.name() == null || horse.name().isEmpty()) {
       context.addError("Horse name cannot be empty or null.");
-    } else if (!horse.name().matches("^[a-zA-Z0-9]*$")) {
+    } else if (!horse.name().matches("^[a-zA-Z0-9 ]*$")) {
       context.addError("Horse name must contain only alphanumeric characters.");
     }
   }
@@ -135,8 +135,8 @@ public class HorseValidator {
   private void validateLinkedToTournament(HorseDetailDto horse, ValidationContext context) {
     try {
       List<Tournament> tournaments = linkerService.getTournamentsAssociatedWithHorseId(horse.id());
-      if (tournaments.isEmpty()) {
-        context.addError("Horse is not linked to any tournament.");
+      if (!tournaments.isEmpty()) {
+        context.addError("Horse is linked to (a) tournament(s): {}." + tournaments);
       }
     } catch (FailedToRetrieveException e) {
       context.addError("Failed to retrieve tournaments associated with the horse.");
