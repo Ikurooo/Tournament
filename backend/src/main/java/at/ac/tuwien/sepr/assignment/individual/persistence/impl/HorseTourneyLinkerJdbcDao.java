@@ -45,10 +45,12 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
       + "FROM " + HORSE_TABLE_NAME + " h "
       + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
       + "WHERE l.tournament_id = ?";
-  private static final String FIND_TOURNAMENT_BY_PARTICIPANT_ID = "SELECT t.* "
-      + "FROM " + TOURNAMENT_TABLE_NAME + " h "
-      + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.horse_id "
-      + "WHERE l.horse_id = ?";
+  private static final String FIND_TOURNAMENT_BY_PARTICIPANT_ID =
+      "SELECT t.* "
+         + "FROM " + TOURNAMENT_TABLE_NAME + " t "
+         + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.tournament_id "
+         + "WHERE l.horse_id = ?";
+
   private final JdbcTemplate jdbcTemplate;
 
   public HorseTourneyLinkerJdbcDao(
@@ -141,7 +143,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private Tournament mapRowTournament(ResultSet result, int rownum) throws SQLException {
     return new Tournament()
         .setId(result.getLong("id"))
-        .setName("name")
+        .setName(result.getString("name"))
         .setStartDate(result.getDate("start_date").toLocalDate())
         .setEndDate(result.getDate("end_date").toLocalDate());
   }
