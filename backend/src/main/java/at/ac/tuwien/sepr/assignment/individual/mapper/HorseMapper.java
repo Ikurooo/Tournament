@@ -74,6 +74,7 @@ public class HorseMapper {
    * @throws FatalException if the breed ID of the horse does not exist in the map
    */
   private BreedDto breedFromMap(Horse horse, Map<Long, BreedDto> map) {
+    LOG.trace("breedFromMap({})", horse);
     var breedId = horse.getBreedId();
     if (breedId == null) {
       return null;

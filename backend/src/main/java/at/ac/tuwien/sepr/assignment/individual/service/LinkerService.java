@@ -1,13 +1,9 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
-import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
-import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
-import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
 import java.util.List;
 

@@ -43,52 +43,51 @@ public class TournamentValidator {
    */
   public void validateForCreate(TournamentDetailDto tournament) throws ValidationException {
     LOG.trace("validateForCreate({})", tournament);
-    Set<Long> seenIds = new HashSet<>();
-    List<String> validationErrors = new ArrayList<>();
+    ValidationContext context = new ValidationContext();
 
-    validateName(tournament.name(), validationErrors);
-    validateDates(tournament.startDate(), tournament.endDate(), validationErrors);
-    validateParticipants(tournament, seenIds, validationErrors);
+    validateName(tournament.name(), context);
+    validateDates(tournament.startDate(), tournament.endDate(), context);
+    validateParticipants(tournament, context);
 
-    if (!validationErrors.isEmpty()) {
-      throw new ValidationException("Validation of tournament for create failed", validationErrors);
-    }
+    context.throwIfErrorsPresent("Validation of tournament for create failed");
   }
 
-  private void validateName(String name, List<String> errors) {
+  private void validateName(String name, ValidationContext context) {
     if (name == null || name.isEmpty()) {
-      errors.add("Tournament name cannot be empty or null.");
+      context.addError("Tournament name cannot be empty or null.");
     } else if (!name.matches("^[a-zA-Z0-9]*$")) {
-      errors.add("Tournament name must contain only alphanumeric characters.");
+      context.addError("Tournament name must contain only alphanumeric characters.");
     }
   }
 
-  private void validateDates(LocalDate startDate, LocalDate endDate, List<String> errors) {
+  private void validateDates(LocalDate startDate, LocalDate endDate, ValidationContext context) {
     if (startDate == null || endDate == null) {
-      errors.add("Start date and end date cannot be null.");
+      context.addError("Start date and end date cannot be null.");
     } else {
       LocalDate minDate = GlobalConstants.minDate;
       if (startDate.isAfter(endDate)) {
-        errors.add("Start date cannot be after end date.");
+        context.addError("Start date cannot be after end date.");
       }
       if (startDate.isBefore(minDate) || endDate.isBefore(minDate)) {
-        errors.add(String.format("Start date and end date must be after %s.", minDate));
+        context.addError(String.format("Start date and end date must be after %s.", minDate));
       }
     }
   }
 
-  private void validateParticipants(TournamentDetailDto tournament, Set<Long> seenIds, List<String> errors) {
+  private void validateParticipants(TournamentDetailDto tournament, ValidationContext context) {
+    Set<Long> seenIds = new HashSet<>();
+
     if (tournament.participants().length != 8) {
-      errors.add("Tournament must have exactly 8 participants.");
+      context.addError("Tournament must have exactly 8 participants.");
     }
 
     for (Horse horse : tournament.participants()) {
       if (horse.getId() == null) {
-        errors.add("Invalid horse ID found.");
+        context.addError("Invalid horse ID found.");
       } else if (!seenIds.add(horse.getId())) {
-        errors.add("Duplicate participant found: Horse ID " + horse.getId());
+        context.addError("Duplicate participant found: Horse ID " + horse.getId());
       } else if (!doesHorseExist(horse)) {
-        errors.add("Horse does not exist: Horse ID " + horse.getId());
+        context.addError("Horse does not exist: Horse ID " + horse.getId());
       }
     }
   }
@@ -99,6 +98,21 @@ public class TournamentValidator {
       return true;
     } catch (NotFoundException e) {
       return false;
+    }
+  }
+
+  private static class ValidationContext {
+    private final List<String> errors = new ArrayList<>();
+
+    public void addError(String errorMessage) {
+      errors.add(errorMessage);
+    }
+
+    public void throwIfErrorsPresent(String exceptionMessage) throws ValidationException {
+      if (!errors.isEmpty()) {
+        LOG.warn("Error during tournament validation: {}", errors);
+        throw new ValidationException(exceptionMessage, errors);
+      }
     }
   }
 }

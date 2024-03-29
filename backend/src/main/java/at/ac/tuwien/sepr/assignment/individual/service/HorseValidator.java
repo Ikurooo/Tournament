@@ -38,9 +38,17 @@ public class HorseValidator {
     this.minDate = GlobalConstants.minDate;
   }
 
+  /**
+   * Validates the provided horse details for deletion.
+   *
+   * @param horse the horse details to validate
+   * @throws ValidationException if the validation fails
+   */
   public void validateForDelete(HorseDetailDto horse) throws ValidationException {
-    LOG.trace("validateForUpdate({})", horse);
+    LOG.trace("validateForDelete({})", horse);
     ValidationContext context = new ValidationContext();
+    validateLinkedToTournament(horse, context);
+    context.throwIfErrorsPresent("Validation of horse for delete failed");
   }
 
   /**
@@ -95,7 +103,7 @@ public class HorseValidator {
     if (horse.dateOfBirth() == null) {
       context.addError("Date of birth cannot be null.");
     } else if (horse.dateOfBirth().isBefore(minDate)) {
-      context.addError(String.format("Date of birth cannot be before %s.", minDate.toString()));
+      context.addError(String.format("Date of birth cannot be before %s.", minDate));
     }
   }
 
@@ -144,6 +152,7 @@ public class HorseValidator {
 
     public void throwIfErrorsPresent(String exceptionMessage) throws ValidationException {
       if (!errors.isEmpty()) {
+        LOG.warn("Error during horse validation: {}", errors);
         throw new ValidationException(exceptionMessage, errors);
       }
     }

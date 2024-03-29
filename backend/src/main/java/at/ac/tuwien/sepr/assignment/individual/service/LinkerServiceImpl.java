@@ -39,6 +39,7 @@ public class LinkerServiceImpl implements LinkerService {
 
   @Override
   public TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException {
+    LOG.trace("getById({})", id);
     Tournament tournament = tournamentDao.getById(id);
     List<Horse> participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
     return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new Horse[0]));
@@ -47,6 +48,7 @@ public class LinkerServiceImpl implements LinkerService {
 
   @Override
   public List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException {
+    LOG.trace("getTournamentsAssociatedWithHorseId({})", id);
     return horseTourneyLinkerDao.getTournamentsAssociatedWithHorseId(id);
   }
 }

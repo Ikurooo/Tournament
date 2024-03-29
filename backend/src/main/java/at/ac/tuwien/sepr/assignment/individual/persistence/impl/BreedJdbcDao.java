@@ -2,6 +2,7 @@ package at.ac.tuwien.sepr.assignment.individual.persistence.impl;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.BreedSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Breed;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.BreedDao;
 
 import java.lang.invoke.MethodHandles;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,22 +42,38 @@ public class BreedJdbcDao implements BreedDao {
   @Override
   public Collection<Breed> allBreeds() {
     LOG.trace("allBreeds()");
-    return jdbcTemplate.query(SQL_ALL, this::mapRow);
+    try {
+      return jdbcTemplate.query(SQL_ALL, this::mapRow);
+    } catch (DataAccessException ex) {
+      LOG.error("Error occurred while collecting breeds: {}", ex.getMessage());
+      throw new FailedToRetrieveException("Failed to collect breeds");
+    }
   }
 
   @Override
   public Collection<Breed> findBreedsById(Set<Long> breedIds) {
-    LOG.trace("findBreedsById({})", breedIds);
-    return jdbcTemplate.query(SQL_FIND_BY_IDS, Map.of("ids", breedIds), this::mapRow);
+    try {
+      LOG.trace("findBreedsById({})", breedIds);
+      return jdbcTemplate.query(SQL_FIND_BY_IDS, Map.of("ids", breedIds), this::mapRow);
+    } catch (DataAccessException ex) {
+      LOG.error("Error occurred while finding breeds by IDs: {} {}", breedIds, ex.getMessage());
+      throw new FailedToRetrieveException("Failed to retrieve breeds: " + breedIds.toString());
+    }
   }
 
   @Override
   public Collection<Breed> search(BreedSearchDto searchParams) {
-    String query = SQL_SEARCH;
-    if (searchParams.limit() != null) {
-      query += SQL_LIMIT_CLAUSE;
+    try {
+      LOG.trace("search({})", searchParams);
+      String query = SQL_SEARCH;
+      if (searchParams.limit() != null) {
+        query += SQL_LIMIT_CLAUSE;
+      }
+      return jdbcTemplate.query(query, new BeanPropertySqlParameterSource(searchParams), this::mapRow);
+    } catch (DataAccessException ex) {
+      LOG.error("Error occurred while searching for breeds with parameters: {} {}", searchParams, ex.getMessage());
+      throw new FailedToRetrieveException("Failed to retrieve breeds with parameters: " + searchParams.toString());
     }
-    return jdbcTemplate.query(query, new BeanPropertySqlParameterSource(searchParams), this::mapRow);
   }
 
   private Breed mapRow(ResultSet resultSet, int i) throws SQLException {

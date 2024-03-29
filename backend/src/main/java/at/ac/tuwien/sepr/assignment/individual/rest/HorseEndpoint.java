@@ -160,6 +160,8 @@ public class HorseEndpoint {
    */
   @DeleteMapping("/{id}")
   public DeletionResponseDto deleteHorse(@PathVariable("id") long id) {
+    LOG.info("DELETE " + BASE_PATH + "/{}", id);
+    LOG.debug("Horse ID: {}", id);
     try {
       service.deleteHorseById(id);
       return new DeletionResponseDto("Horse deleted successfully.", true);

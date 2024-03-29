@@ -64,6 +64,7 @@ public class HorseServiceImpl implements HorseService {
 
   @Override
   public Stream<HorseListDto> search(HorseSearchDto searchParameters) throws FailedToRetrieveException {
+    LOG.trace("search({})", searchParameters);
     var horses = horseDao.search(searchParameters);
     // First get all breed ids…
     var breeds = horses.stream()

@@ -117,6 +117,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
   @Override
   public List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException {
+    LOG.trace("getTournamentsAssociatedWithHorseId({})", id);
     try {
       return jdbcTemplate.query(FIND_TOURNAMENT_BY_PARTICIPANT_ID, this::mapRowTournament, id);
     } catch (DataAccessException e) {

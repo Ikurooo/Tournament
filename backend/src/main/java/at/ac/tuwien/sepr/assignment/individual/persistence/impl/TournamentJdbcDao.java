@@ -82,10 +82,12 @@ public class TournamentJdbcDao implements TournamentDao {
       List<Tournament> tournaments = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
       if (tournaments.isEmpty()) {
+        LOG.warn("Tournament with ID {} does not exist", id);
         throw new NotFoundException("No tournament with ID %d found".formatted(id));
       }
 
       if (tournaments.size() > 1) {
+        LOG.error("Multiple tournaments with ID: {} found", id);
         throw new FatalException("Too many tournaments with ID %d found".formatted(id));
       }
 

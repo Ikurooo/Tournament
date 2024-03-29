@@ -77,10 +77,12 @@ public class HorseJdbcDao implements HorseDao {
       List<Horse> horses = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
       if (horses.isEmpty()) {
+        LOG.warn("Horse with ID {} does not exist", id);
         throw new NotFoundException("No horse with ID %d found".formatted(id));
       }
 
       if (horses.size() > 1) {
+        LOG.error("Multiple horses with ID: {} found", id);
         throw new FatalException("Too many horses with ID %d found".formatted(id));
       }
 
@@ -113,7 +115,7 @@ public class HorseJdbcDao implements HorseDao {
       }, keyHolder);
 
       if (update != 1) {
-        LOG.error("Failed to insert a new horse. Rows affected: {}", update);
+        LOG.warn("Failed to insert a new horse. Rows affected: {}", update);
         throw new FailedToCreateException("Failed to insert a new horse.");
       }
 
@@ -128,7 +130,7 @@ public class HorseJdbcDao implements HorseDao {
           .setWeight(horse.weight())
           .setBreedId(horse.breed().id());
     } catch (DataAccessException e) {
-      LOG.error("Failed to create a new horse: {}", e.getMessage());
+      LOG.error("Failed to create a new horse: {} {}", horse, e.getMessage());
       throw new FailedToCreateException("Failed to create a new horse.", e);
     }
   }
@@ -141,10 +143,10 @@ public class HorseJdbcDao implements HorseDao {
       int deleted = jdbcTemplate.update("DELETE FROM " + TABLE_NAME + " WHERE id = ?", id);
 
       if (deleted == 0) {
+        LOG.warn("Failed to delete horse because horse with ID: {} does not exist", id);
         throw new NotFoundException("No horse with ID %d found for deletion".formatted(id));
       }
 
-      LOG.info("Deleted horse with ID: {}", id);
     } catch (DataAccessException e) {
       LOG.error("Failed to delete horse with ID {}: {}", id, e.getMessage());
       throw new FailedToDeleteException("Failed to delete horse with ID " + id, e);
@@ -165,7 +167,7 @@ public class HorseJdbcDao implements HorseDao {
 
       return jdbcNamed.query(query, params, this::mapRow);
     } catch (DataAccessException e) {
-      LOG.error("Failed to search horses: {}", e.getMessage());
+      LOG.error("Failed to search horses with parameters: {} {}", searchParameters, e.getMessage());
       throw new FailedToRetrieveException("Failed to search horses", e);
     }
   }
@@ -183,6 +185,7 @@ public class HorseJdbcDao implements HorseDao {
           horse.breed().id(),
           horse.id());
       if (updated == 0) {
+        LOG.warn("Failed to update horse with ID {} because it does not exist", horse.id());
         throw new NotFoundException("Could not update horse with ID " + horse.id() + ", because it does not exist");
       }
 
