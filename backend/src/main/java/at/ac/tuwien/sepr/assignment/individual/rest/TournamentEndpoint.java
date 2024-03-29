@@ -79,10 +79,6 @@ public class TournamentEndpoint {
       HttpStatus status = HttpStatus.BAD_REQUEST;
       logClientError(status, "Validation issue during creation.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (ConflictException e) {
-      HttpStatus status = HttpStatus.CONFLICT;
-      logClientError(status, "Conflict issue during creation.", e);
-      throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToCreateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       logClientError(status, "Failed to insert tournament.", e);

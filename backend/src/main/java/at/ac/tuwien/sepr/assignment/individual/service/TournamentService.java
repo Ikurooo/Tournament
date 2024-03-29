@@ -35,6 +35,8 @@ public interface TournamentService {
    *                             (e.g., missing name, name too long, etc.)
    * @throws ConflictException   if there is a conflict with the existing data in the system
    *                             (e.g., breed does not exist)
+   * @throws NotFoundException   if any of the horses in the participants are not in the horses
+   *                             table
    */
   Tournament create(TournamentDetailDto tournament)
       throws ValidationException, ConflictException, NotFoundException;

@@ -2,16 +2,24 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
+import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,6 +73,29 @@ public class TournamentServiceTest extends TestBase {
             tuple(-5L, "Special Cup", LocalDate.of(2009, 6, 20), LocalDate.of(2010, 8, 18)),
             tuple(-6L, "Shell Cup", LocalDate.of(2011, 10, 5), LocalDate.of(2012, 12, 28))
         );
+  }
+
+  @Test
+  public void createInvalidTournamentLessThan8Participants() throws ConflictException, NotFoundException {
+    List<Horse> participants = new ArrayList<>(expectedParticipants.subList(0, Math.min(7, expectedParticipants.size())));
+    participants.add(new Horse()
+        .setId(-2L)
+        .setName("Hugo")
+        .setSex(Sex.MALE)
+        .setDateOfBirth(LocalDate.of(2020, 2, 20))
+        .setHeight(1.20f)
+        .setWeight(320)
+        .setBreedId(-20L));
+
+    var tournament = new TournamentDetailDto(null,
+        "Not8",
+        LocalDate.of(2000, 1, 1),
+        LocalDate.of(2001, 1, 1),
+        participants.toArray(new Horse[0]));
+
+    assertThatThrownBy(() -> tournamentService.create(tournament))
+        .isInstanceOf(ValidationException.class)
+        .hasMessageContaining("Validation of tournament for create failed. Failed validations: Duplicate participant found: Horse ID -2.");
   }
 
 }
