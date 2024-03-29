@@ -3,6 +3,7 @@ package at.ac.tuwien.sepr.assignment.individual.persistence;
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 import org.junit.jupiter.api.Test;
@@ -23,19 +24,10 @@ import static org.mockito.Mockito.when;
 @ActiveProfiles({"test", "datagen"})
 @SpringBootTest
 public class TournamentDaoTest extends TestBase {
-
-  @Autowired
-  HorseTourneyLinkerDao horseTourneyLinkerDao;
   @Autowired
   TournamentDao tournamentDao;
   @Autowired
   TournamentMapper tournamentMapper;
-
-  private void assertTournamentsEqual(Tournament expected, Tournament actual) {
-    assertEquals(expected.getName(), actual.getName());
-    assertEquals(expected.getStartDate(), actual.getStartDate());
-    assertEquals(expected.getEndDate(), actual.getEndDate());
-  }
 
   @Test
   public void searchByName() {
@@ -118,5 +110,29 @@ public class TournamentDaoTest extends TestBase {
                 .setStartDate(LocalDate.of(2017, 10, 10))
                 .setEndDate(LocalDate.of(2018, 12, 15))
         );
+  }
+
+  @Test
+  public void getTournamentWithInvalidId() {
+    long invalidId = 42069L;
+    NotFoundException exception = assertThrows(NotFoundException.class, () -> {
+      tournamentDao.getById(invalidId);
+    });
+
+    assertEquals("No tournament with ID " + invalidId + " found", exception.getMessage());
+  }
+
+  @Test
+  public void getTournamentWithValidId() throws NotFoundException {
+    long validId = -8L;
+
+    var tournament = tournamentDao.getById(validId);
+    assertThat(tournament)
+        .usingRecursiveComparison()
+        .isEqualTo(new Tournament()
+            .setId(-8)
+            .setName("Leaf Cup")
+            .setStartDate(LocalDate.of(2015, 6, 25))
+            .setEndDate(LocalDate.of(2016, 8, 22)));
   }
 }
