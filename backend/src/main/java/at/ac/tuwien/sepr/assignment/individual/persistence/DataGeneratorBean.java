@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 
 import java.lang.invoke.MethodHandles;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.jdbc.datasource.init.ScriptStatementFailedException;
 
 /**
  * This component is only created, if the profile {@code datagen} is active
@@ -33,6 +35,12 @@ public class DataGeneratorBean {
   @PostConstruct
   public void generateData() throws SQLException {
     LOGGER.info("Generating data…");
+
+    try (var connection = dataSource.getConnection()) {
+      ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/insertBreeds.sql"));
+    }
+
+
     try (var connection = dataSource.getConnection()) {
       ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/insertData.sql"));
       LOGGER.info("Finished generating data without error.");

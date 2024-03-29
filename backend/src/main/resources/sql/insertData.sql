@@ -1,48 +1,16 @@
--- insert initial test data
--- the IDs are hardcoded to enable references between further test data
--- negative IDs are used to not interfere with user-entered data and allow clean deletion of test data
 
 // TODO temporary delete everything for testing
 
--- Delete negative IDs from tables
--- Drop foreign key constraint in horse_tourney_linker table
 ALTER TABLE horse_tourney_linker DROP CONSTRAINT IF EXISTS horse_id;
 
--- Delete from horse_tourney_linker table first to avoid referential integrity constraint violation
-DELETE FROM horse_tourney_linker WHERE horse_id < 0;
+DELETE FROM horse_tourney_linker WHERE horse_id < 0 OR tournament_id < 0;
 
--- Delete from horse table
 DELETE FROM horse WHERE id < 0;
 
--- Re-add foreign key constraint in horse_tourney_linker table
-ALTER TABLE horse_tourney_linker ADD CONSTRAINT IF NOT EXISTS fk_horse_id FOREIGN KEY (horse_id) REFERENCES horse(id);
-
-DELETE FROM breed WHERE id < 0;
 DELETE FROM tournament WHERE id < 0;
 
+ALTER TABLE horse_tourney_linker ADD CONSTRAINT IF NOT EXISTS fk_horse_id FOREIGN KEY (horse_id) REFERENCES horse(id);
 
-INSERT INTO breed (id, name)
-VALUES
-    (-1, 'Andalusian'),
-    (-2, 'Appaloosa'),
-    (-3, 'Arabian'),
-    (-4, 'Belgian Draft'),
-    (-5, 'Connemara Pony'),
-    (-6, 'Dartmoor Pony'),
-    (-7, 'Friesian'),
-    (-8, 'Haflinger'),
-    (-9, 'Hanoverian'),
-    (-10, 'Icelandic Horse'),
-    (-11, 'Lipizzaner'),
-    (-12, 'Oldenburg'),
-    (-13, 'Paint Horse'),
-    (-14, 'Quarter Horse'),
-    (-15, 'Shetland Pony'),
-    (-16, 'Tinker'),
-    (-17, 'Trakehner'),
-    (-18, 'Warmblood'),
-    (-19, 'Welsh Cob'),
-    (-20, 'Welsh Pony');
 
 -- Füge Pferdedaten hinzu
 INSERT INTO horse (id, name, sex, date_of_birth, height, weight, breed_id)
