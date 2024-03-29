@@ -55,7 +55,7 @@ public class TournamentValidator {
   private void validateName(String name, ValidationContext context) {
     if (name == null || name.isEmpty()) {
       context.addError("Tournament name cannot be empty or null.");
-    } else if (!name.matches("^[a-zA-Z0-9]*$")) {
+    } else if (!name.matches("^[a-zA-Z0-9 ]*$")) {
       context.addError("Tournament name must contain only alphanumeric characters.");
     }
   }
