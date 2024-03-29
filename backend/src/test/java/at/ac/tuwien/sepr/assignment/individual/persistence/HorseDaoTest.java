@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,7 +13,10 @@ import at.ac.tuwien.sepr.assignment.individual.dto.BreedDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToDeleteException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
+import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
 import at.ac.tuwien.sepr.assignment.individual.persistence.impl.HorseJdbcDao;
 import at.ac.tuwien.sepr.assignment.individual.service.BreedService;
@@ -30,6 +34,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles({"test", "datagen"})
@@ -47,13 +52,50 @@ public class HorseDaoTest extends TestBase {
   BreedService breedService;
 
   @Test
-  public void getByIdThrowsNotFoundExceptionWhenNoHorseFound() {
-    assertThrows(NotFoundException.class, () -> horseDao.getById(1L));
+  public void deleteByIdThrowsNotFoundException() {
+    assertThatThrownBy(() ->  horseDao.delete(1L))
+        .isInstanceOf(NotFoundException.class)
+        .hasMessageContaining("No horse with ID 1 found for deletion");
   }
 
   @Test
-  public void deleteByIdThrowsNotFoundException() {
-    assertThrows(NotFoundException.class, () -> horseDao.delete(1L));
+  public void deleteExistingHorse() throws NotFoundException {
+    horseDao.delete(-10L);
+    assertThatThrownBy(() ->  horseDao.delete(-10L))
+        .isInstanceOf(NotFoundException.class)
+        .hasMessageContaining("No horse with ID -10 found for deletion");
+  }
+
+  @Test
+  public void deleteExistingHorseButHorseIsInTournament() {
+    assertThatThrownBy(() -> horseDao.delete(-1L))
+        .isInstanceOf(FailedToDeleteException.class)
+        .hasMessageContaining("Failed to delete horse with ID -1");
+  }
+
+  @Test
+  public void updateExistingHorse() throws NotFoundException {
+    var horseDto = new HorseDetailDto(
+        -2L,
+        "Updated Hugo",
+        Sex.MALE,
+        LocalDate.of(2020, 1, 1),
+        1.5f,
+        500,
+        new BreedDto(-1L, "Andalusian")
+    );
+
+    var horse = horseDao.update(horseDto);
+    assertThat(horse)
+        .usingRecursiveComparison()
+        .isEqualTo(new Horse()
+            .setId(-2L)
+            .setName("Updated Hugo")
+            .setSex(Sex.MALE)
+            .setDateOfBirth(LocalDate.of(2020, 1, 1))
+            .setHeight(1.5f)
+            .setWeight(500)
+            .setBreedId(-1L));
   }
 
   @Test
@@ -68,8 +110,9 @@ public class HorseDaoTest extends TestBase {
         new BreedDto(-1L, "Some Breed")
     );
 
-    var exception = assertThrows(NotFoundException.class, () -> horseDao.update(horseDto));
-    assertEquals("Could not update horse with ID -50, because it does not exist", exception.getMessage());
+    assertThatThrownBy(() -> horseDao.update(horseDto))
+        .isInstanceOf(NotFoundException.class)
+        .hasMessageContaining("Could not update horse with ID -50, because it does not exist");
   }
 
   @Test
@@ -150,5 +193,55 @@ public class HorseDaoTest extends TestBase {
                 .setHeight(1.62f)
                 .setWeight(670)
                 .setBreedId(-19L));
+  }
+
+  @Test
+  public void getHorseWithInvalidId() {
+    long invalidId = 42069L;
+    assertThatThrownBy(() -> horseDao.getById(invalidId))
+        .isInstanceOf(NotFoundException.class)
+        .hasMessageContaining("No horse with ID " + invalidId + " found");
+  }
+
+  @Test
+  public void getHorseWithValidId() throws NotFoundException {
+    long validId = -32L;
+
+    var horse = horseDao.getById(validId);
+    assertThat(horse)
+        .usingRecursiveComparison()
+        .isEqualTo(new Horse()
+            .setId(-32L)
+            .setName("Luna")
+            .setSex(Sex.FEMALE)
+            .setDateOfBirth(LocalDate.of(2018, 10, 10))
+            .setHeight(1.62f)
+            .setWeight(670)
+            .setBreedId(-19L));
+  }
+
+  @Test
+  public void createValidHorse() {
+    var horseDto = new HorseDetailDto(
+        null,
+        "Valid Hugo",
+        Sex.MALE,
+        LocalDate.of(2020, 1, 1),
+        1.5f,
+        500,
+        new BreedDto(-1L, "Andalusian")
+    );
+    var horse = horseDao.create(horseDto);
+    assertThat(horse)
+        .usingRecursiveComparison()
+        .isEqualTo(new Horse()
+            .setId(1L)
+            .setName("Valid Hugo")
+            .setSex(Sex.MALE)
+            .setDateOfBirth(LocalDate.of(2020, 1, 1))
+            .setHeight(1.5f)
+            .setWeight(500)
+            .setBreedId(-1L));
+
   }
 }

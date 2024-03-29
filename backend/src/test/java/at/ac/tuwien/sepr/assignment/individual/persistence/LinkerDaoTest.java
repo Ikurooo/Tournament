@@ -36,6 +36,28 @@ public class LinkerDaoTest extends TestBase {
   HorseTourneyLinkerDao horseTourneyLinkerDao;
 
   @Test
+  public void getTournamentsAssociatedWithNonExistentHorseId() {
+    long nonExistentHorseId = -1L;
+    List<Tournament> expectedTournaments = Arrays.asList(
+        new Tournament()
+            .setId(-1)
+            .setName("Rainbow Road")
+            .setStartDate(LocalDate.of(2001, 1, 1))
+            .setEndDate(LocalDate.of(2002, 3, 2)),
+        new Tournament()
+            .setId(-2)
+            .setName("Star Cup")
+            .setStartDate(LocalDate.of(2003, 5, 15))
+            .setEndDate(LocalDate.of(2004, 7, 20))
+    );
+    List<Tournament> tournaments = horseTourneyLinkerDao.getTournamentsAssociatedWithHorseId(nonExistentHorseId);
+    assertNotNull(tournaments);
+    assertThat(tournaments)
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactlyInAnyOrderElementsOf(expectedTournaments);
+  }
+
+  @Test
   public void getHorsesAssociatedWithTournamentId() {
     var horses = horseTourneyLinkerDao.findParticipantsByTournamentId(-1);
     assertNotNull(horses);
@@ -59,7 +81,7 @@ public class LinkerDaoTest extends TestBase {
   }
 
   @Test
-  public void createValidTournament() throws ValidationException {
+  public void createValidTournament() {
     Horse[] participantArray = expectedParticipants.toArray(new Horse[0]);
     var toCreate = new TournamentDetailDto(
         null,
