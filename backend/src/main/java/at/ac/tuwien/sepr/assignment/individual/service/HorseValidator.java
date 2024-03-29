@@ -2,97 +2,116 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
+import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
+import at.ac.tuwien.sepr.assignment.individual.service.BreedService;
+import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 
-import java.lang.invoke.MethodHandles;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
-import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
-import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HorseValidator {
-  private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  private static final Logger LOG = LoggerFactory.getLogger(HorseValidator.class);
   private final BreedService breedService;
-  private final LocalDate minDate = GlobalConstants.minDate;
+  private final LocalDate minDate;
 
   public HorseValidator(BreedService breedService) {
     this.breedService = breedService;
+    this.minDate = GlobalConstants.minDate;
   }
 
   public void validateForUpdate(HorseDetailDto horse) throws ValidationException {
     LOG.trace("validateForUpdate({})", horse);
-    List<String> validationErrors = new ArrayList<>();
+    ValidationContext context = new ValidationContext();
 
-    var breeds = breedService.allBreeds();
+    validateName(horse, context);
+    validateDateOfBirth(horse, context);
+    validateHeight(horse, context);
+    validateWeight(horse, context);
+    validateBreed(horse, context);
+    validateSex(horse, context);
 
-    if (breeds.noneMatch(b -> b.equals(horse.breed()))) {
-      validationErrors.add("Invalid breed specified.");
-    }
-
-    if (horse.id() == null) {
-      validationErrors.add("No ID given");
-    }
-
-    if (!validationErrors.isEmpty()) {
-      throw new ValidationException("Validation of horse for update failed", validationErrors);
-    }
+    context.throwIfErrorsPresent("Validation of horse for update failed");
   }
 
   public void validateForCreate(HorseDetailDto horse) throws ValidationException {
     LOG.trace("validateForCreate({})", horse);
-    List<String> validationErrors = new ArrayList<>();
+    ValidationContext context = new ValidationContext();
 
+    validateName(horse, context);
+    validateDateOfBirth(horse, context);
+    validateHeight(horse, context);
+    validateWeight(horse, context);
+    validateBreed(horse, context);
+    validateSex(horse, context);
+
+    context.throwIfErrorsPresent("Validation of horse for create failed");
+  }
+
+  private void validateName(HorseDetailDto horse, ValidationContext context) {
     if (horse.name() == null || horse.name().isEmpty()) {
-      validationErrors.add("Horse name cannot be empty or null.");
-      throw new ValidationException("Validation of horse for create failed", validationErrors);
+      context.addError("Horse name cannot be empty or null.");
+    } else if (!horse.name().matches("^[a-zA-Z0-9]*$")) {
+      context.addError("Horse name must contain only alphanumeric characters.");
     }
+  }
 
-    if (!horse.name().matches("^[a-zA-Z0-9]*$")) {
-      validationErrors.add("Horse name must contain only alphanumeric characters.");
-    }
-
+  private void validateDateOfBirth(HorseDetailDto horse, ValidationContext context) {
     if (horse.dateOfBirth() == null) {
-      validationErrors.add("Date of birth cannot be null.");
-      throw new ValidationException("Validation of horse for create failed", validationErrors);
+      context.addError("Date of birth cannot be null.");
+    } else if (horse.dateOfBirth().isBefore(minDate)) {
+      context.addError(String.format("Date of birth cannot be before %s.", minDate.toString()));
     }
+  }
 
-    if (horse.dateOfBirth().isBefore(minDate)) {
-      validationErrors.add(String.format("Date of birth cannot be before %s.", minDate.toString()));
-    }
-
-
+  private void validateHeight(HorseDetailDto horse, ValidationContext context) {
     if (horse.height() <= 0) {
-      validationErrors.add("Height must be greater than zero.");
+      context.addError("Height must be greater than zero.");
     }
+  }
 
+  private void validateWeight(HorseDetailDto horse, ValidationContext context) {
     if (horse.weight() <= 0) {
-      validationErrors.add("Weight must be greater than zero.");
+      context.addError("Weight must be greater than zero.");
     }
+  }
 
+  private void validateBreed(HorseDetailDto horse, ValidationContext context) {
     var breeds = breedService.allBreeds();
-
     if (horse.breed() != null && breeds.noneMatch(b -> b.equals(horse.breed()))) {
-      validationErrors.add("Invalid breed specified.");
+      context.addError("Invalid breed specified.");
+    }
+  }
+
+  private void validateSex(HorseDetailDto horse, ValidationContext context) {
+    if (horse.sex() == null || !(horse.sex().equals(Sex.FEMALE) || horse.sex().equals(Sex.MALE))) {
+      context.addError("Invalid horse sex specified.");
+    }
+  }
+
+  private void validateId(HorseDetailDto horse, ValidationContext context) {
+    if (horse.id() == null) {
+      context.addError("No ID given");
+    }
+  }
+
+  private static class ValidationContext {
+    private final List<String> errors = new ArrayList<>();
+
+    public void addError(String errorMessage) {
+      errors.add(errorMessage);
     }
 
-    if (horse.sex() == null) {
-      validationErrors.add("Sex cannot be null.");
-      throw new ValidationException("Validation of horse for create failed", validationErrors);
-    }
-
-    LOG.info("{}", horse.sex());
-
-    if (!(horse.sex().equals(Sex.FEMALE) || horse.sex().equals(Sex.MALE))) {
-      validationErrors.add("Invalid horse sex specified.");
-    }
-
-    if (!validationErrors.isEmpty()) {
-      throw new ValidationException("Validation of horse for create failed", validationErrors);
+    public void throwIfErrorsPresent(String exceptionMessage) throws ValidationException {
+      if (!errors.isEmpty()) {
+        throw new ValidationException(exceptionMessage, errors);
+      }
     }
   }
 }

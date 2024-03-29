@@ -38,76 +38,56 @@ public class TournamentValidator {
     this.horseService = horseService;
   }
 
-  /**
-   * Validates tournament details for creation.
-   *
-   * @param tournament The tournament details to validate
-   * @throws ValidationException if validation fails
-   */
   public void validateForCreate(TournamentDetailDto tournament) throws ValidationException, NotFoundException {
     LOG.trace("validateForCreate({})", tournament);
     Set<Long> seenIds = new HashSet<>();
-    List<String> validationErrors = Stream.of(
-            validate(tournament.name(), "Tournament name cannot be empty or null.", s -> s == null || s.isEmpty()),
-            validate(tournament.name(), "Tournament name must contain only alphanumeric characters.", s -> !s.matches("^[a-zA-Z0-9]*$")),
-            validateDates(tournament.startDate(), tournament.endDate()),
-            hasEightParticipants(tournament),
-            validateHorseIds(tournament),
-            validateHorseExistence(tournament),
-            validateDuplicates(tournament, seenIds)
-        )
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .collect(Collectors.toList());
+    List<String> validationErrors = new ArrayList<>();
+
+    validateName(tournament.name(), validationErrors);
+    validateDates(tournament.startDate(), tournament.endDate(), validationErrors);
+    validateParticipants(tournament, seenIds, validationErrors);
 
     if (!validationErrors.isEmpty()) {
       throw new ValidationException("Validation of tournament for create failed", validationErrors);
     }
   }
 
-  private Optional<String> validate(String value, String message, Predicate<String> condition) {
-    return condition.test(value) ? Optional.of(message) : Optional.empty();
+  private void validateName(String name, List<String> errors) {
+    if (name == null || name.isEmpty()) {
+      errors.add("Tournament name cannot be empty or null.");
+    } else if (!name.matches("^[a-zA-Z0-9]*$")) {
+      errors.add("Tournament name must contain only alphanumeric characters.");
+    }
   }
 
-  private Optional<String> validateDates(LocalDate startDate, LocalDate endDate) {
-    List<String> errors = new ArrayList<>();
+  private void validateDates(LocalDate startDate, LocalDate endDate, List<String> errors) {
     if (startDate == null || endDate == null) {
       errors.add("Start date and end date cannot be null.");
+    } else {
+      LocalDate minDate = GlobalConstants.minDate;
+      if (startDate.isAfter(endDate)) {
+        errors.add("Start date cannot be after end date.");
+      }
+      if (startDate.isBefore(minDate) || endDate.isBefore(minDate)) {
+        errors.add(String.format("Start date and end date must be after %s.", minDate));
+      }
     }
-    if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-      errors.add("Start date cannot be after end date.");
+  }
+
+  private void validateParticipants(TournamentDetailDto tournament, Set<Long> seenIds, List<String> errors) {
+    if (tournament.participants().length != 8) {
+      errors.add("Tournament must have exactly 8 participants.");
     }
-    if (startDate != null && endDate != null && (startDate.isBefore(minDate) || endDate.isBefore(minDate))) {
-      errors.add(String.format("Start date and end date must be after %s.", minDate));
+
+    for (Horse horse : tournament.participants()) {
+      if (horse.getId() == null) {
+        errors.add("Invalid horse ID found.");
+      } else if (!seenIds.add(horse.getId())) {
+        errors.add("Duplicate participant found: Horse ID " + horse.getId());
+      } else if (!doesHorseExist(horse)) {
+        errors.add("Horse does not exist: Horse ID " + horse.getId());
+      }
     }
-    return errors.isEmpty() ? Optional.empty() : Optional.of(String.join(" ", errors));
-  }
-
-  private Optional<String> validateHorseIds(TournamentDetailDto tournament) {
-    boolean hasInvalidIds = Arrays.stream(tournament.participants())
-        .anyMatch(horse -> horse.getId() == null);
-    return hasInvalidIds ? Optional.of("Invalid horse ID found.") : Optional.empty();
-  }
-
-  private Optional<String> validateDuplicates(TournamentDetailDto tournament, Set<Long> seenIds) {
-    return Arrays.stream(tournament.participants())
-        .map(Horse::getId)
-        .filter(Objects::nonNull) // Filter out null IDs
-        .filter(id -> !seenIds.add(id))
-        .findAny()
-        .map(duplicateId -> "Duplicate participant found: Horse ID " + duplicateId);
-  }
-
-  private Optional<String> validateHorseExistence(TournamentDetailDto tournament) {
-    return Arrays.stream(tournament.participants())
-        .filter(horse -> !doesHorseExist(horse))
-        .map(Horse::getId)
-        .findAny()
-        .map(horse -> "Horse does not exist: Horse ID " + horse);
-  }
-
-  private Optional<String> hasEightParticipants(TournamentDetailDto tournament) {
-    return tournament.participants().length == 8 ? Optional.empty() : Optional.of("Tournament must have exactly 8 participants.");
   }
 
   private boolean doesHorseExist(Horse horse) {
@@ -118,5 +98,4 @@ public class TournamentValidator {
       return false;
     }
   }
-
 }
