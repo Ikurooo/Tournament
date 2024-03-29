@@ -7,8 +7,21 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Constants used globally in the application.
+ */
 public class GlobalConstants {
+
+  /**
+   * The minimum allowed date in the application.
+   */
   public static final LocalDate minDate = LocalDate.of(1900, 1, 1);
+
+  /**
+   * The list of expected participants in tournaments.
+   * This list should be populated with the expected participants beforehand.
+   * Exists for testing purposes.
+   */
   public static final List<Horse> expectedParticipants = Arrays.asList(
       new Horse()
           .setId(-1L)

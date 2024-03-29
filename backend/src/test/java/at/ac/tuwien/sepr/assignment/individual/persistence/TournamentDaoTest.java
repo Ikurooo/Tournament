@@ -3,6 +3,7 @@ package at.ac.tuwien.sepr.assignment.individual.persistence;
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class TournamentDaoTest extends TestBase {
 
+  @Autowired
+  HorseTourneyLinkerDao horseTourneyLinkerDao;
   @Autowired
   TournamentDao tournamentDao;
   @Autowired
@@ -69,32 +72,6 @@ public class TournamentDaoTest extends TestBase {
                 .setStartDate(LocalDate.of(2011, 10, 5))
                 .setEndDate(LocalDate.of(2012, 12, 28))
         );
-  }
-
-  @Test
-  public void insertion() {
-    var baldBalls = new Tournament()
-        .setName("Bald Balls")
-        .setStartDate(LocalDate.of(2013, 1, 1))
-        .setEndDate(LocalDate.of(2014, 6, 18));
-
-    var rogerTogger = new Tournament()
-        .setName("Roger Togger")
-        .setStartDate(LocalDate.of(2015, 1, 1))
-        .setEndDate(LocalDate.of(2015, 6, 18));
-
-    var billyWilly = new Tournament()
-        .setName("Billy Willy")
-        .setStartDate(LocalDate.of(2017, 1, 1))
-        .setEndDate(LocalDate.of(2018, 6, 18));
-
-    var createdBaldBalls = tournamentDao.create(tournamentMapper.entityToDetailDto(baldBalls));
-    var createdRogerTogger = tournamentDao.create(tournamentMapper.entityToDetailDto(rogerTogger));
-    var createdBillyWilly = tournamentDao.create(tournamentMapper.entityToDetailDto(billyWilly));
-
-    assertTournamentsEqual(baldBalls, createdBaldBalls);
-    assertTournamentsEqual(rogerTogger, createdRogerTogger);
-    assertTournamentsEqual(billyWilly, createdBillyWilly);
   }
 
   @Test

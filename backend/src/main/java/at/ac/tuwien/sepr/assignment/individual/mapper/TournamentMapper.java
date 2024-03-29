@@ -47,13 +47,12 @@ public class TournamentMapper {
       return null;
     }
 
-    // TODO: Implement mapping from Tournament to TournamentDetailDto
     return new TournamentDetailDto(
         tournament.getId(),
         tournament.getName(),
         tournament.getStartDate(),
         tournament.getEndDate(),
-        null
+        tournament.getParticipants()
     );
   }
 }

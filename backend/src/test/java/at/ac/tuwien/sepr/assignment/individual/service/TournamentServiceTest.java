@@ -3,6 +3,7 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -10,6 +11,7 @@ import at.ac.tuwien.sepr.assignment.individual.TestBase;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
@@ -96,6 +98,20 @@ public class TournamentServiceTest extends TestBase {
     assertThatThrownBy(() -> tournamentService.create(tournament))
         .isInstanceOf(ValidationException.class)
         .hasMessageContaining("Validation of tournament for create failed. Failed validations: Duplicate participant found: Horse ID -2.");
+  }
+
+  @Test
+  public void createValidTournament() throws ConflictException, NotFoundException, ValidationException {
+    Horse[] participantArray = expectedParticipants.toArray(new Horse[0]);
+    var toCreate = new TournamentDetailDto(
+        null,
+        "createValidTournament",
+        LocalDate.of(2001, 1, 1),
+        LocalDate.of(2002, 1, 1),
+        participantArray
+    );
+    Tournament createdTournament = tournamentService.create(toCreate);
+    assertArrayEquals(expectedParticipants.toArray(), createdTournament.getParticipants());
   }
 
 }

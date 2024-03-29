@@ -65,6 +65,14 @@ public class HorseMapper {
     );
   }
 
+  /**
+   * Get the BreedDto corresponding to the breed of the given horse from the provided map of breeds.
+   *
+   * @param horse the horse for which to find the breed
+   * @param map   a map of breeds identified by their id
+   * @return the corresponding BreedDto
+   * @throws FatalException if the breed ID of the horse does not exist in the map
+   */
   private BreedDto breedFromMap(Horse horse, Map<Long, BreedDto> map) {
     var breedId = horse.getBreedId();
     if (breedId == null) {

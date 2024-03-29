@@ -13,6 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of the {@link BreedService} interface that provides methods for managing breeds.
+ */
 @Service
 public class BreedServiceImpl implements BreedService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());

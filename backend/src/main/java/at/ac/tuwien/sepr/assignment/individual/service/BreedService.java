@@ -6,7 +6,11 @@ import at.ac.tuwien.sepr.assignment.individual.dto.BreedSearchDto;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * Service interface for managing breed-related operations.
+ */
 public interface BreedService {
+
   /**
    * Retrieve all breeds from the persistent data store.
    *
@@ -15,7 +19,7 @@ public interface BreedService {
   Stream<BreedDto> allBreeds();
 
   /**
-   * Retrieve all stored breeds, that have one of the given IDs.
+   * Retrieve all stored breeds that have one of the given IDs.
    * Note that if for one ID no breed is found, this method does not throw an error.
    *
    * @param breedIds the set of IDs to find breeds for.
@@ -24,7 +28,7 @@ public interface BreedService {
   Stream<BreedDto> findBreedsByIds(Set<Long> breedIds);
 
   /**
-   * Retrieve all stored breeds, that match the given parameters.
+   * Retrieve all stored breeds that match the given parameters.
    * The parameters may include a limit on the amount of results to return.
    *
    * @param searchParams parameters to search breeds by

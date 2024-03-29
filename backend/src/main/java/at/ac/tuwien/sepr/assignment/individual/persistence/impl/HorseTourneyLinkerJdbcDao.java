@@ -4,6 +4,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
@@ -36,20 +37,23 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private static final String HORSE_TABLE_NAME = "horse";
   private static final String TOURNAMENT_TABLE_NAME = "tournament";
   private static final String LINKER_TABLE_NAME = "horse_tourney_linker";
+  private static final String INSERT_NEW_TOURNAMENT = "INSERT INTO " + LINKER_TABLE_NAME + " "
+      + "(horse_id, tournament_id) VALUES (?, ?)";
+
+  private static final String FIND_PARTICIPANTS_BY_TOURNAMENT_ID = "SELECT h.* "
+      + "FROM " + HORSE_TABLE_NAME + " h "
+      + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
+      + "WHERE l.tournament_id = ?";
   private final JdbcTemplate jdbcTemplate;
-  private final NamedParameterJdbcTemplate jdbcNamed;
 
   public HorseTourneyLinkerJdbcDao(
-      NamedParameterJdbcTemplate jdbcNamed,
       JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
-    this.jdbcNamed = jdbcNamed;
   }
-
 
   @Transactional
   @Override
-  public Tournament create(TournamentDetailDto tournament) {
+  public Tournament create(TournamentDetailDto tournament) throws FailedToCreateException {
     LOG.trace("create({})", tournament);
 
     try {
@@ -74,9 +78,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
       for (Horse horse : tournament.participants()) {
         LOG.debug("Horse Details: {}", horse);
-        int rowsAffectedLinker = jdbcTemplate.update("INSERT INTO " + LINKER_TABLE_NAME
-                + " (horse_id, tournament_id) VALUES (?, ?)",
-            horse.getId(), generatedId);
+        int rowsAffectedLinker = jdbcTemplate.update(INSERT_NEW_TOURNAMENT, horse.getId(), generatedId);
 
         if (rowsAffectedLinker < 1) {
           String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.getId(), generatedId);
@@ -95,19 +97,16 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
     } catch (DataAccessException e) {
       LOG.error("Failed to insert a new tournament: {}", e.getMessage());
       throw new FailedToCreateException("Failed to create a new tournament due to a database error.");
-    } catch (Exception e) {
-      LOG.error("Failed to insert a new tournament: {}", e.getMessage());
-      throw new FailedToCreateException("Failed to create a new tournament.");
     }
   }
 
-  public List<Horse> findParticipantsByTournamentId(long id) {
-    String sql = "SELECT h.* "
-        + "FROM " + HORSE_TABLE_NAME + " h "
-        + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
-        + "WHERE l.tournament_id = ?";
-
-    return jdbcTemplate.query(sql, this::mapRow, id);
+  public List<Horse> findParticipantsByTournamentId(long id) throws FailedToRetrieveException {
+    try {
+      return jdbcTemplate.query(FIND_PARTICIPANTS_BY_TOURNAMENT_ID, this::mapRow, id);
+    } catch (DataAccessException e) {
+      LOG.error("Failed to find participants for tournament with ID {}: {}", id, e.getMessage());
+      throw new FailedToRetrieveException("Failed to find participants for tournament with ID " + id, e);
+    }
   }
 
   private Horse mapRow(ResultSet result, int rownum) throws SQLException {

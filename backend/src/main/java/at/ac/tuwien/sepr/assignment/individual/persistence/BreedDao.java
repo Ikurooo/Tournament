@@ -6,6 +6,10 @@ import at.ac.tuwien.sepr.assignment.individual.entity.Breed;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * Data Access Object for breeds.
+ * Implements access functionality to the application's persistent data store regarding breeds.
+ */
 public interface BreedDao {
 
   /**

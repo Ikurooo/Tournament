@@ -6,6 +6,10 @@ import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToDeleteException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
@@ -24,6 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of the {@link HorseService} interface that provides methods for managing horses.
+ */
 @Service
 public class HorseServiceImpl implements HorseService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -32,6 +39,14 @@ public class HorseServiceImpl implements HorseService {
   private final HorseValidator validator;
   private final BreedService breedService;
 
+  /**
+   * Constructs a new HorseServiceImpl with the specified dependencies.
+   *
+   * @param dao          the HorseDao instance to use for database operations
+   * @param mapper       the HorseMapper instance to use for mapping entities to DTOs
+   * @param validator    the HorseValidator instance to use for data validation
+   * @param breedService the BreedService instance to use for retrieving breed information
+   */
   public HorseServiceImpl(HorseDao dao, HorseMapper mapper, HorseValidator validator, BreedService breedService) {
     this.dao = dao;
     this.mapper = mapper;
@@ -40,7 +55,7 @@ public class HorseServiceImpl implements HorseService {
   }
 
   @Override
-  public Stream<HorseListDto> search(HorseSearchDto searchParameters) {
+  public Stream<HorseListDto> search(HorseSearchDto searchParameters) throws FailedToRetrieveException {
     var horses = dao.search(searchParameters);
     // First get all breed ids…
     var breeds = horses.stream()
@@ -55,7 +70,7 @@ public class HorseServiceImpl implements HorseService {
   }
 
   @Override
-  public HorseDetailDto create(HorseDetailDto horse) throws ValidationException, ConflictException {
+  public HorseDetailDto create(HorseDetailDto horse) throws ValidationException, ConflictException, FailedToCreateException {
     LOG.trace("create({})", horse);
     validator.validateForCreate(horse);
     var createdHorse = dao.create(horse);
@@ -64,7 +79,8 @@ public class HorseServiceImpl implements HorseService {
   }
 
   @Override
-  public HorseDetailDto update(HorseDetailDto horse) throws NotFoundException, ValidationException, ConflictException {
+  public HorseDetailDto update(HorseDetailDto horse) throws NotFoundException, ValidationException,
+                                                            ConflictException, FailedToUpdateException {
     LOG.trace("update({})", horse);
     validator.validateForUpdate(horse);
     var updatedHorse = dao.update(horse);
@@ -73,7 +89,7 @@ public class HorseServiceImpl implements HorseService {
   }
 
   @Override
-  public HorseDetailDto getById(long id) throws NotFoundException {
+  public HorseDetailDto getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("details({})", id);
     Horse horse = dao.getById(id);
     var breeds = breedMapForSingleHorse(horse);
@@ -81,7 +97,7 @@ public class HorseServiceImpl implements HorseService {
   }
 
   @Override
-  public void deleteHorseById(long id) throws NotFoundException {
+  public void deleteHorseById(long id) throws NotFoundException, FailedToDeleteException {
     LOG.trace("delete({})", id);
     dao.delete(id);
   }

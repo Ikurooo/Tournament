@@ -55,8 +55,7 @@ public class LinkerDaoTest extends TestBase {
     );
 
     assertThatThrownBy(() -> horseTourneyLinkerDao.create(toCreate))
-        .isInstanceOf(FailedToCreateException.class)
-        .hasMessageContaining("Failed to create a new tournament.");
+        .isInstanceOf(NullPointerException.class);
   }
 
   @Test

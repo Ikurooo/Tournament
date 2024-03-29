@@ -9,36 +9,39 @@ import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
 import java.lang.invoke.MethodHandles;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import javax.print.attribute.HashDocAttributeSet;
 
 /**
  * Validator class for validating tournament details.
  */
 @Component
 public class TournamentValidator {
+
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private final LocalDate minDate = GlobalConstants.minDate;
   private final HorseService horseService;
 
-  public TournamentValidator(HorseService horseService) throws ValidationException {
+  /**
+   * Constructs a new TournamentValidator with the specified dependencies.
+   *
+   * @param horseService the HorseService instance to use for retrieving horse information
+   */
+  public TournamentValidator(HorseService horseService) {
     this.horseService = horseService;
   }
 
-  public void validateForCreate(TournamentDetailDto tournament) throws ValidationException, NotFoundException {
+  /**
+   * Validates the details of a tournament before creating it.
+   *
+   * @param tournament the tournament details to validate
+   * @throws ValidationException if the validation fails
+   */
+  public void validateForCreate(TournamentDetailDto tournament) throws ValidationException {
     LOG.trace("validateForCreate({})", tournament);
     Set<Long> seenIds = new HashSet<>();
     List<String> validationErrors = new ArrayList<>();

@@ -7,6 +7,8 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
@@ -22,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Implementation of the TournamentService interface.
+ * Implementation of the {@link TournamentService} interface.
  */
 @Service
 public class TournamentServiceImpl implements TournamentService {
@@ -35,9 +37,9 @@ public class TournamentServiceImpl implements TournamentService {
   /**
    * Constructor for TournamentServiceImpl.
    *
-   * @param dao       The TournamentDao instance
-   * @param mapper    The TournamentMapper instance
-   * @param validator The TournamentValidator instance
+   * @param dao                   The TournamentDao instance
+   * @param mapper                The TournamentMapper instance
+   * @param validator             The TournamentValidator instance
    * @param horseTourneyLinkerDao The HorseTourneyLinkerDao instance
    */
   public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper,
@@ -50,7 +52,7 @@ public class TournamentServiceImpl implements TournamentService {
   }
 
   @Override
-  public Stream<TournamentListDto> search(TournamentSearchDto searchParameters) {
+  public Stream<TournamentListDto> search(TournamentSearchDto searchParameters) throws FailedToRetrieveException {
     LOG.trace("search({})", searchParameters);
     var tournaments = dao.search(searchParameters);
     return tournaments.stream().map(mapper::entityToListDto);
@@ -58,14 +60,14 @@ public class TournamentServiceImpl implements TournamentService {
 
   @Override
   public Tournament create(TournamentDetailDto tournament)
-      throws ValidationException, ConflictException, NotFoundException {
+      throws ValidationException, ConflictException, NotFoundException, FailedToCreateException {
     validator.validateForCreate(tournament);
     LOG.trace("create({})", tournament);
     return horseTourneyLinkerDao.create(tournament);
   }
 
   @Override
-  public TournamentStandingsDto getById(long id) throws NotFoundException {
+  public TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException {
     Tournament tournament = dao.getById(id);
     List<Horse> participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
     return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new Horse[0]));

@@ -5,27 +5,32 @@ import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
 import java.util.List;
 
+/**
+ * Data Access Object interface for managing the linkage between horses and tournaments.
+ * Provides methods to create tournaments and retrieve participants for tournaments.
+ */
 public interface HorseTourneyLinkerDao {
 
   /**
-   * Create a new tournament with the provided data and store it in the persistent data store.
+   * Creates a new tournament with the provided data and stores it in the persistent data store.
    *
-   * @param tournament the tournament to create
+   * @param tournament the DTO containing the data for the tournament to be created
    * @return the created tournament
-   * @throws ValidationException if the provided tournament data is invalid
-   * @throws FailedToCreateException if the tournament creation process fails
+   * @throws FailedToCreateException if there is a failure in creating the tournament in the persistent data store
    */
-  Tournament create(TournamentDetailDto tournament) throws ValidationException, FailedToCreateException;
+  Tournament create(TournamentDetailDto tournament) throws FailedToCreateException;
 
   /**
-   * Retrieve the list of participants (horses) for the tournament with the specified ID.
+   * Retrieves the list of participants (horses) for the tournament with the specified ID.
    *
    * @param id the ID of the tournament
-   * @return the list of participants for the tournament
+   * @return the list of participants (horses) for the tournament
+   * @throws FailedToRetrieveException if there is a failure in retrieving the participants from the persistent data store
    */
-  List<Horse> findParticipantsByTournamentId(long id);
+  List<Horse> findParticipantsByTournamentId(long id) throws FailedToRetrieveException;
 }

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST controller for handling breed-related requests.
+ */
 @RestController
 @RequestMapping(path = BreedEndpoint.BASE_PATH)
 public class BreedEndpoint {
@@ -25,6 +28,12 @@ public class BreedEndpoint {
     this.service = service;
   }
 
+  /**
+   * Handles GET requests to retrieve breeds based on search criteria.
+   *
+   * @param searchParams the search parameters for filtering breeds
+   * @return a stream of breed DTOs matching the search criteria
+   */
   @GetMapping
   public Stream<BreedDto> search(BreedSearchDto searchParams) {
     LOG.info("GET " + BASE_PATH);

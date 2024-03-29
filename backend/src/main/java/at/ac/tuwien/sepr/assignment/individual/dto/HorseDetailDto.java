@@ -4,6 +4,9 @@ import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 
 import java.time.LocalDate;
 
+/**
+ * Data Transfer Object (DTO) representing detailed information about a horse.
+ */
 public record HorseDetailDto(
     Long id,
     String name,

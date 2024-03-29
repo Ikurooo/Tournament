@@ -4,6 +4,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
@@ -18,6 +19,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -46,15 +48,7 @@ public class TournamentJdbcDao implements TournamentDao {
       + "       (:endDate is NULL AND t.end_date >= :startDate)"
       + "      )";
 
-
   private static final String SQL_LIMIT_CLAUSE = " LIMIT :limit";
-
-  private static final String SQL_UPDATE = "UPDATE " + TABLE_NAME
-      + " SET name = ?"
-      + "  , start_date = ?"
-      + "  , end_date = ?"
-      + " WHERE id = ?";
-
   private final JdbcTemplate jdbcTemplate;
   private final NamedParameterJdbcTemplate jdbcNamed;
 
@@ -65,62 +59,43 @@ public class TournamentJdbcDao implements TournamentDao {
   }
 
   @Override
-  public Collection<Tournament> search(TournamentSearchDto searchParameters) {
+  public Collection<Tournament> search(TournamentSearchDto searchParameters) throws FailedToRetrieveException {
     LOG.trace("search({})", searchParameters);
-    var query = SQL_SELECT_SEARCH;
-    if (searchParameters.limit() != null) {
-      query += SQL_LIMIT_CLAUSE;
-    }
-    var params = new BeanPropertySqlParameterSource(searchParameters);
+    try {
+      String query = SQL_SELECT_SEARCH;
+      if (searchParameters.limit() != null) {
+        query += SQL_LIMIT_CLAUSE;
+      }
+      BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(searchParameters);
 
-    return jdbcNamed.query(query, params, this::mapRow);
+      return jdbcNamed.query(query, params, this::mapRow);
+    } catch (DataAccessException e) {
+      LOG.error("Failed to search tournaments: {}", e.getMessage());
+      throw new FailedToRetrieveException("Failed to search tournaments", e);
+    }
   }
 
   @Override
-  public Tournament getById(long id) throws NotFoundException {
+  public Tournament getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("getById({})", id);
-    List<Tournament> tournament = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
+    try {
+      List<Tournament> tournaments = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
-    if (tournament.isEmpty()) {
-      throw new NotFoundException("No horse with ID %d found".formatted(id));
+      if (tournaments.isEmpty()) {
+        throw new NotFoundException("No tournament with ID %d found".formatted(id));
+      }
+
+      if (tournaments.size() > 1) {
+        throw new FatalException("Too many tournaments with ID %d found".formatted(id));
+      }
+
+      return tournaments.getFirst();
+    } catch (DataAccessException e) {
+      LOG.error("Failed to retrieve tournament with ID {}: {}", id, e.getMessage());
+      throw new FailedToRetrieveException("Failed to retrieve tournament with ID " + id, e);
     }
-
-    if (tournament.size() > 1) {
-      throw new FatalException("Too many horses with ID %d found".formatted(id));
-    }
-
-    return tournament.getFirst();
   }
 
-  @Override
-  public Tournament create(TournamentDetailDto tournament) {
-    LOG.trace("create({})", tournament);
-
-    KeyHolder keyHolder = new GeneratedKeyHolder();
-
-    int update = jdbcTemplate.update(connection -> {
-      PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE_NAME
-              + " (name, start_date, end_date) VALUES (?, ?, ?)",
-          Statement.RETURN_GENERATED_KEYS);
-      ps.setString(1, tournament.name());
-      ps.setDate(2, java.sql.Date.valueOf(tournament.startDate()));
-      ps.setDate(3, java.sql.Date.valueOf(tournament.endDate()));
-      return ps;
-    }, keyHolder);
-
-    if (update != 1) {
-      LOG.error("Failed to insert a new horse. Rows affected: {}", update);
-      throw new FailedToCreateException("Failed to insert a new tournament.");
-    }
-
-    long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
-
-    return new Tournament()
-        .setId(generatedId)
-        .setName(tournament.name())
-        .setStartDate(tournament.startDate())
-        .setEndDate(tournament.endDate());
-  }
 
   private Tournament mapRow(ResultSet result, int rownum) throws SQLException {
     return new Tournament()

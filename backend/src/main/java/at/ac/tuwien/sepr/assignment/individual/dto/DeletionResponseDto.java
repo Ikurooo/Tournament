@@ -1,4 +1,10 @@
 package at.ac.tuwien.sepr.assignment.individual.dto;
 
-public record DeletionResponseDto(String message, boolean success) {
+/**
+ * Data Transfer Object (DTO) representing the response for a deletion operation.
+ */
+public record DeletionResponseDto(
+    String message,
+    boolean success
+) {
 }

@@ -15,17 +15,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * Validator class for validating horse details.
+ */
 @Component
 public class HorseValidator {
   private static final Logger LOG = LoggerFactory.getLogger(HorseValidator.class);
   private final BreedService breedService;
   private final LocalDate minDate;
 
+  /**
+   * Constructs a new instance of HorseValidator with the specified BreedService dependency.
+   *
+   * @param breedService the breed service to use for breed validation
+   */
   public HorseValidator(BreedService breedService) {
     this.breedService = breedService;
     this.minDate = GlobalConstants.minDate;
   }
 
+  /**
+   * Validates the provided horse details for update.
+   *
+   * @param horse the horse details to validate
+   * @throws ValidationException if the validation fails
+   */
   public void validateForUpdate(HorseDetailDto horse) throws ValidationException {
     LOG.trace("validateForUpdate({})", horse);
     ValidationContext context = new ValidationContext();
@@ -40,6 +54,12 @@ public class HorseValidator {
     context.throwIfErrorsPresent("Validation of horse for update failed");
   }
 
+  /**
+   * Validates the provided horse details for creation.
+   *
+   * @param horse the horse details to validate
+   * @throws ValidationException if the validation fails
+   */
   public void validateForCreate(HorseDetailDto horse) throws ValidationException {
     LOG.trace("validateForCreate({})", horse);
     ValidationContext context = new ValidationContext();
@@ -92,12 +112,6 @@ public class HorseValidator {
   private void validateSex(HorseDetailDto horse, ValidationContext context) {
     if (horse.sex() == null || !(horse.sex().equals(Sex.FEMALE) || horse.sex().equals(Sex.MALE))) {
       context.addError("Invalid horse sex specified.");
-    }
-  }
-
-  private void validateId(HorseDetailDto horse, ValidationContext context) {
-    if (horse.id() == null) {
-      context.addError("No ID given");
     }
   }
 

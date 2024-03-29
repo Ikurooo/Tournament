@@ -1,10 +1,12 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
-import at.ac.tuwien.sepr.assignment.individual.type.Sex;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,20 +18,23 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants.expectedParticipants;
 
@@ -42,6 +47,8 @@ public class TournamentEndpointTest extends TestBase {
   ObjectMapper objectMapper;
   @Autowired
   private WebApplicationContext webAppContext;
+  @Autowired
+  private TournamentMapper tournamentMapper;
   private MockMvc mockMvc;
 
   @BeforeEach
@@ -140,8 +147,8 @@ public class TournamentEndpointTest extends TestBase {
     var body = mockMvc
         .perform(MockMvcRequestBuilders
             .get("/tournaments")
-            .queryParam("startDate", LocalDate.of(2001, 1, 1).toString())  // Earliest date in the insertions
-            .queryParam("endDate", LocalDate.of(2002, 1, 1).toString())     // Changed to include all tournaments
+            .queryParam("startDate", LocalDate.of(2001, 1, 1).toString())
+            .queryParam("endDate", LocalDate.of(2002, 1, 1).toString())
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andReturn().getResponse().getContentAsByteArray();
@@ -161,5 +168,34 @@ public class TournamentEndpointTest extends TestBase {
         );
   }
 
+  @Test
+  public void createValidTournament() throws Exception {
+    Horse[] participantArray = expectedParticipants.toArray(new Horse[0]);
+    TournamentDetailDto originalTournament = new TournamentDetailDto(
+        null,
+        "createValidTournament",
+        LocalDate.of(2001, 1, 1),
+        LocalDate.of(2002, 1, 1),
+        participantArray
+    );
 
+    String requestBody = objectMapper.writeValueAsString(originalTournament);
+
+    var result = mockMvc.perform(MockMvcRequestBuilders
+            .post("/tournaments")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andReturn();
+
+    Tournament tournamentResponse = objectMapper.readValue(result.getResponse().getContentAsString(), Tournament.class);
+
+    assertEquals(originalTournament.name(), tournamentResponse.getName());
+    assertEquals(originalTournament.startDate(), tournamentResponse.getStartDate());
+    assertEquals(originalTournament.endDate(), tournamentResponse.getEndDate());
+
+    assertThat(tournamentResponse.getParticipants())
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactlyInAnyOrderElementsOf(expectedParticipants);
+  }
 }
