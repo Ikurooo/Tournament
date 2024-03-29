@@ -42,9 +42,7 @@ public class TournamentServiceImpl implements TournamentService {
    * @param validator             The TournamentValidator instance
    * @param horseTourneyLinkerDao The HorseTourneyLinkerDao instance
    */
-  public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper,
-                               TournamentValidator validator,
-                               HorseTourneyLinkerDao horseTourneyLinkerDao) {
+  public TournamentServiceImpl(TournamentDao dao, TournamentMapper mapper, TournamentValidator validator, HorseTourneyLinkerDao horseTourneyLinkerDao) {
     this.dao = dao;
     this.mapper = mapper;
     this.validator = validator;
@@ -64,12 +62,5 @@ public class TournamentServiceImpl implements TournamentService {
     validator.validateForCreate(tournament);
     LOG.trace("create({})", tournament);
     return horseTourneyLinkerDao.create(tournament);
-  }
-
-  @Override
-  public TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException {
-    Tournament tournament = dao.getById(id);
-    List<Horse> participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
-    return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new Horse[0]));
   }
 }

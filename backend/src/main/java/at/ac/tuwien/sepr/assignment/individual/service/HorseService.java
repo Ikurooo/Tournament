@@ -3,6 +3,7 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToDeleteException;
@@ -11,6 +12,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -69,5 +71,5 @@ public interface HorseService {
    * @throws NotFoundException       if the horse with the given ID does not exist in the persistent data store
    * @throws FailedToDeleteException if there is a failure in deleting the horse from the persistent data store
    */
-  void deleteHorseById(long id) throws NotFoundException, FailedToDeleteException;
+  void deleteHorseById(long id) throws NotFoundException, FailedToDeleteException, ValidationException;
 }

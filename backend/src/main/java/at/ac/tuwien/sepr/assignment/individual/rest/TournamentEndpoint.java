@@ -9,6 +9,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
+import at.ac.tuwien.sepr.assignment.individual.service.LinkerService;
 import at.ac.tuwien.sepr.assignment.individual.service.TournamentService;
 
 import java.lang.invoke.MethodHandles;
@@ -34,9 +35,11 @@ public class TournamentEndpoint {
   static final String BASE_PATH = "/tournaments";
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final TournamentService tournamentService;
+  private final LinkerService linkerService;
 
-  public TournamentEndpoint(TournamentService tournamentService) {
+  public TournamentEndpoint(TournamentService tournamentService, LinkerService linkerService) {
     this.tournamentService = tournamentService;
+    this.linkerService = linkerService;
   }
 
   /**
@@ -50,7 +53,7 @@ public class TournamentEndpoint {
     LOG.info("GET " + BASE_PATH + "/{}", id);
     LOG.info("Tournament ID: {}", id);
     try {
-      return tournamentService.getById(id);
+      return linkerService.getById(id);
     } catch (NotFoundException e) {
       HttpStatus status = HttpStatus.NOT_FOUND;
       logClientError(status, "Tournament not found", e);

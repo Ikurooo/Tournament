@@ -40,17 +40,6 @@ public class TournamentServiceTest extends TestBase {
   TournamentMapper tournamentMapper;
 
   @Test
-  public void getTournamentAndThe8HorsesThatBelongToIt() throws NotFoundException {
-    var tournament = tournamentService.getById(-1L);
-    assertNotNull(tournament);
-    assertNotNull(tournament.participants());
-    assertEquals(8, tournament.participants().length);
-    assertThat(tournament.participants())
-        .usingRecursiveFieldByFieldElementComparator()
-        .containsExactlyInAnyOrderElementsOf(expectedParticipants);
-  }
-
-  @Test
   public void searchByNameFindsOneTournament() {
     var searchDto = new TournamentSearchDto("Star Cup", null, null, null);
     var tournaments = tournamentService.search(searchDto);
@@ -113,5 +102,4 @@ public class TournamentServiceTest extends TestBase {
     Tournament createdTournament = tournamentService.create(toCreate);
     assertArrayEquals(expectedParticipants.toArray(), createdTournament.getParticipants());
   }
-
 }

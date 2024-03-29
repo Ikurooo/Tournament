@@ -1,6 +1,8 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
 import at.ac.tuwien.sepr.assignment.individual.service.BreedService;
@@ -23,15 +25,22 @@ public class HorseValidator {
   private static final Logger LOG = LoggerFactory.getLogger(HorseValidator.class);
   private final BreedService breedService;
   private final LocalDate minDate;
+  private final LinkerService linkerService;
 
   /**
    * Constructs a new instance of HorseValidator with the specified BreedService dependency.
    *
    * @param breedService the breed service to use for breed validation
    */
-  public HorseValidator(BreedService breedService) {
+  public HorseValidator(BreedService breedService, LinkerService linkerService) {
     this.breedService = breedService;
+    this.linkerService = linkerService;
     this.minDate = GlobalConstants.minDate;
+  }
+
+  public void validateForDelete(HorseDetailDto horse) throws ValidationException {
+    LOG.trace("validateForUpdate({})", horse);
+    ValidationContext context = new ValidationContext();
   }
 
   /**
@@ -112,6 +121,17 @@ public class HorseValidator {
   private void validateSex(HorseDetailDto horse, ValidationContext context) {
     if (horse.sex() == null || !(horse.sex().equals(Sex.FEMALE) || horse.sex().equals(Sex.MALE))) {
       context.addError("Invalid horse sex specified.");
+    }
+  }
+
+  private void validateLinkedToTournament(HorseDetailDto horse, ValidationContext context) {
+    try {
+      List<Tournament> tournaments = linkerService.getTournamentsAssociatedWithHorseId(horse.id());
+      if (tournaments.isEmpty()) {
+        context.addError("Horse is not linked to any tournament.");
+      }
+    } catch (FailedToRetrieveException e) {
+      context.addError("Failed to retrieve tournaments associated with the horse.");
     }
   }
 

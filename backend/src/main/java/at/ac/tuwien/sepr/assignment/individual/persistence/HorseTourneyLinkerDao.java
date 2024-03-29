@@ -6,6 +6,7 @@ import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
 import java.util.List;
@@ -33,4 +34,13 @@ public interface HorseTourneyLinkerDao {
    * @throws FailedToRetrieveException if there is a failure in retrieving the participants from the persistent data store
    */
   List<Horse> findParticipantsByTournamentId(long id) throws FailedToRetrieveException;
+
+  /**
+   * Retrieves the list of tournaments associated with the horse with the specified ID.
+   *
+   * @param id the ID of the horse
+   * @return the list of tournaments associated with the horse
+   * @throws FailedToRetrieveException if there is a failure in retrieving the tournaments from the persistent data store
+   */
+  List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException;
 }

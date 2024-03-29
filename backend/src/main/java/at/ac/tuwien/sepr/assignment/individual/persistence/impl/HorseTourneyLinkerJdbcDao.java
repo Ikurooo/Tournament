@@ -5,6 +5,7 @@ import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.mapper.HorseMapper;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
@@ -44,6 +45,10 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
       + "FROM " + HORSE_TABLE_NAME + " h "
       + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
       + "WHERE l.tournament_id = ?";
+  private static final String FIND_TOURNAMENT_BY_PARTICIPANT_ID = "SELECT t.* "
+      + "FROM " + TOURNAMENT_TABLE_NAME + " h "
+      + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.horse_id "
+      + "WHERE l.horse_id = ?";
   private final JdbcTemplate jdbcTemplate;
 
   public HorseTourneyLinkerJdbcDao(
@@ -100,16 +105,27 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
     }
   }
 
+  @Override
   public List<Horse> findParticipantsByTournamentId(long id) throws FailedToRetrieveException {
     try {
-      return jdbcTemplate.query(FIND_PARTICIPANTS_BY_TOURNAMENT_ID, this::mapRow, id);
+      return jdbcTemplate.query(FIND_PARTICIPANTS_BY_TOURNAMENT_ID, this::mapRowHorse, id);
     } catch (DataAccessException e) {
       LOG.error("Failed to find participants for tournament with ID {}: {}", id, e.getMessage());
       throw new FailedToRetrieveException("Failed to find participants for tournament with ID " + id, e);
     }
   }
 
-  private Horse mapRow(ResultSet result, int rownum) throws SQLException {
+  @Override
+  public List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException {
+    try {
+      return jdbcTemplate.query(FIND_TOURNAMENT_BY_PARTICIPANT_ID, this::mapRowTournament, id);
+    } catch (DataAccessException e) {
+      LOG.error("Failed to find tournaments associated with horse with ID {}: {}", id, e.getMessage());
+      throw new FailedToRetrieveException("Failed to retrieve tournaments associated with horse with ID " + id, e);
+    }
+  }
+
+  private Horse mapRowHorse(ResultSet result, int rownum) throws SQLException {
     return new Horse()
         .setId(result.getLong("id"))
         .setName(result.getString("name"))
@@ -119,5 +135,13 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
         .setWeight(result.getFloat("weight"))
         .setBreedId(result.getObject("breed_id", Long.class))
         ;
+  }
+
+  private Tournament mapRowTournament(ResultSet result, int rownum) throws SQLException {
+    return new Tournament()
+        .setId(result.getLong("id"))
+        .setName("name")
+        .setStartDate(result.getDate("start_date").toLocalDate())
+        .setEndDate(result.getDate("end_date").toLocalDate());
   }
 }

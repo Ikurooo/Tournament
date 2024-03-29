@@ -5,6 +5,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
+import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToDeleteException;
@@ -17,6 +18,7 @@ import at.ac.tuwien.sepr.assignment.individual.persistence.HorseDao;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -24,8 +26,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +38,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class HorseServiceImpl implements HorseService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private final HorseDao dao;
+  private final HorseDao horseDao;
+  private final HorseTourneyLinkerDao horseTourneyLinkerDao;
   private final HorseMapper mapper;
   private final HorseValidator validator;
   private final BreedService breedService;
@@ -42,21 +47,24 @@ public class HorseServiceImpl implements HorseService {
   /**
    * Constructs a new HorseServiceImpl with the specified dependencies.
    *
-   * @param dao          the HorseDao instance to use for database operations
-   * @param mapper       the HorseMapper instance to use for mapping entities to DTOs
-   * @param validator    the HorseValidator instance to use for data validation
-   * @param breedService the BreedService instance to use for retrieving breed information
+   * @param horseDao          the HorseDao instance to use for database operations
+   * @param mapper            the HorseMapper instance to use for mapping entities to DTOs
+   * @param validator         the HorseValidator instance to use for data validation
+   * @param breedService      the BreedService instance to use for retrieving breed information
    */
-  public HorseServiceImpl(HorseDao dao, HorseMapper mapper, HorseValidator validator, BreedService breedService) {
-    this.dao = dao;
+  public HorseServiceImpl(HorseDao horseDao, HorseMapper mapper,
+                          HorseValidator validator, BreedService breedService,
+                          HorseTourneyLinkerDao horseTourneyLinkerDao) {
+    this.horseDao = horseDao;
     this.mapper = mapper;
     this.validator = validator;
     this.breedService = breedService;
+    this.horseTourneyLinkerDao = horseTourneyLinkerDao;
   }
 
   @Override
   public Stream<HorseListDto> search(HorseSearchDto searchParameters) throws FailedToRetrieveException {
-    var horses = dao.search(searchParameters);
+    var horses = horseDao.search(searchParameters);
     // First get all breed ids…
     var breeds = horses.stream()
         .map(Horse::getBreedId)
@@ -73,7 +81,7 @@ public class HorseServiceImpl implements HorseService {
   public HorseDetailDto create(HorseDetailDto horse) throws ValidationException, ConflictException, FailedToCreateException {
     LOG.trace("create({})", horse);
     validator.validateForCreate(horse);
-    var createdHorse = dao.create(horse);
+    var createdHorse = horseDao.create(horse);
     var breeds = breedMapForSingleHorse(createdHorse);
     return mapper.entityToDetailDto(createdHorse, breeds);
   }
@@ -83,7 +91,7 @@ public class HorseServiceImpl implements HorseService {
                                                             ConflictException, FailedToUpdateException {
     LOG.trace("update({})", horse);
     validator.validateForUpdate(horse);
-    var updatedHorse = dao.update(horse);
+    var updatedHorse = horseDao.update(horse);
     var breeds = breedMapForSingleHorse(updatedHorse);
     return mapper.entityToDetailDto(updatedHorse, breeds);
   }
@@ -91,15 +99,16 @@ public class HorseServiceImpl implements HorseService {
   @Override
   public HorseDetailDto getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("details({})", id);
-    Horse horse = dao.getById(id);
+    Horse horse = horseDao.getById(id);
     var breeds = breedMapForSingleHorse(horse);
     return mapper.entityToDetailDto(horse, breeds);
   }
 
   @Override
-  public void deleteHorseById(long id) throws NotFoundException, FailedToDeleteException {
+  public void deleteHorseById(long id) throws NotFoundException, FailedToDeleteException, ValidationException {
     LOG.trace("delete({})", id);
-    dao.delete(id);
+    validator.validateForDelete(new HorseDetailDto(id, null, null, null, Float.NaN, Float.NaN, null));
+    horseDao.delete(id);
   }
 
   private Map<Long, BreedDto> breedMapForSingleHorse(Horse horse) {

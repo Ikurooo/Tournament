@@ -41,15 +41,4 @@ public interface TournamentService {
    */
   Tournament create(TournamentDetailDto tournament)
       throws ValidationException, ConflictException, NotFoundException, FailedToCreateException;
-
-
-  /**
-   * Retrieves the tournament with the given ID, including more detailed information such as standings.
-   *
-   * @param id the ID of the tournament to retrieve
-   * @return the tournament with the specified ID, including detailed standings
-   * @throws NotFoundException        if the tournament with the given ID does not exist in the persistent data store
-   * @throws FailedToRetrieveException if there is a failure in retrieving the tournament from the persistent data store
-   */
-  TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException;
 }
