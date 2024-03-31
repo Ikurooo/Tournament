@@ -1,7 +1,9 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsTreeDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
@@ -40,9 +42,11 @@ public class LinkerServiceImpl implements LinkerService {
   @Override
   public TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("getById({})", id);
-    Tournament tournament = tournamentDao.getById(id);
-    List<Horse> participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
-    return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new Horse[0]));
+    var tournament = tournamentDao.getById(id);
+    var participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
+
+
+    return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new TournamentDetailParticipantDto[0]), null);
   }
 
 
@@ -50,5 +54,10 @@ public class LinkerServiceImpl implements LinkerService {
   public List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException {
     LOG.trace("getTournamentsAssociatedWithHorseId({})", id);
     return horseTourneyLinkerDao.getTournamentsAssociatedWithHorseId(id);
+  }
+
+  private TournamentStandingsTreeDto generateStandingsTress() {
+
+    return null;
   }
 }

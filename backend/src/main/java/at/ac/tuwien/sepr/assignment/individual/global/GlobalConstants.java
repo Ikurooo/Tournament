@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.global;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 
@@ -22,7 +23,7 @@ public class GlobalConstants {
    * This list should be populated with the expected participants beforehand.
    * Exists for testing purposes.
    */
-  public static final List<Horse> expectedParticipants = Arrays.asList(
+  public static final List<Horse> expectedHorses = Arrays.asList(
       new Horse()
           .setId(-1L)
           .setName("Wendy")
@@ -95,5 +96,48 @@ public class GlobalConstants {
           .setHeight(1.55f)
           .setWeight(580)
           .setBreedId(-6L)
+  );
+
+  public static final List<TournamentDetailParticipantDto> expectedParticipants = Arrays.asList(
+      new TournamentDetailParticipantDto()
+          .setHorseId(-1L)
+          .setName("Wendy")
+          .setDateOfBirth(LocalDate.of(2019, 8, 5)),
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-2L)
+          .setName("Hugo")
+          .setDateOfBirth(LocalDate.of(2020, 2, 20)),
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-3L)
+          .setName("Bella")
+          .setDateOfBirth(LocalDate.of(2005, 4, 8)),
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-4L)
+          .setName("Thunder")
+          .setDateOfBirth(LocalDate.of(2008, 7, 15)),
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-5L)
+          .setName("Luna")
+          .setDateOfBirth(LocalDate.of(2012, 11, 22)),
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-6L)
+          .setName("Apollo")
+          .setDateOfBirth(LocalDate.of(2003, 9, 3)),
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-7L)
+          .setName("Sophie")
+          .setDateOfBirth(LocalDate.of(2010, 6, 18)),
+
+
+      new TournamentDetailParticipantDto()
+          .setHorseId(-8L)
+          .setName("Max")
+          .setDateOfBirth(LocalDate.of(2006, 3, 27))
   );
 }
