@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
@@ -33,7 +34,7 @@ public interface HorseTourneyLinkerDao {
    * @return the list of participants (horses) for the tournament
    * @throws FailedToRetrieveException if there is a failure in retrieving the participants from the persistent data store
    */
-  List<Horse> findParticipantsByTournamentId(long id) throws FailedToRetrieveException;
+  List<TournamentDetailParticipantDto> findParticipantsByTournamentId(long id) throws FailedToRetrieveException;
 
   /**
    * Retrieves the list of tournaments associated with the horse with the specified ID.

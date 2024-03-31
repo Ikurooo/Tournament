@@ -10,8 +10,8 @@ import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 public record TournamentStandingsDto(
     Long id,
     String name,
-    Horse[] participants
-// TournamentStandingsTreeDto tree
+    TournamentDetailParticipantDto[] participants,
+    TournamentStandingsTreeDto tree
 ) {
 
 }

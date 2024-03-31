@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
+import static at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants.expectedHorses;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -68,7 +69,7 @@ public class TournamentServiceTest extends TestBase {
 
   @Test
   public void createInvalidTournamentLessThan8Participants() throws ConflictException, NotFoundException {
-    List<Horse> participants = new ArrayList<>(expectedParticipants.subList(0, Math.min(7, expectedParticipants.size())));
+    List<Horse> participants = new ArrayList<>(expectedHorses.subList(0, Math.min(7, expectedHorses.size())));
     participants.add(new Horse()
         .setId(-2L)
         .setName("Hugo")
@@ -91,7 +92,7 @@ public class TournamentServiceTest extends TestBase {
 
   @Test
   public void createValidTournament() throws ConflictException, NotFoundException, ValidationException {
-    Horse[] participantArray = expectedParticipants.toArray(new Horse[0]);
+    Horse[] participantArray = expectedHorses.toArray(new Horse[0]);
     var toCreate = new TournamentDetailDto(
         null,
         "createValidTournament",
@@ -100,6 +101,6 @@ public class TournamentServiceTest extends TestBase {
         participantArray
     );
     Tournament createdTournament = tournamentService.create(toCreate);
-    assertArrayEquals(expectedParticipants.toArray(), createdTournament.getParticipants());
+    assertArrayEquals(expectedHorses.toArray(), createdTournament.getParticipants());
   }
 }
