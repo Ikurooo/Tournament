@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
@@ -39,6 +40,6 @@ public interface TournamentService {
    * @throws NotFoundException       if any of the horses in the participants are not in the horses table
    * @throws FailedToCreateException if there is a failure in creating the tournament in the persistent data store
    */
-  Tournament create(TournamentDetailDto tournament)
+  Tournament create(TournamentCreateDto tournament)
       throws ValidationException, ConflictException, NotFoundException, FailedToCreateException;
 }

@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
@@ -25,7 +26,7 @@ public interface HorseTourneyLinkerDao {
    * @return the created tournament
    * @throws FailedToCreateException if there is a failure in creating the tournament in the persistent data store
    */
-  Tournament create(TournamentDetailDto tournament) throws FailedToCreateException;
+  Tournament create(TournamentCreateDto tournament) throws FailedToCreateException;
 
   /**
    * Retrieves the list of participants (horses) for the tournament with the specified ID.

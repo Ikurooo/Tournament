@@ -9,7 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
@@ -69,21 +72,22 @@ public class TournamentServiceTest extends TestBase {
 
   @Test
   public void createInvalidTournamentLessThan8Participants() throws ConflictException, NotFoundException {
-    List<Horse> participants = new ArrayList<>(expectedHorses.subList(0, Math.min(7, expectedHorses.size())));
-    participants.add(new Horse()
-        .setId(-2L)
-        .setName("Hugo")
-        .setSex(Sex.MALE)
-        .setDateOfBirth(LocalDate.of(2020, 2, 20))
-        .setHeight(1.20f)
-        .setWeight(320)
-        .setBreedId(-20L));
+    HorseSelectionDto[] participants = {
+        new HorseSelectionDto(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
+        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+        new HorseSelectionDto(-3L, "Bella", LocalDate.of(2005, 4, 8)),
+        new HorseSelectionDto(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
+        new HorseSelectionDto(-5L, "Luna", LocalDate.of(2012, 11, 22)),
+        new HorseSelectionDto(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
+        new HorseSelectionDto(-7L, "Sophie", LocalDate.of(2010, 6, 18))
+    };
 
-    var tournament = new TournamentDetailDto(null,
+    var tournament = new TournamentCreateDto(
         "Not8",
         LocalDate.of(2000, 1, 1),
         LocalDate.of(2001, 1, 1),
-        participants.toArray(new Horse[0]));
+        participants);
 
     assertThatThrownBy(() -> tournamentService.create(tournament))
         .isInstanceOf(ValidationException.class)
@@ -92,15 +96,24 @@ public class TournamentServiceTest extends TestBase {
 
   @Test
   public void createValidTournament() throws ConflictException, NotFoundException, ValidationException {
-    Horse[] participantArray = expectedHorses.toArray(new Horse[0]);
-    var toCreate = new TournamentDetailDto(
-        null,
+    HorseSelectionDto[] participants = {
+        new HorseSelectionDto(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
+        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+        new HorseSelectionDto(-3L, "Bella", LocalDate.of(2005, 4, 8)),
+        new HorseSelectionDto(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
+        new HorseSelectionDto(-5L, "Luna", LocalDate.of(2012, 11, 22)),
+        new HorseSelectionDto(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
+        new HorseSelectionDto(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
+        new HorseSelectionDto(-8L, "Max", LocalDate.of(2006, 3, 27))
+    };
+
+    var toCreate = new TournamentCreateDto(
         "createValidTournament",
         LocalDate.of(2001, 1, 1),
         LocalDate.of(2002, 1, 1),
-        participantArray
+        participants
     );
     Tournament createdTournament = tournamentService.create(toCreate);
-    assertArrayEquals(expectedHorses.toArray(), createdTournament.getParticipants());
+    assertArrayEquals(participants, createdTournament.getParticipants());
   }
 }

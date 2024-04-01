@@ -18,7 +18,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the {@link LinkerService} interface.
@@ -40,13 +45,15 @@ public class LinkerServiceImpl implements LinkerService {
   }
 
   @Override
-  public TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException {
+  public TournamentDetailDto getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("getById({})", id);
     var tournament = tournamentDao.getById(id);
     var participants = horseTourneyLinkerDao.findParticipantsByTournamentId(id);
-
-
-    return new TournamentStandingsDto(tournament.getId(), tournament.getName(), participants.toArray(new TournamentDetailParticipantDto[0]), null);
+    return new TournamentDetailDto(tournament.getId(),
+                                   tournament.getName(),
+                                   tournament.getStartDate(),
+                                   tournament.getEndDate(),
+                                   participants.toArray(new TournamentDetailParticipantDto[0]));
   }
 
 
@@ -54,10 +61,5 @@ public class LinkerServiceImpl implements LinkerService {
   public List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException {
     LOG.trace("getTournamentsAssociatedWithHorseId({})", id);
     return horseTourneyLinkerDao.getTournamentsAssociatedWithHorseId(id);
-  }
-
-  private TournamentStandingsTreeDto generateStandingsTress() {
-
-    return null;
   }
 }

@@ -2,6 +2,8 @@ package at.ac.tuwien.sepr.assignment.individual.persistence;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
@@ -81,8 +83,7 @@ public class LinkerDaoTest extends TestBase {
 
   @Test
   public void createInvalidTournament() {
-    var toCreate = new TournamentDetailDto(
-        null,
+    var toCreate = new TournamentCreateDto(
         "createInvalidTournament",
         LocalDate.of(2001, 1, 1),
         LocalDate.of(2002, 1, 1),
@@ -95,16 +96,25 @@ public class LinkerDaoTest extends TestBase {
 
   @Test
   public void createValidTournament() {
-    Horse[] participantArray = expectedHorses.toArray(new Horse[0]);
-    var toCreate = new TournamentDetailDto(
-        null,
+
+    HorseSelectionDto[] participants = {
+        new HorseSelectionDto(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
+        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+        new HorseSelectionDto(-3L, "Bella", LocalDate.of(2005, 4, 8)),
+        new HorseSelectionDto(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
+        new HorseSelectionDto(-5L, "Luna", LocalDate.of(2012, 11, 22)),
+        new HorseSelectionDto(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
+        new HorseSelectionDto(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
+        new HorseSelectionDto(-8L, "Max", LocalDate.of(2006, 3, 27))
+    };
+    var toCreate = new TournamentCreateDto(
         "createInvalidTournament",
         LocalDate.of(2001, 1, 1),
         LocalDate.of(2002, 1, 1),
-        participantArray
+        participants
     );
     Tournament createdTournament = horseTourneyLinkerDao.create(toCreate);
 
-    assertArrayEquals(expectedHorses.toArray(), createdTournament.getParticipants());
+    assertArrayEquals(participants, createdTournament.getParticipants());
   }
 }

@@ -1,5 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
@@ -41,7 +43,7 @@ public class TournamentValidator {
    * @param tournament the tournament details to validate
    * @throws ValidationException if the validation fails
    */
-  public void validateForCreate(TournamentDetailDto tournament) throws ValidationException {
+  public void validateForCreate(TournamentCreateDto tournament) throws ValidationException {
     LOG.trace("validateForCreate({})", tournament);
     ValidationContext context = new ValidationContext();
 
@@ -74,27 +76,27 @@ public class TournamentValidator {
     }
   }
 
-  private void validateParticipants(TournamentDetailDto tournament, ValidationContext context) {
+  private void validateParticipants(TournamentCreateDto tournament, ValidationContext context) {
     Set<Long> seenIds = new HashSet<>();
 
     if (tournament.participants().length != 8) {
       context.addError("Tournament must have exactly 8 participants.");
     }
 
-    for (Horse horse : tournament.participants()) {
-      if (horse.getId() == null) {
+    for (HorseSelectionDto horse : tournament.participants()) {
+      if (horse.id() == null) {
         context.addError("Invalid horse ID found.");
-      } else if (!seenIds.add(horse.getId())) {
-        context.addError("Duplicate participant found: Horse ID " + horse.getId());
+      } else if (!seenIds.add(horse.id())) {
+        context.addError("Duplicate participant found: Horse ID " + horse.id());
       } else if (!doesHorseExist(horse)) {
-        context.addError("Horse does not exist: Horse ID " + horse.getId());
+        context.addError("Horse does not exist: Horse ID " + horse.id());
       }
     }
   }
 
-  private boolean doesHorseExist(Horse horse) {
+  private boolean doesHorseExist(HorseSelectionDto horse) {
     try {
-      horseService.getById(horse.getId());
+      horseService.getById(horse.id());
       return true;
     } catch (NotFoundException e) {
       return false;

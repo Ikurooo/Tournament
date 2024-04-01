@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
@@ -21,7 +22,7 @@ public interface LinkerService {
    * @throws NotFoundException        if the tournament with the given ID does not exist in the persistent data store
    * @throws FailedToRetrieveException if there is a failure in retrieving the tournament from the persistent data store
    */
-  TournamentStandingsDto getById(long id) throws NotFoundException, FailedToRetrieveException;
+  TournamentDetailDto getById(long id) throws NotFoundException, FailedToRetrieveException;
 
   /**
    * Retrieves the list of tournaments associated with the horse with the specified ID.
