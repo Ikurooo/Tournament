@@ -1,5 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence.impl;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
@@ -54,7 +56,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
   @Transactional
   @Override
-  public Tournament create(TournamentDetailDto tournament) throws FailedToCreateException {
+  public Tournament create(TournamentCreateDto tournament) throws FailedToCreateException {
     LOG.trace("create({})", tournament);
 
     try {
@@ -77,12 +79,12 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
       long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
 
-      for (Horse horse : tournament.participants()) {
+      for (HorseSelectionDto horse : tournament.participants()) {
         LOG.debug("Horse Details: {}", horse);
-        int rowsAffectedLinker = jdbcTemplate.update(INSERT_NEW_TOURNAMENT, horse.getId(), generatedId);
+        int rowsAffectedLinker = jdbcTemplate.update(INSERT_NEW_TOURNAMENT, horse.id(), generatedId);
 
         if (rowsAffectedLinker < 1) {
-          String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.getId(), generatedId);
+          String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.id(), generatedId);
           LOG.warn(errorMessage);
           throw new FailedToCreateException(errorMessage);
 

@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
@@ -57,7 +58,7 @@ public class TournamentServiceImpl implements TournamentService {
   }
 
   @Override
-  public Tournament create(TournamentDetailDto tournament)
+  public Tournament create(TournamentCreateDto tournament)
       throws ValidationException, ConflictException, NotFoundException, FailedToCreateException {
     LOG.trace("create({})", tournament);
     validator.validateForCreate(tournament);

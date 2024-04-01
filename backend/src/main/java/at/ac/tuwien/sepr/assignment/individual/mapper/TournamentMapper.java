@@ -34,25 +34,4 @@ public class TournamentMapper {
         tournament.getEndDate()
     );
   }
-
-  /**
-   * Convert a tournament entity object to a {@link TournamentDetailDto}.
-   *
-   * @param tournament the tournament to convert
-   * @return the converted {@link TournamentDetailDto}
-   */
-  public TournamentDetailDto entityToDetailDto(Tournament tournament) {
-    LOG.trace("entityToDetailDto({})", tournament);
-    if (tournament == null) {
-      return null;
-    }
-
-    return new TournamentDetailDto(
-        tournament.getId(),
-        tournament.getName(),
-        tournament.getStartDate(),
-        tournament.getEndDate(),
-        tournament.getParticipants()
-    );
-  }
 }

@@ -1,6 +1,8 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
 import at.ac.tuwien.sepr.assignment.individual.TestBase;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
@@ -8,6 +10,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
+import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.assertj.core.api.AssertionsForClassTypes;
@@ -183,13 +186,21 @@ public class TournamentEndpointTest extends TestBase {
 
   @Test
   public void createValidTournament() throws Exception {
-    Horse[] participantArray = expectedHorses.toArray(new Horse[0]);;
-    TournamentDetailDto originalTournament = new TournamentDetailDto(
-        null,
+    HorseSelectionDto[] participants = {
+        new HorseSelectionDto(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
+        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+        new HorseSelectionDto(-3L, "Bella", LocalDate.of(2005, 4, 8)),
+        new HorseSelectionDto(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
+        new HorseSelectionDto(-5L, "Luna", LocalDate.of(2012, 11, 22)),
+        new HorseSelectionDto(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
+        new HorseSelectionDto(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
+        new HorseSelectionDto(-8L, "Max", LocalDate.of(2006, 3, 27))
+    };
+    TournamentCreateDto originalTournament = new TournamentCreateDto(
         "createValidTournament",
         LocalDate.of(2001, 1, 1),
         LocalDate.of(2002, 1, 1),
-        participantArray
+        participants
     );
 
     String requestBody = objectMapper.writeValueAsString(originalTournament);
@@ -208,7 +219,16 @@ public class TournamentEndpointTest extends TestBase {
     assertEquals(originalTournament.endDate(), tournamentResponse.getEndDate());
 
     assertThat(tournamentResponse.getParticipants())
-        .usingRecursiveFieldByFieldElementComparator()
-        .containsExactlyInAnyOrderElementsOf(expectedHorses);
+        .extracting("id", "name", "dateOfBirth")
+        .containsOnly(
+            tuple(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
+            tuple(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+            tuple(-3L, "Bella", LocalDate.of(2005, 4, 8)),
+            tuple(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
+            tuple(-5L, "Luna", LocalDate.of(2012, 11, 22)),
+            tuple(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
+            tuple(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
+            tuple(-8L, "Max", LocalDate.of(2006, 3, 27))
+        );
   }
 }

@@ -1,5 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.entity;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
+
 import java.time.LocalDate;
 
 /**
@@ -10,14 +12,14 @@ public class Tournament {
   private String name;
   private LocalDate startDate;
   private LocalDate endDate;
-  private Horse[] participants;
+  private HorseSelectionDto[] participants;
 
-  public Tournament setParticipants(Horse[] participants) {
+  public Tournament setParticipants(HorseSelectionDto[] participants) {
     this.participants = participants;
     return this;
   }
 
-  public Horse[] getParticipants() {
+  public HorseSelectionDto[] getParticipants() {
     return participants;
   }
 

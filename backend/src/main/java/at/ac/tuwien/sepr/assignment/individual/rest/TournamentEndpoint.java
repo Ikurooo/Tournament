@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
@@ -49,7 +50,7 @@ public class TournamentEndpoint {
    * @return the detailed information of the tournament with the specified ID
    */
   @GetMapping("{id}")
-  public TournamentStandingsDto getById(@PathVariable("id") long id) {
+  public TournamentDetailDto getById(@PathVariable("id") long id) {
     LOG.info("GET " + BASE_PATH + "/{}", id);
     LOG.info("Tournament ID: {}", id);
     try {
@@ -64,7 +65,8 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      throw new ResponseStatusException(status, "Internal server error.");
+      LOG.warn("{}", e.getMessage());
+      throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
 
@@ -97,7 +99,7 @@ public class TournamentEndpoint {
    * @return the created tournament details
    */
   @PostMapping
-  public Tournament create(@RequestBody TournamentDetailDto toCreate) {
+  public Tournament create(@RequestBody TournamentCreateDto toCreate) {
     LOG.info("POST " + BASE_PATH);
     LOG.debug("Body of request:\n{}", toCreate);
 
