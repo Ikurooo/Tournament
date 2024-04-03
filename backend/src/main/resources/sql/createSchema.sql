@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS horse_tourney_linker
 (
     horse_id BIGINT REFERENCES horse (id),
     tournament_id BIGINT REFERENCES tournament (id),
-    PRIMARY KEY (horse_id, tournament_id),
-    round_reached BIGINT  CHECK (round_reached IS NULL OR round_reached >= 0 OR round_reached <= 4),
-    entry_number BIGINT
+    round_reached BIGINT,
+    entry_number BIGINT,
+    PRIMARY KEY (horse_id, tournament_id)
 );

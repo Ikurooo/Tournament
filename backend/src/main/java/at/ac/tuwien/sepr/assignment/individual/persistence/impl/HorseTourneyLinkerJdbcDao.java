@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -23,24 +25,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 @Repository
 public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
-
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
   private static final String HORSE_TABLE_NAME = "horse";
   private static final String TOURNAMENT_TABLE_NAME = "tournament";
   private static final String LINKER_TABLE_NAME = "horse_tourney_linker";
   private static final String INSERT_NEW_TOURNAMENT = "INSERT INTO " + LINKER_TABLE_NAME + " "
-      + "(horse_id, tournament_id) VALUES (?, ?)";
+      + "(horse_id, tournament_id, round_reached, entry_number) VALUES (?, ?, null, null)";
 
-  private static final String FIND_PARTICIPANTS_BY_TOURNAMENT_ID = "SELECT h.*, l.* "
+  private static final String FIND_PARTICIPANTS_BY_TOURNAMENT_ID = "SELECT * "
       + "FROM " + HORSE_TABLE_NAME + " h "
       + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
       + "WHERE l.tournament_id = ?";
+
   private static final String FIND_TOURNAMENT_BY_PARTICIPANT_ID =
       "SELECT t.* "
          + "FROM " + TOURNAMENT_TABLE_NAME + " t "
@@ -104,7 +107,8 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   }
 
   @Override
-  public List<TournamentDetailParticipantDto> findParticipantsByTournamentId(long id) throws FailedToRetrieveException {
+  public Collection<TournamentDetailParticipantDto> findParticipantsByTournamentId(long id) throws FailedToRetrieveException {
+    LOG.trace("findParticipantsByTournamentId({})", id);
     try {
       return jdbcTemplate.query(FIND_PARTICIPANTS_BY_TOURNAMENT_ID, this::mapRowHorse, id);
     } catch (DataAccessException e) {

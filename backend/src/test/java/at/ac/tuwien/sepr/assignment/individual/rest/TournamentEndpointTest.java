@@ -86,14 +86,14 @@ public class TournamentEndpointTest extends TestBase {
         .andExpect(status().isOk())
         .andReturn().getResponse().getContentAsByteArray();
 
-    TournamentStandingsDto tournamentStandingsDto = objectMapper.readValue(body, TournamentStandingsDto.class);
+    TournamentDetailDto tournamentStandingsDto = objectMapper.readValue(body, TournamentDetailDto.class);
     assertNotNull(tournamentStandingsDto);
     assertNotNull(tournamentStandingsDto.participants());
     assertEquals(8, tournamentStandingsDto.participants().length);
 
     AssertionsForClassTypes.assertThat(tournamentStandingsDto.participants())
         .extracting("horseId", "name", "dateOfBirth")
-        .containsExactlyInAnyOrder(
+        .containsExactly(
             AssertionsForClassTypes.tuple(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
             AssertionsForClassTypes.tuple(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
             AssertionsForClassTypes.tuple(-3L, "Bella", LocalDate.of(2005, 4, 8)),
@@ -186,22 +186,7 @@ public class TournamentEndpointTest extends TestBase {
 
   @Test
   public void createValidTournament() throws Exception {
-    HorseSelectionDto[] participants = {
-        new HorseSelectionDto(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
-        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
-        new HorseSelectionDto(-3L, "Bella", LocalDate.of(2005, 4, 8)),
-        new HorseSelectionDto(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
-        new HorseSelectionDto(-5L, "Luna", LocalDate.of(2012, 11, 22)),
-        new HorseSelectionDto(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
-        new HorseSelectionDto(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
-        new HorseSelectionDto(-8L, "Max", LocalDate.of(2006, 3, 27))
-    };
-    TournamentCreateDto originalTournament = new TournamentCreateDto(
-        "createValidTournament",
-        LocalDate.of(2001, 1, 1),
-        LocalDate.of(2002, 1, 1),
-        participants
-    );
+    TournamentCreateDto originalTournament = getTournamentCreateDto();
 
     String requestBody = objectMapper.writeValueAsString(originalTournament);
 
@@ -230,5 +215,24 @@ public class TournamentEndpointTest extends TestBase {
             tuple(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
             tuple(-8L, "Max", LocalDate.of(2006, 3, 27))
         );
+  }
+
+  private static TournamentCreateDto getTournamentCreateDto() {
+    HorseSelectionDto[] participants = {
+        new HorseSelectionDto(-1L, "Wendy", LocalDate.of(2019, 8, 5)),
+        new HorseSelectionDto(-2L, "Hugo", LocalDate.of(2020, 2, 20)),
+        new HorseSelectionDto(-3L, "Bella", LocalDate.of(2005, 4, 8)),
+        new HorseSelectionDto(-4L, "Thunder", LocalDate.of(2008, 7, 15)),
+        new HorseSelectionDto(-5L, "Luna", LocalDate.of(2012, 11, 22)),
+        new HorseSelectionDto(-6L, "Apollo", LocalDate.of(2003, 9, 3)),
+        new HorseSelectionDto(-7L, "Sophie", LocalDate.of(2010, 6, 18)),
+        new HorseSelectionDto(-8L, "Max", LocalDate.of(2006, 3, 27))
+    };
+    return new TournamentCreateDto(
+        "createValidTournament",
+        LocalDate.of(2001, 1, 1),
+        LocalDate.of(2002, 1, 1),
+        participants
+    );
   }
 }
