@@ -11,6 +11,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveExcepti
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public interface HorseTourneyLinkerDao {
    * @return the list of participants (horses) for the tournament
    * @throws FailedToRetrieveException if there is a failure in retrieving the participants from the persistent data store
    */
-  List<TournamentDetailParticipantDto> findParticipantsByTournamentId(long id) throws FailedToRetrieveException;
+  Collection<TournamentDetailParticipantDto> findParticipantsByTournamentId(long id) throws FailedToRetrieveException;
 
   /**
    * Retrieves the list of tournaments associated with the horse with the specified ID.
