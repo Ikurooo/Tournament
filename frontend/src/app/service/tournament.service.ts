@@ -25,7 +25,7 @@ export class TournamentService {
   }
 
   getById(id: string) {
-    return this.http.get<TournamentStandingsDto>(`${baseUri}/${id}`);
+    return this.http.get<TournamentDetailDto>(`${baseUri}/${id}`);
   }
 
   search(searchParams: TournamentSearchParams): Observable<TournamentListDto[]> {
