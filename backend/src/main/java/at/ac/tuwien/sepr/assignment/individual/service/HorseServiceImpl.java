@@ -5,7 +5,6 @@ import at.ac.tuwien.sepr.assignment.individual.dto.HorseDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
-import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToDeleteException;
@@ -18,7 +17,6 @@ import at.ac.tuwien.sepr.assignment.individual.persistence.HorseDao;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -26,10 +24,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,7 +35,6 @@ import org.springframework.stereotype.Service;
 public class HorseServiceImpl implements HorseService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final HorseDao horseDao;
-  private final HorseTourneyLinkerDao horseTourneyLinkerDao;
   private final HorseMapper mapper;
   private final HorseValidator validator;
   private final BreedService breedService;
@@ -53,13 +48,11 @@ public class HorseServiceImpl implements HorseService {
    * @param breedService      the BreedService instance to use for retrieving breed information
    */
   public HorseServiceImpl(HorseDao horseDao, HorseMapper mapper,
-                          HorseValidator validator, BreedService breedService,
-                          HorseTourneyLinkerDao horseTourneyLinkerDao) {
+                          HorseValidator validator, BreedService breedService) {
     this.horseDao = horseDao;
     this.mapper = mapper;
     this.validator = validator;
     this.breedService = breedService;
-    this.horseTourneyLinkerDao = horseTourneyLinkerDao;
   }
 
   @Override
