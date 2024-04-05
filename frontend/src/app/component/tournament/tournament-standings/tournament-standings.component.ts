@@ -1,4 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { Location } from "@angular/common";
 import {
   HorseTournamentHistoryRequest,
   TournamentDetailDto,
@@ -6,12 +10,8 @@ import {
   TournamentStandingsDto,
   TournamentStandingsTreeDto
 } from "../../../dto/tournament";
-import {TournamentService} from "../../../service/tournament.service";
-import {ActivatedRoute} from "@angular/router";
-import {NgForm} from "@angular/forms";
-import {Location} from "@angular/common";
-import {ToastrService} from "ngx-toastr";
-import {ErrorFormatterService} from "../../../service/error-formatter.service";
+import { TournamentService } from "../../../service/tournament.service";
+import { ErrorFormatterService } from "../../../service/error-formatter.service";
 
 @Component({
   selector: 'app-tournament-standings',
@@ -22,74 +22,124 @@ export class TournamentStandingsComponent implements OnInit {
   standings: TournamentStandingsDto | null = null;
   tournamentId: string | null = null;
   tournamentDetails: TournamentDetailDto | null = null;
-  pointMap: Map<number, number> | null = null;
+  pointMap: Map<number, number> = new Map<number, number>();
+  entryMap: Map<number, TournamentDetailParticipantDto> = new Map<number, TournamentDetailParticipantDto>();
+  participantCounter: number = 0;
+  participantCount: number = 0;
 
-  public constructor(
+  constructor(
     private service: TournamentService,
     private errorFormatter: ErrorFormatterService,
     private route: ActivatedRoute,
     private notification: ToastrService,
-    private location: Location,
-  ) {
-  }
+    private location: Location
+  ) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.tournamentId = params.get('id');
       if (this.tournamentId) {
         this.service.getById(this.tournamentId).subscribe({
           next: data => {
             this.tournamentDetails = data;
-            this.buildEmptyTree(data);
+            this.initialiseStandings(data);
+            this.buildTree();
           },
           error: error => {
-            console.error('Error fetching horse details', error);
+            this.notification.error('Error fetching horse details', error);
           }
         });
       }
     });
   }
 
-  public buildEmptyTree(details: TournamentDetailDto) {
+  public initialiseStandings(tournament: TournamentDetailDto) {
     this.standings = {
       id: -1,
       name: 'Unable To Load Participants',
       participants: [],
-      tree: {thisParticipant: null}
+      tree: { thisParticipant: null }
     };
 
     if (!this.standings.tree.branches) {
-      this.standings.tree.branches = []; // Initialize branches as an empty array
+      this.standings.tree.branches = [];
     }
 
-    this.standings.name = details.name;
-    this.standings.id = details.id;
-    this.standings.participants = details.participants;
-
-    const maxDepth = Math.ceil(Math.log2(this.standings.participants.length));
-    this.buildEmptyTreeRecursively(0, this.standings.tree, maxDepth);
+    this.standings.name = tournament.name;
+    this.standings.id = tournament.id;
+    this.standings.participants = tournament.participants;
+    this.participantCount = this.standings.participants.length;
   }
 
-  public buildEmptyTreeRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
+  /**
+   * Builds the initial tree based on the following criteria:
+   * Checks if the tree has been initialised;
+   * Adds the participants that have already participated in at least one round to a map <id, participantObject>
+   * Recursively builds the tree until a depth defined by the amount of participants is reached
+   * When bubbling up compares the depth and the round reached of a participant to recursively set it
+   * Depth starts from one since we reserved 0 for horses that have not yet been assigned a spot
+   */
+  buildTree() {
+    const standings = this.standings;
+    if (standings === null) {
+      return;
+    }
+
+    standings.participants
+      .filter((participant: TournamentDetailParticipantDto) => participant.entryNumber !== 0)
+      .forEach((participant: TournamentDetailParticipantDto) => {
+        const entryNumber = participant.entryNumber;
+        if (entryNumber === undefined) {
+          return
+        }
+        this.entryMap.set(entryNumber, participant);
+      });
+
+    const maxDepth = Math.ceil(Math.log2(standings.participants.length)) + 1;
+    this.buildEmptyTreeRecursively(1, standings.tree, maxDepth);
+  }
+
+  buildEmptyTreeRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
     if (depth >= maxDepth) {
+      const participant = this.entryMap.get(this.participantCounter % this.participantCount + 1);
+      this.participantCounter += 1;
+      if (!participant) {
+        return;
+      }
+      branch.thisParticipant = participant;
       return;
     }
 
     branch.branches = [];
-
-    branch.branches[0] = {thisParticipant: null, branches: undefined};
-    branch.branches[1] = {thisParticipant: null, branches: undefined};
+    branch.branches[0] = { thisParticipant: null, branches: undefined };
+    branch.branches[1] = { thisParticipant: null, branches: undefined };
 
     this.buildEmptyTreeRecursively(depth + 1, branch.branches[0], maxDepth);
     this.buildEmptyTreeRecursively(depth + 1, branch.branches[1], maxDepth);
-    return;
+
+    const roundReachedUpper = branch.branches[1].thisParticipant?.entryNumber;
+    const roundReachedLower = branch.branches[0].thisParticipant?.entryNumber;
+
+    if (roundReachedUpper !== undefined) {
+      const participantUpper = this.entryMap.get(roundReachedUpper);
+      if (participantUpper && roundReachedUpper <= depth) {
+        branch.thisParticipant = participantUpper;
+      }
+    }
+
+    if (roundReachedLower !== undefined) {
+      const participantLower = this.entryMap.get(roundReachedLower);
+      if (participantLower && roundReachedLower <= depth) {
+        branch.thisParticipant = participantLower;
+      }
+    }
   }
 
-  public submit(form: NgForm) {
-    // TODO to be implemented.
+  submit(form: NgForm) {
+    // TODO: Implement form submission
   }
 
-  public generateFirstRound() {
+  generateFirstRound() {
     if (!this.standings) {
       return;
     }
@@ -111,36 +161,24 @@ export class TournamentStandingsComponent implements OnInit {
       {
         next: data => {
           this.pointMap = this.sumPoints(data);
-          console.log(this.pointMap);
-          console.log(data);
+          this.sortAndMapParticipants();
+          this.populateLeaves();
         },
         error: err => {
-          console.log(err);
+          this.notification.error("Error fetching rounds reached");
         }
       }
     )
-    this.sortParticipants()
-    console.log(this.standings.participants);
   }
 
-  // TODO: ask why the map thingy screams without ts-ignore
-  // TODO: ask why autocomplete isn't working even though I initialised the participants
-  // TODO: ask why map is null even though it is initialised
-
-  private sortParticipants() {
-    if (this.standings === null) {
+  sortAndMapParticipants() {
+    if (!this.standings) {
       return;
     }
 
     this.standings.participants.sort((a, b) => {
-      if (this.pointMap === null || this.pointMap === undefined) {
-        console.log("Map is null");
-        return 0;
-      }
-
       const pointsA = this.pointMap.get(a.horseId) || 0;
       const pointsB = this.pointMap.get(b.horseId) || 0;
-
       const pointsDiff = pointsB - pointsA;
 
       if (pointsDiff !== 0) {
@@ -149,25 +187,30 @@ export class TournamentStandingsComponent implements OnInit {
 
       return a.name.localeCompare(b.name);
     });
+
+    this.standings.participants.forEach((participant, index) => {
+      participant.entryNumber = index + 1;
+    });
   }
 
-  private sumPoints(participants: TournamentDetailParticipantDto[]) {
-
+  sumPoints(participants: TournamentDetailParticipantDto[]) {
     let pointsMap = new Map<number, number>();
 
     participants.forEach(participant => {
       const id = participant.horseId;
       const roundReached = participant.roundReached;
+
       if (id !== null && roundReached !== undefined) {
         const points = this.calculatePoints(roundReached);
         const currentPoints = pointsMap.get(id) ?? 0;
         pointsMap.set(id, currentPoints + points);
       }
     });
+
     return pointsMap;
   }
 
-  private calculatePoints(roundReached: number): number {
+  calculatePoints(roundReached: number): number {
     switch (roundReached) {
       case 3:
         return 5;
@@ -180,27 +223,35 @@ export class TournamentStandingsComponent implements OnInit {
     }
   }
 
-  private populateLeaves() {
+  populateLeaves() {
+    const tree = this.standings?.tree;
 
+    if (!tree || this.standings === null) {
+      return;
+    }
+    const maxDepth = Math.ceil(Math.log2(this.standings.participants.length)) + 1;
+    this.populateLeavesRecursively(1, tree, maxDepth);
   }
 
-  // TODO: add entry numbers to the participants based on the pointsMap
-  // TODO: add update method to initialisation of participants in backend and frontend
-  // TODO: implement DFS with counter to initialise participants.
-  private populateLeavesRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
+  populateLeavesRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
+    if (depth >= maxDepth) {
+      const participant = this.standings?.participants[this.participantCounter % this.participantCount];
+
+      if (!participant) {
+        return;
+      }
+
+      branch.thisParticipant = participant;
+      this.participantCounter += 1;
+      return;
+    }
+
     if (branch.branches === undefined) {
       this.notification.error("An error occurred while generating the initial rounds.");
       return;
     }
 
-    if (depth >= maxDepth) {
-      // @ts-ignore
-      branch.thisParticipant = this.pointMap
-      return;
-    }
-
-    this.buildEmptyTreeRecursively(depth + 1, branch.branches[0], maxDepth);
-    this.buildEmptyTreeRecursively(depth + 1, branch.branches[1], maxDepth);
-    return;
+    this.populateLeavesRecursively(depth + 1, branch.branches[0], maxDepth);
+    this.populateLeavesRecursively(depth + 1, branch.branches[1], maxDepth);
   }
 }
