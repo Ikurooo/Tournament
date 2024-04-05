@@ -81,18 +81,15 @@ export class TournamentStandingsComponent implements OnInit {
    */
   buildTree() {
     const standings = this.standings;
-    if (standings === null) {
-      return;
-    }
+    if (!standings) return;
 
     standings.participants
-      .filter((participant: TournamentDetailParticipantDto) => participant.entryNumber !== 0)
-      .forEach((participant: TournamentDetailParticipantDto) => {
+      .filter(participant => participant.entryNumber !== 0)
+      .forEach(participant => {
         const entryNumber = participant.entryNumber;
-        if (entryNumber === undefined) {
-          return
+        if (entryNumber !== undefined) {
+          this.entryMap.set(entryNumber, participant);
         }
-        this.entryMap.set(entryNumber, participant);
       });
 
     const maxDepth = Math.ceil(Math.log2(standings.participants.length)) + 1;
@@ -103,34 +100,23 @@ export class TournamentStandingsComponent implements OnInit {
     if (depth >= maxDepth) {
       const participant = this.entryMap.get(this.participantCounter % this.participantCount + 1);
       this.participantCounter += 1;
-      if (!participant) {
-        return;
-      }
-      branch.thisParticipant = participant;
+      if (participant) branch.thisParticipant = participant;
       return;
     }
 
-    branch.branches = [];
-    branch.branches[0] = { thisParticipant: null, branches: undefined };
-    branch.branches[1] = { thisParticipant: null, branches: undefined };
+    branch.branches = [{ thisParticipant: null, branches: undefined }, { thisParticipant: null, branches: undefined }];
 
     this.buildEmptyTreeRecursively(depth + 1, branch.branches[0], maxDepth);
     this.buildEmptyTreeRecursively(depth + 1, branch.branches[1], maxDepth);
 
-    const roundReachedUpper = branch.branches[1].thisParticipant?.entryNumber;
-    const roundReachedLower = branch.branches[0].thisParticipant?.entryNumber;
-
-    if (roundReachedUpper !== undefined) {
-      const participantUpper = this.entryMap.get(roundReachedUpper);
-      if (participantUpper && roundReachedUpper <= depth) {
-        branch.thisParticipant = participantUpper;
-      }
-    }
-
-    if (roundReachedLower !== undefined) {
-      const participantLower = this.entryMap.get(roundReachedLower);
-      if (participantLower && roundReachedLower <= depth) {
-        branch.thisParticipant = participantLower;
+    for (const subBranch of branch.branches) {
+      const roundReached = subBranch.thisParticipant?.entryNumber;
+      if (roundReached !== undefined) {
+        const participant = this.entryMap.get(roundReached);
+        if (participant && roundReached <= depth) {
+          branch.thisParticipant = participant;
+          break;
+        }
       }
     }
   }
