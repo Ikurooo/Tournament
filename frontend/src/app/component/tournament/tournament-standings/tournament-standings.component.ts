@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { Location } from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {Location} from "@angular/common";
 import {
   HorseTournamentHistoryRequest,
   TournamentDetailDto,
@@ -10,8 +10,8 @@ import {
   TournamentStandingsDto,
   TournamentStandingsTreeDto
 } from "../../../dto/tournament";
-import { TournamentService } from "../../../service/tournament.service";
-import { ErrorFormatterService } from "../../../service/error-formatter.service";
+import {TournamentService} from "../../../service/tournament.service";
+import {ErrorFormatterService} from "../../../service/error-formatter.service";
 
 @Component({
   selector: 'app-tournament-standings',
@@ -33,7 +33,8 @@ export class TournamentStandingsComponent implements OnInit {
     private route: ActivatedRoute,
     private notification: ToastrService,
     private location: Location
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -44,6 +45,7 @@ export class TournamentStandingsComponent implements OnInit {
             this.tournamentDetails = data;
             this.initialiseStandings(data);
             this.buildTree();
+            console.log(this.standings?.tree);
           },
           error: error => {
             this.notification.error('Error fetching horse details', error);
@@ -58,7 +60,7 @@ export class TournamentStandingsComponent implements OnInit {
       id: -1,
       name: 'Unable To Load Participants',
       participants: [],
-      tree: { thisParticipant: null }
+      tree: {thisParticipant: null}
     };
 
     if (!this.standings.tree.branches) {
@@ -91,6 +93,7 @@ export class TournamentStandingsComponent implements OnInit {
           this.entryMap.set(entryNumber, participant);
         }
       });
+    console.log(this.entryMap);
 
     const maxDepth = Math.ceil(Math.log2(standings.participants.length)) + 1;
     this.buildEmptyTreeRecursively(1, standings.tree, maxDepth);
@@ -103,20 +106,23 @@ export class TournamentStandingsComponent implements OnInit {
       if (participant) branch.thisParticipant = participant;
       return;
     }
-
-    branch.branches = [{ thisParticipant: null, branches: undefined }, { thisParticipant: null, branches: undefined }];
+    branch.branches = [{thisParticipant: null, branches: undefined}, {thisParticipant: null, branches: undefined}];
 
     this.buildEmptyTreeRecursively(depth + 1, branch.branches[0], maxDepth);
     this.buildEmptyTreeRecursively(depth + 1, branch.branches[1], maxDepth);
 
     for (const subBranch of branch.branches) {
-      const roundReached = subBranch.thisParticipant?.entryNumber;
-      if (roundReached !== undefined) {
-        const participant = this.entryMap.get(roundReached);
-        if (participant && roundReached <= depth) {
-          branch.thisParticipant = participant;
-          break;
-        }
+      const entryNumber = subBranch.thisParticipant?.entryNumber;
+      const roundReached = subBranch.thisParticipant?.roundReached;
+
+      if (entryNumber === undefined || roundReached === undefined) {
+        return;
+      }
+
+      const participant = this.entryMap.get(entryNumber);
+      if (participant && roundReached <= depth) {
+        branch.thisParticipant = participant;
+        break;
       }
     }
   }
@@ -127,6 +133,11 @@ export class TournamentStandingsComponent implements OnInit {
 
   generateFirstRound() {
     if (!this.standings) {
+      return;
+    }
+
+    if (this.entryMap.size !== 0) {
+      this.notification.error("This tournament already has ongoing matches");
       return;
     }
 
@@ -211,7 +222,6 @@ export class TournamentStandingsComponent implements OnInit {
 
   populateLeaves() {
     const tree = this.standings?.tree;
-
     if (!tree || this.standings === null) {
       return;
     }
