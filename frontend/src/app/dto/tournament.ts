@@ -48,3 +48,8 @@ export interface TournamentStandingsDto {
   participants: TournamentDetailParticipantDto[];
   tree: TournamentStandingsTreeDto;
 }
+
+export interface HorseTournamentHistoryRequest {
+  dateOfCurrentTournament: Date;
+  horses: TournamentDetailParticipantDto[];
+}

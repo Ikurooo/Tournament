@@ -5,8 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { formatIsoDate } from '../util/date-helper';
 import {
+  HorseTournamentHistoryRequest,
   TournamentCreateDto,
-  TournamentDetailDto,
+  TournamentDetailDto, TournamentDetailParticipantDto,
   TournamentListDto,
   TournamentSearchParams,
   TournamentStandingsDto
@@ -42,5 +43,9 @@ export class TournamentService {
     }
 
     return this.http.get<TournamentListDto[]>(baseUri, { params })
+  }
+
+  getRoundsReached(req: HorseTournamentHistoryRequest, id: string){
+    return this.http.post<TournamentDetailParticipantDto[]>(`${baseUri}/${id}/generate-first-round`, req);
   }
 }
