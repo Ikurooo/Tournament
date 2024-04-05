@@ -31,7 +31,7 @@ export class TournamentStandingsBranchComponent {
     return this.branchPosition === TournamentBranchPosition.FINAL_WINNER;
   }
 
-  suggestions = (input: string) => {
+  @Input() suggestions = (input: string) => {
     // The candidates are either the participants of the previous round matches in this branch
     // or, if this is the first round, all participant horses
     const allCandidates =
@@ -47,7 +47,8 @@ export class TournamentStandingsBranchComponent {
 
   public formatParticipant(participant: TournamentDetailParticipantDto | null): string {
     return participant
-        ? `${participant.name} (${participant.dateOfBirth.toLocaleDateString()})`
+        ? `${participant.name} (${participant.dateOfBirth})`
         : "";
+    // TODO: would be nice to add local date string
   }
 }
