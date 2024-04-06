@@ -24,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,12 +46,38 @@ public class TournamentEndpoint {
     this.linkerService = linkerService;
   }
 
+  @PutMapping("{id}")
+  public TournamentStandingsDto updateTournamentStandings(@PathVariable("id") long id,
+                                        @RequestBody TournamentStandingsDto request) {
+    LOG.info("POST " + BASE_PATH + "/{}", id);
+    LOG.info("Body of request {}", request.toString());
+    // TODO: add exception handling
+    return this.linkerService.updateTournamentStandings(id, request);
+  }
+
+  /**
+   * Generates the first round of a tournament for the specified ID.
+   *
+   * @param id The ID of the tournament.
+   * @param request The request containing information about horses and the date of the current tournament.
+   * @return A stream of TournamentDetailParticipantDto objects representing horse details for the past year.
+   */
   @PostMapping ("{id}/generate-first-round")
   public Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(@PathVariable("id") long id,
                                                                            @RequestBody HorseTournamentHistoryRequest request) {
-    LOG.info("GET " + BASE_PATH + "/{}/generate-first-round", id);
+    LOG.info("POST " + BASE_PATH + "/{}/generate-first-round", id);
     LOG.info("Body of request {}, Date: {}", request.getHorses().toString(), request.getDateOfCurrentTournament().toString());
-    return linkerService.getHorseDetailsForPastYear(request);
+    try {
+      return linkerService.getHorseDetailsForPastYear(request);
+    } catch (FailedToRetrieveException e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Internal server error. ", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.warn("{}", e.getMessage());
+      throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
+    }
   }
 
   /**

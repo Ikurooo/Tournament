@@ -26,6 +26,8 @@ import org.springframework.stereotype.Component;
 public class TournamentValidator {
 
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+  // TODO: if there's time left
   private final HorseService horseService;
 
   /**

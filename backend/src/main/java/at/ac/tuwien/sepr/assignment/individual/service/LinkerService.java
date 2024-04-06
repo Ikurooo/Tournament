@@ -16,6 +16,8 @@ import java.util.stream.Stream;
  */
 public interface LinkerService {
 
+  TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings);
+
   /**
    * Retrieves horse details for the past year.
    * This method retrieves detailed information about horses, including their participation in tournaments,
