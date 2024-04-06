@@ -13,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -25,7 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +37,16 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private static final String INSERT_NEW_TOURNAMENT = "INSERT INTO " + LINKER_TABLE_NAME + " "
       + "(horse_id, tournament_id, round_reached, entry_number) VALUES (?, ?, null, null)";
 
+
+  // TODO fix that iso date thingy because it is a pain in the ass
+  private static final String FIND_ROUNDS_REACHED_FOR_PAST_YEAR = "SELECT h.name, h.id, l.round_reached"
+      + " FROM " + LINKER_TABLE_NAME + " l"
+      + " JOIN " + TOURNAMENT_TABLE_NAME + " t ON l.tournament_id = t.id"
+      + " JOIN " + HORSE_TABLE_NAME + " h ON l.horse_id = h.id"
+      + " WHERE l.horse_id = ?"
+      + " AND t.end_date > ?"
+      + " AND t.end_date < ?";
+
   private static final String FIND_PARTICIPANTS_BY_TOURNAMENT_ID = "SELECT * "
       + "FROM " + HORSE_TABLE_NAME + " h "
       + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
@@ -46,15 +54,34 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
   private static final String FIND_TOURNAMENT_BY_PARTICIPANT_ID =
       "SELECT t.* "
-         + "FROM " + TOURNAMENT_TABLE_NAME + " t "
-         + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.tournament_id "
-         + "WHERE l.horse_id = ?";
+          + "FROM " + TOURNAMENT_TABLE_NAME + " t "
+          + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.tournament_id "
+          + "WHERE l.horse_id = ?";
 
   private final JdbcTemplate jdbcTemplate;
 
   public HorseTourneyLinkerJdbcDao(
       JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
+  }
+
+  @Override
+  public Collection<TournamentDetailParticipantDto> getHorseDetailsForPastYear(TournamentDetailParticipantDto horse,
+                                                                               LocalDate dateOfCurrentTournament)
+                                                                               throws FailedToRetrieveException {
+    LOG.trace("getHorseDetailsForPastYear({}, {})", horse, dateOfCurrentTournament);
+    try {
+      var horseId = horse.getHorseId();
+      var oneYearPrior = dateOfCurrentTournament.minusYears(1);
+      return jdbcTemplate.query(FIND_ROUNDS_REACHED_FOR_PAST_YEAR,
+          this::mapRowRoundReached,
+          horseId,
+          oneYearPrior,
+          dateOfCurrentTournament);
+    } catch (DataAccessException e) {
+      LOG.error("Failed to find the rounds reach for the participant with ID {}: {}", horse.getHorseId(), e.getMessage());
+      throw new FailedToRetrieveException("Failed to find the rounds reach for the participant with ID " + horse.getHorseId(), e);
+    }
   }
 
   @Transactional
@@ -126,6 +153,14 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
       LOG.error("Failed to find tournaments associated with horse with ID {}: {}", id, e.getMessage());
       throw new FailedToRetrieveException("Failed to retrieve tournaments associated with horse with ID " + id, e);
     }
+  }
+
+  private TournamentDetailParticipantDto mapRowRoundReached(ResultSet result, int rownum) throws SQLException {
+    return new TournamentDetailParticipantDto()
+        .setHorseId(result.getLong("id"))
+        .setRoundReached(result.getLong("round_reached"))
+        .setName(result.getString("name"))
+        ;
   }
 
   private TournamentDetailParticipantDto mapRowHorse(ResultSet result, int rownum) throws SQLException {

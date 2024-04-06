@@ -11,6 +11,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveExcepti
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,6 +20,16 @@ import java.util.List;
  * Provides methods to create tournaments and retrieve participants for tournaments.
  */
 public interface HorseTourneyLinkerDao {
+
+  /**
+   * Retrieves all the rounds reached by a given horse for the past year.
+   *
+   * @param horse the tournament detail participant DTO representing the horse for which past year details are to be retrieved
+   * @return a list of tournament detail participant DTOs containing the rounds reached by the horse for the past year
+   */
+  Collection<TournamentDetailParticipantDto> getHorseDetailsForPastYear(TournamentDetailParticipantDto horse,
+                                                                        LocalDate dateOfCurrentTournament)
+                                                                        throws FailedToRetrieveException;
 
   /**
    * Creates a new tournament with the provided data and stores it in the persistent data store.

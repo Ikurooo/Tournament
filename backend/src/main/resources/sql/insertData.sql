@@ -58,7 +58,8 @@ VALUES
     (-6, 'Shell Cup', '2011-10-05', '2012-12-28'),
     (-7, 'Banana Cup', '2013-02-15', '2014-04-30'),
     (-8, 'Leaf Cup', '2015-06-25', '2016-08-22'),
-    (-9, 'Lightning Cup', '2017-10-10', '2018-12-15');
+    (-9, 'Lightning Cup', '2017-10-10', '2018-12-15'),
+    (-10, 'Borderline Schizophrenic Cup', '1999-01-01', '2000-03-03');
 
 INSERT INTO horse_tourney_linker (tournament_id, horse_id)
 VALUES
@@ -72,3 +73,16 @@ VALUES
     ( -1, -8 ),
     ( -2, -1 ),
     ( -9, -7 );
+
+
+-- TODO: entry number and round reached don't match specification
+INSERT INTO horse_tourney_linker (tournament_id, horse_id, round_reached, entry_number)
+VALUES
+    ( -10, -1, 3, 1 ), -- good
+    ( -10, -2, 4, 2 ), -- good
+    ( -10, -3, 1, 3 ), -- good
+    ( -10, -4, 4, 4 ), -- good
+    ( -10, -5, 2, 5 ), -- good
+    ( -10, -6, 4, 6 ), -- good
+    ( -10, -7, 3, 7 ), -- good
+    ( -10, -8, 4, 8 ); -- good

@@ -1,7 +1,9 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequest;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
@@ -43,6 +45,14 @@ public class TournamentEndpoint {
     this.linkerService = linkerService;
   }
 
+  @PostMapping ("{id}/generate-first-round")
+  public Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(@PathVariable("id") long id,
+                                                                           @RequestBody HorseTournamentHistoryRequest request) {
+    LOG.info("GET " + BASE_PATH + "/{}/generate-first-round", id);
+    LOG.info("Body of request {}, Date: {}", request.getHorses().toString(), request.getDateOfCurrentTournament().toString());
+    return linkerService.getHorseDetailsForPastYear(request);
+  }
+
   /**
    * Handles GET requests to retrieve detailed information of a specific tournament.
    *
@@ -50,7 +60,7 @@ public class TournamentEndpoint {
    * @return the detailed information of the tournament with the specified ID
    */
   @GetMapping("{id}")
-  public TournamentDetailDto getById(@PathVariable("id") long id) {
+  public TournamentStandingsDto getById(@PathVariable("id") long id) {
     LOG.info("GET " + BASE_PATH + "/{}", id);
     LOG.info("Tournament ID: {}", id);
     try {

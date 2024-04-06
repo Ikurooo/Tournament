@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * Represents a tournament in the persistent data store.
  */
 public class Tournament {
-  private long id;
+  private Long id;
   private String name;
   private LocalDate startDate;
   private LocalDate endDate;
@@ -23,11 +23,11 @@ public class Tournament {
     return participants;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public Tournament setId(long id) {
+  public Tournament setId(Long id) {
     this.id = id;
     return this;
   }

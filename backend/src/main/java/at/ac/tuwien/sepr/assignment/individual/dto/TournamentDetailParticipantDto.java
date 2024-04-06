@@ -23,9 +23,17 @@ public class TournamentDetailParticipantDto {
     this.roundReached = roundReached;
   }
 
+  public Long getHorseId() {
+    return horseId;
+  }
+
   public TournamentDetailParticipantDto setHorseId(Long horseId) {
     this.horseId = horseId;
     return this;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public TournamentDetailParticipantDto setName(String name) {
@@ -33,9 +41,17 @@ public class TournamentDetailParticipantDto {
     return this;
   }
 
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
+
   public TournamentDetailParticipantDto setDateOfBirth(LocalDate dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
     return this;
+  }
+
+  public Long getEntryNumber() {
+    return entryNumber;
   }
 
   public TournamentDetailParticipantDto setEntryNumber(Long entryNumber) {
@@ -43,28 +59,23 @@ public class TournamentDetailParticipantDto {
     return this;
   }
 
+  public Long getRoundReached() {
+    return roundReached;
+  }
+
   public TournamentDetailParticipantDto setRoundReached(Long roundReached) {
     this.roundReached = roundReached;
     return this;
   }
 
-  public Long getHorseId() {
-    return horseId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public LocalDate getDateOfBirth() {
-    return dateOfBirth;
-  }
-
-  public Long getEntryNumber() {
-    return entryNumber;
-  }
-
-  public Long getRoundReached() {
-    return roundReached;
+  @Override
+  public String toString() {
+    return "TournamentDetailParticipantDto{"
+        + "horseId=" + horseId
+        + ", name='" + name + '\''
+        + ", dateOfBirth=" + dateOfBirth
+        + ", entryNumber=" + entryNumber
+        + ", roundReached=" + roundReached
+        + '}';
   }
 }
