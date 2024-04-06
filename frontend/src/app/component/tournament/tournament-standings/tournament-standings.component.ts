@@ -20,7 +20,6 @@ import {ErrorFormatterService} from "../../../service/error-formatter.service";
 })
 export class TournamentStandingsComponent implements OnInit {
   standings: TournamentStandingsDto | null = null;
-  tournamentId: string | null = null;
   pointMap: Map<number, number> = new Map<number, number>();
   entryMap: Map<number, TournamentDetailParticipantDto> = new Map<number, TournamentDetailParticipantDto>();
   participantCounter: number = 0;
@@ -36,16 +35,16 @@ export class TournamentStandingsComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.tournamentId = params.get('id');
-      if (this.tournamentId) {
-        this.service.getById(this.tournamentId).subscribe({
+      const tournamentId = params.get('id');
+      if (tournamentId) {
+        this.service.getById(tournamentId).subscribe({
           next: data => {
             this.standings = data;
             this.standings.startDate = new Date(data.startDate);
             this.fillEntryMap();
           },
-          error: error => {
-            this.notification.error('Error fetching horse details', error);
+          error: err => {
+            this.notification.error('Error fetching horse details', err);
           }
         });
       }
@@ -62,6 +61,7 @@ export class TournamentStandingsComponent implements OnInit {
 
     this.service.update(this.standings, this.standings.id.toString()).subscribe({
     next: data => {
+      // TODO: reload page with received data.
       this.notification.success("Update sent.");
     },
     error: (err) => {
