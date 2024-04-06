@@ -28,7 +28,6 @@ public class TournamentStandingsTreeFactory {
         this.entryMap.put(participant.getEntryNumber(), participant);
       }
     }
-    System.out.println(this.entryMap);
 
     int maxDepth = (int) Math.ceil(Math.log(this.participants.length) / Math.log(2)) + 1;
     this.buildEmptyTreeRecursively(1, this.tree, maxDepth);
