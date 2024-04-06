@@ -21,11 +21,9 @@ import {ErrorFormatterService} from "../../../service/error-formatter.service";
 export class TournamentStandingsComponent implements OnInit {
   standings: TournamentStandingsDto | null = null;
   tournamentId: string | null = null;
-  tournamentDetails: TournamentDetailDto | null = null;
   pointMap: Map<number, number> = new Map<number, number>();
   entryMap: Map<number, TournamentDetailParticipantDto> = new Map<number, TournamentDetailParticipantDto>();
   participantCounter: number = 0;
-  participantCount: number = 0;
 
   constructor(
     private service: TournamentService,
@@ -44,10 +42,7 @@ export class TournamentStandingsComponent implements OnInit {
           next: data => {
             this.standings = data;
             this.standings.startDate = new Date(data.startDate);
-            this.participantCount = this.standings.participants.length;
             this.fillEntryMap();
-            console.log(this.entryMap);
-
           },
           error: error => {
             this.notification.error('Error fetching horse details', error);
@@ -63,7 +58,7 @@ export class TournamentStandingsComponent implements OnInit {
       this.notification.warning("There's nothing to submit.");
       return;
     }
-    console.log(this.entryMap);
+    console.log(this.standings.tree);
 
     this.service.update(this.standings, this.standings.id.toString()).subscribe({
     next: data => {
@@ -76,34 +71,22 @@ export class TournamentStandingsComponent implements OnInit {
   });
   }
 
-
   generateFirstRound() {
-    if (!this.standings) {
-      return;
-    }
-
     const hasNonZero = Array.from(this.entryMap.values()).some(participant => participant.entryNumber !== undefined && participant.entryNumber !== 0);
-    if (hasNonZero) {
-      return;
-    }
-
-    const startDate = new Date(this.standings.startDate);
-    const participants = this.standings.participants;
-    const id = this.standings.id;
-
-    if (!startDate || !participants || !id) {
+    if (hasNonZero || !this.standings) {
+      this.notification.error("Participants have already been assigned");
       return;
     }
 
     const req: HorseTournamentHistoryRequest = {
-      dateOfCurrentTournament: startDate,
-      horses: participants
+      dateOfCurrentTournament: new Date(this.standings.startDate),
+      horses: this.standings.participants
     };
 
-    this.service.getRoundsReached(req, id.toString()).subscribe(
+    this.service.getRoundsReached(req, this.standings.id.toString()).subscribe(
       {
         next: data => {
-          this.pointMap = this.sumPoints(data);
+          this.sumPoints(data);
           this.sortAndMapParticipants();
           this.populateLeaves();
         },
@@ -122,44 +105,25 @@ export class TournamentStandingsComponent implements OnInit {
       });
   }
 
-
   sortAndMapParticipants() {
     if (!this.standings) {
       return;
     }
 
     this.standings.participants.sort((a, b) => {
-      const pointsA = this.pointMap.get(a.horseId) || 0;
-      const pointsB = this.pointMap.get(b.horseId) || 0;
-      const pointsDiff = pointsB - pointsA;
-
-      if (pointsDiff !== 0) {
-        return pointsDiff;
-      }
-
-      return a.name.localeCompare(b.name);
-    });
-
-    this.standings.participants.forEach((participant, index) => {
-      participant.entryNumber = index + 1;
+      const pointsDiff = (this.pointMap.get(b.horseId) || 0) - (this.pointMap.get(a.horseId) || 0);
+      return pointsDiff !== 0 ? pointsDiff : a.name.localeCompare(b.name);
     });
   }
 
   sumPoints(participants: TournamentDetailParticipantDto[]) {
-    let pointsMap = new Map<number, number>();
-
     participants.forEach(participant => {
-      const id = participant.horseId;
-      const roundReached = participant.roundReached;
-
-      if (id !== null && roundReached !== undefined) {
-        const points = this.calculatePoints(roundReached);
-        const currentPoints = pointsMap.get(id) ?? 0;
-        pointsMap.set(id, currentPoints + points);
+      if (participant.horseId !== null && participant.roundReached !== undefined) {
+        const points = this.calculatePoints(participant.roundReached);
+        const currentPoints = this.pointMap.get(participant.horseId) ?? 0;
+        this.pointMap.set(participant.horseId, currentPoints + points);
       }
     });
-
-    return pointsMap;
   }
 
   calculatePoints(roundReached: number): number {
@@ -181,20 +145,18 @@ export class TournamentStandingsComponent implements OnInit {
       return;
     }
 
+    this.participantCounter = 0;
     const maxDepth = Math.ceil(Math.log2(this.standings.participants.length)) + 1;
     this.populateLeavesRecursively(1, tree, maxDepth);
   }
 
   populateLeavesRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
     if (depth >= maxDepth) {
-      const participant = this.standings?.participants[this.participantCounter % this.participantCount];
-
-      if (!participant) {
-        return;
+      const participant = this.standings?.participants[this.participantCounter];
+      if (participant) {
+        this.participantCounter += 1;
+        branch.thisParticipant = participant;
       }
-
-      branch.thisParticipant = participant;
-      this.participantCounter += 1;
       return;
     }
 
