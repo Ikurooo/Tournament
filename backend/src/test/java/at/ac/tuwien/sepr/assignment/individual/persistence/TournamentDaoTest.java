@@ -15,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -38,7 +39,7 @@ public class TournamentDaoTest extends TestBase {
         .usingRecursiveFieldByFieldElementComparator()
         .containsExactlyInAnyOrder(
             (new Tournament())
-                .setId(-7).setName("Banana Cup")
+                .setId(-7L).setName("Banana Cup")
                 .setStartDate(LocalDate.of(2013, 2, 15))
                 .setEndDate(LocalDate.of(2014, 4, 30))
         );
@@ -56,11 +57,11 @@ public class TournamentDaoTest extends TestBase {
         .usingRecursiveFieldByFieldElementComparator()
         .containsExactlyInAnyOrder(
             (new Tournament())
-                .setId(-7).setName("Banana Cup")
+                .setId(-7L).setName("Banana Cup")
                 .setStartDate(LocalDate.of(2013, 2, 15))
                 .setEndDate(LocalDate.of(2014, 4, 30)),
             (new Tournament())
-                .setId(-6).setName("Shell Cup")
+                .setId(-6L).setName("Shell Cup")
                 .setStartDate(LocalDate.of(2011, 10, 5))
                 .setEndDate(LocalDate.of(2012, 12, 28))
         );
@@ -79,13 +80,16 @@ public class TournamentDaoTest extends TestBase {
         .usingRecursiveFieldByFieldElementComparator()
         .containsExactlyInAnyOrder(
             (new Tournament())
-                .setId(-1).setName("Rainbow Road")
+                .setId(-1L).setName("Rainbow Road")
                 .setStartDate(LocalDate.of(2001, 1, 1))
                 .setEndDate(LocalDate.of(2002, 3, 2)),
             (new Tournament())
-                .setId(-2).setName("Star Cup")
+                .setId(-2L).setName("Star Cup")
                 .setStartDate(LocalDate.of(2003, 5, 15))
-                .setEndDate(LocalDate.of(2004, 7, 20))
+                .setEndDate(LocalDate.of(2004, 7, 20)),
+            new Tournament().setId(-10L).setName("Borderline Schizophrenic Cup")
+                .setStartDate(LocalDate.of(1999, 1, 1))
+                .setEndDate(LocalDate.of(2000, 3, 3))
         );
   }
 
@@ -102,11 +106,11 @@ public class TournamentDaoTest extends TestBase {
         .usingRecursiveFieldByFieldElementComparator()
         .containsExactlyInAnyOrder(
             (new Tournament())
-                .setId(-8).setName("Leaf Cup")
+                .setId(-8L).setName("Leaf Cup")
                 .setStartDate(LocalDate.of(2015, 6, 25))
                 .setEndDate(LocalDate.of(2016, 8, 22)),
             (new Tournament())
-                .setId(-9).setName("Lightning Cup")
+                .setId(-9L).setName("Lightning Cup")
                 .setStartDate(LocalDate.of(2017, 10, 10))
                 .setEndDate(LocalDate.of(2018, 12, 15))
         );
@@ -130,7 +134,7 @@ public class TournamentDaoTest extends TestBase {
     assertThat(tournament)
         .usingRecursiveComparison()
         .isEqualTo(new Tournament()
-            .setId(-8)
+            .setId(-8L)
             .setName("Leaf Cup")
             .setStartDate(LocalDate.of(2015, 6, 25))
             .setEndDate(LocalDate.of(2016, 8, 22)));

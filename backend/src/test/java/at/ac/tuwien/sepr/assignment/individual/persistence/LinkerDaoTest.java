@@ -42,21 +42,24 @@ public class LinkerDaoTest extends TestBase {
   HorseTourneyLinkerDao horseTourneyLinkerDao;
 
   @Test
-  public void getTournamentsAssociatedWithNonExistentHorseId() {
-    long nonExistentHorseId = -1L;
+  public void getTournamentsAssociatedWithHorseId() {
+    long horseId = -1L;
     List<Tournament> expectedTournaments = Arrays.asList(
         new Tournament()
-            .setId(-1)
+            .setId(-1L)
             .setName("Rainbow Road")
             .setStartDate(LocalDate.of(2001, 1, 1))
             .setEndDate(LocalDate.of(2002, 3, 2)),
         new Tournament()
-            .setId(-2)
+            .setId(-2L)
             .setName("Star Cup")
             .setStartDate(LocalDate.of(2003, 5, 15))
-            .setEndDate(LocalDate.of(2004, 7, 20))
+            .setEndDate(LocalDate.of(2004, 7, 20)),
+        new Tournament().setId(-10L).setName("Borderline Schizophrenic Cup")
+            .setStartDate(LocalDate.of(1999, 1, 1))
+            .setEndDate(LocalDate.of(2000, 3, 3))
     );
-    List<Tournament> tournaments = horseTourneyLinkerDao.getTournamentsAssociatedWithHorseId(nonExistentHorseId);
+    List<Tournament> tournaments = horseTourneyLinkerDao.getTournamentsAssociatedWithHorseId(horseId);
     assertNotNull(tournaments);
     assertThat(tournaments)
         .usingRecursiveFieldByFieldElementComparator()
