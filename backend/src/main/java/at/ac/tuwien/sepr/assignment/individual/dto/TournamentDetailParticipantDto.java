@@ -73,9 +73,6 @@ public class TournamentDetailParticipantDto {
     return "TournamentDetailParticipantDto{"
         + "horseId=" + horseId
         + ", name='" + name + '\''
-        + ", dateOfBirth=" + dateOfBirth
-        + ", entryNumber=" + entryNumber
-        + ", roundReached=" + roundReached
         + '}';
   }
 }
