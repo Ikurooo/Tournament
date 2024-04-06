@@ -12,7 +12,6 @@ import {
 } from "../../../dto/tournament";
 import {TournamentService} from "../../../service/tournament.service";
 import {ErrorFormatterService} from "../../../service/error-formatter.service";
-import {min} from "rxjs";
 
 @Component({
   selector: 'app-tournament-standings',
@@ -44,6 +43,11 @@ export class TournamentStandingsComponent implements OnInit {
         this.service.getById(this.tournamentId).subscribe({
           next: data => {
             this.standings = data;
+            this.standings.startDate = new Date(data.startDate);
+            this.participantCount = this.standings.participants.length;
+            this.fillEntryMap();
+            console.log(this.entryMap);
+
           },
           error: error => {
             this.notification.error('Error fetching horse details', error);
@@ -54,23 +58,38 @@ export class TournamentStandingsComponent implements OnInit {
   }
 
   submit(form: NgForm) {
-    this.flattenTree()
+    this.updateTree();
+    if (this.standings === null) {
+      this.notification.warning("There's nothing to submit.");
+      return;
+    }
     console.log(this.entryMap);
+
+    this.service.update(this.standings, this.standings.id.toString()).subscribe({
+    next: data => {
+      this.notification.success("Update sent.");
+    },
+    error: (err) => {
+      console.error("Error updating standings:", err);
+      this.notification.error("Failed to update standings.");
+    }
+  });
   }
+
 
   generateFirstRound() {
     if (!this.standings) {
       return;
     }
 
-    if (this.entryMap.size !== 0) {
-      this.notification.error("This tournament already has ongoing matches");
+    const hasNonZero = Array.from(this.entryMap.values()).some(participant => participant.entryNumber !== undefined && participant.entryNumber !== 0);
+    if (hasNonZero) {
       return;
     }
 
-    const startDate = this.tournamentDetails?.startDate;
-    const participants = this.tournamentDetails?.participants;
-    const id = this.tournamentId;
+    const startDate = new Date(this.standings.startDate);
+    const participants = this.standings.participants;
+    const id = this.standings.id;
 
     if (!startDate || !participants || !id) {
       return;
@@ -94,6 +113,15 @@ export class TournamentStandingsComponent implements OnInit {
       }
     )
   }
+
+  public fillEntryMap() {
+    this.standings?.participants
+      .forEach(participant => {
+        if (participant.entryNumber !== undefined && participant.entryNumber !== 0)
+        this.entryMap.set(participant.entryNumber, participant);
+      });
+  }
+
 
   sortAndMapParticipants() {
     if (!this.standings) {
@@ -136,11 +164,11 @@ export class TournamentStandingsComponent implements OnInit {
 
   calculatePoints(roundReached: number): number {
     switch (roundReached) {
-      case 3:
+      case 1:
         return 5;
       case 2:
         return 3;
-      case 1:
+      case 3:
         return 1;
       default:
         return 0;
@@ -152,6 +180,7 @@ export class TournamentStandingsComponent implements OnInit {
     if (!tree || this.standings === null) {
       return;
     }
+
     const maxDepth = Math.ceil(Math.log2(this.standings.participants.length)) + 1;
     this.populateLeavesRecursively(1, tree, maxDepth);
   }
@@ -178,36 +207,43 @@ export class TournamentStandingsComponent implements OnInit {
     this.populateLeavesRecursively(depth + 1, branch.branches[1], maxDepth);
   }
 
-  public flattenTree() {
+  public updateTree() {
     const tree = this.standings?.tree;
     if (!tree || this.standings === null) {
       return;
     }
 
+    this.participantCounter = 0;
     const maxDepth = Math.ceil(Math.log2(this.standings.participants.length)) + 1;
-    this.flattenTreeRecursively(1, tree, maxDepth);
+    this.updateTreeRecursively(1, tree, maxDepth);
   }
 
-  public flattenTreeRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
+  public updateTreeRecursively(depth: number, branch: TournamentStandingsTreeDto, maxDepth: number) {
     const participant = branch.thisParticipant;
-
-    if (participant !== null) {
-      if (participant.entryNumber !== undefined) {
-        participant.roundReached = Math.min(Math.max(participant.roundReached || 0, depth), depth);
+    if (depth >= maxDepth) {
+      this.participantCounter += 1;
+      if (participant !== null) {
+        participant.entryNumber = this.participantCounter;
+        participant.roundReached = depth;
         this.entryMap.set(participant.entryNumber, participant);
-      } else if (participant.roundReached === 0) {
-        participant.roundReached = Math.max(participant.roundReached || 0, depth);
       }
-    }
-
-    if (depth >= maxDepth) return;
-
-    if (branch.branches === undefined) {
-      this.notification.error("An error occurred while flattening the tree.");
       return;
     }
 
-    this.flattenTreeRecursively(depth + 1, branch.branches[0], maxDepth);
-    this.flattenTreeRecursively(depth + 1, branch.branches[1], maxDepth);
+    if (branch.branches === undefined) {
+      this.notification.error("An error occurred while updating the tree.");
+      return;
+    }
+
+    this.updateTreeRecursively(depth + 1, branch.branches[0], maxDepth);
+    this.updateTreeRecursively(depth + 1, branch.branches[1], maxDepth);
+
+    if (participant !== null && participant.entryNumber !== undefined) {
+      const entry = this.entryMap.get(participant.entryNumber);
+      if (entry && entry.roundReached) {
+        participant.roundReached = Math.min(depth, entry.roundReached);
+      }
+      this.entryMap.set(participant.entryNumber, participant);
+    }
   }
 }

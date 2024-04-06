@@ -45,6 +45,7 @@ export interface TournamentStandingsTreeDto {
 export interface TournamentStandingsDto {
   id: number;
   name: string;
+  startDate: Date;
   participants: TournamentDetailParticipantDto[];
   tree: TournamentStandingsTreeDto;
 }

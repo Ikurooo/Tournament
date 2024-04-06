@@ -25,6 +25,10 @@ export class TournamentService {
     return this.http.post<TournamentDetailDto>(baseUri, tournament);
   }
 
+  update(req: TournamentStandingsDto, id: string){
+    return this.http.put<TournamentStandingsDto>(`${baseUri}/${id}`, req);
+  }
+
   getById(id: string) {
     return this.http.get<TournamentStandingsDto>(`${baseUri}/${id}`);
   }
