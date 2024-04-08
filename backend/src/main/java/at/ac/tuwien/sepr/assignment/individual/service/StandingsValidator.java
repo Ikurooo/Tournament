@@ -58,6 +58,7 @@ public class StandingsValidator {
   }
 
   private void validateTree(TournamentStandingsTreeDto tree, ValidationContext context) {
+    LOG.debug("validateTree()");
     if (tree == null) {
       context.addError("Provided tree cannot be null.");
       return;
@@ -72,6 +73,7 @@ public class StandingsValidator {
   // TODO: validate for children
 
   private void validateTreeRecursively(int depth, TournamentStandingsTreeDto branch, int maxDepth, ValidationContext context) {
+    LOG.debug("validateTreeRecursively({})", depth);
     if (depth >= maxDepth) {
       this.entryNumber += 1;
 

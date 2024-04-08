@@ -73,6 +73,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   @Override
   public Collection<TournamentDetailParticipantDto> updateStandings(Collection<TournamentDetailParticipantDto> horses,
                                                                     long tournamentId) throws FailedToUpdateException {
+    LOG.trace("updateStandings({}, {})", horses, tournamentId);
     try {
       horses.forEach(horse -> jdbcTemplate.update(UPDATE_STANDINGS_FOR_HORSE_IN_TOURNAMENT,
           horse.getRoundReached(), horse.getEntryNumber(), horse.getHorseId(), tournamentId)
@@ -107,7 +108,6 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   @Override
   public Tournament create(TournamentCreateDto tournament) throws FailedToCreateException {
     LOG.trace("create({})", tournament);
-
     try {
       KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -134,7 +134,6 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
         if (rowsAffectedLinker < 1) {
           String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.id(), generatedId);
-          LOG.warn(errorMessage);
           throw new FailedToCreateException(errorMessage);
 
         }
@@ -148,7 +147,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
 
     } catch (DataAccessException e) {
       LOG.error("Failed to insert a new tournament: {}", e.getMessage());
-      throw new FailedToCreateException("Failed to create a new tournament due to a database error.");
+      throw new FailedToCreateException("Failed to create a new tournament due to a database error." + e.getMessage());
     }
   }
 

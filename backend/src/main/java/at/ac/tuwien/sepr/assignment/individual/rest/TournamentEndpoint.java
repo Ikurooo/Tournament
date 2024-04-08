@@ -96,7 +96,6 @@ public class TournamentEndpoint {
       return linkerService.getHorseDetailsForPastYear(request);
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Internal server error. ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -123,7 +122,6 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Internal server error. ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -146,7 +144,6 @@ public class TournamentEndpoint {
       return tournamentService.search(searchParameters);
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Internal server error. ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -174,7 +171,6 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToCreateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Failed to insert tournament.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;

@@ -75,7 +75,6 @@ public class HorseJdbcDao implements HorseDao {
   @Override
   public Horse getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("getById({})", id);
-
     try {
       List<Horse> horses = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
@@ -99,7 +98,6 @@ public class HorseJdbcDao implements HorseDao {
   @Override
   public Horse create(HorseDetailDto horse) throws FailedToCreateException {
     LOG.trace("create({})", horse);
-
     KeyHolder keyHolder = new GeneratedKeyHolder();
 
     try {
@@ -141,7 +139,6 @@ public class HorseJdbcDao implements HorseDao {
   @Override
   public void delete(long id) throws NotFoundException, FailedToDeleteException {
     LOG.trace("delete({})", id);
-
     try {
       int deleted = jdbcTemplate.update("DELETE FROM " + TABLE_NAME + " WHERE id = ?", id);
 

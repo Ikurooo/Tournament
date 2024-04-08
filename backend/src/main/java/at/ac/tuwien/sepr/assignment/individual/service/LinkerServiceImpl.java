@@ -45,6 +45,7 @@ public class LinkerServiceImpl implements LinkerService {
 
   @Override
   public TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws ValidationException, FailedToUpdateException {
+    LOG.trace("updateTournamentStandings({}, {})", id, standings);
     standingsValidator.validateStandings(standings);
     var participants = tournamentMapper.standingsToCollection(standings);
     var updatedParticipants = horseTourneyLinkerDao.updateStandings(participants, id);

@@ -57,8 +57,8 @@ public class BreedJdbcDao implements BreedDao {
 
   @Override
   public Collection<Breed> findBreedsById(Set<Long> breedIds) {
+    LOG.trace("findBreedsById({})", breedIds);
     try {
-      LOG.trace("findBreedsById({})", breedIds);
       return jdbcTemplate.query(SQL_FIND_BY_IDS, Map.of("ids", breedIds), this::mapRow);
     } catch (DataAccessException ex) {
       LOG.error("Error occurred while finding breeds by IDs: {} {}", breedIds, ex.getMessage());
@@ -68,8 +68,8 @@ public class BreedJdbcDao implements BreedDao {
 
   @Override
   public Collection<Breed> search(BreedSearchDto searchParams) {
+    LOG.trace("search({})", searchParams);
     try {
-      LOG.trace("search({})", searchParams);
       String query = SQL_SEARCH;
       if (searchParams.limit() != null) {
         query += SQL_LIMIT_CLAUSE;

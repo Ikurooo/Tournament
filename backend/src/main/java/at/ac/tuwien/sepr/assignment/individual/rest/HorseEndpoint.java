@@ -57,7 +57,6 @@ public class HorseEndpoint {
       return service.search(searchParameters);
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Internal server error. ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -83,7 +82,6 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Internal server error. ", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -115,7 +113,6 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToUpdateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Failed to update horse.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -147,7 +144,6 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToCreateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Failed to insert horse.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -175,7 +171,6 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToDeleteException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Error deleting horse.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;

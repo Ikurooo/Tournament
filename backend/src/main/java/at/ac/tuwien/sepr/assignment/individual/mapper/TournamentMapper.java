@@ -48,6 +48,7 @@ public class TournamentMapper {
    * @return A collection of participant details.
    */
   public Collection<TournamentDetailParticipantDto> standingsToCollection(TournamentStandingsDto standings) {
+    LOG.trace("standingsToCollection({})", standings);
     Map<Long, TournamentDetailParticipantDto> participants = new HashMap<>();
     var tree = standings.tree();
     processTree(tree, participants);
@@ -62,6 +63,7 @@ public class TournamentMapper {
    * @param participants The map to store participant details.
    */
   private void processTree(TournamentStandingsTreeDto branch, Map<Long, TournamentDetailParticipantDto> participants) {
+    LOG.debug("processTree({})", participants);
     if (branch == null) {
       return;
     }

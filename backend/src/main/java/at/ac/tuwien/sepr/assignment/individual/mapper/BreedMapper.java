@@ -25,15 +25,4 @@ public class BreedMapper {
     LOG.trace("entityToDto({})", breed);
     return new BreedDto(breed.getId(), breed.getName());
   }
-
-  /**
-   * Converts a {@link BreedDto} DTO to a {@link Breed} entity.
-   *
-   * @param breedDto The {@link BreedDto} DTO to convert.
-   * @return The converted {@link Breed} entity.
-   */
-  public Breed dtoToBreed(BreedDto breedDto) {
-    LOG.trace("dtoToBreed({})", breedDto);
-    return new Breed().setId(breedDto.id());
-  }
 }
