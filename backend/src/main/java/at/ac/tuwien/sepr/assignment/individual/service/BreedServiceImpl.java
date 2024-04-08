@@ -24,8 +24,9 @@ public class BreedServiceImpl implements BreedService {
 
   /**
    * Constructor for the BreedServiceImpl class
-   * @param dao               the BreedDao instance to use for database operations
-   * @param mapper            the BreedMapper instance to use for mapping entities to DTOs
+   *
+   * @param dao    the BreedDao instance to use for database operations
+   * @param mapper the BreedMapper instance to use for mapping entities to DTOs
    */
   public BreedServiceImpl(BreedDao dao, BreedMapper mapper) {
     this.dao = dao;

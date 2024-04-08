@@ -19,6 +19,7 @@ public interface HorseTourneyLinkerDao {
 
   /**
    * Updates the standings of a tournament.
+   *
    * @param horses the participants of the given tournament to be updated
    * @param tournamentId the id of the tournament you wish to update the standings of
    * @return on success the new standings of the tournament.

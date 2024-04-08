@@ -49,8 +49,8 @@ public class TournamentEndpoint {
   /**
    * Controller method to update tournament standings.
    *
-   * @param id       The ID of the tournament to update standings for
-   * @param request  The request body containing updated tournament standings data
+   * @param id      The ID of the tournament to update standings for
+   * @param request The request body containing updated tournament standings data
    * @return The updated tournament standings
    * @throws ResponseStatusException If there is an error during the update process
    */
@@ -69,7 +69,7 @@ public class TournamentEndpoint {
       HttpStatus status = HttpStatus.NOT_FOUND;
       logClientError(status, "Tournament not found", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch(FailedToUpdateException e) {
+    } catch (FailedToUpdateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       logClientError(status, "Failed to update standings.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
@@ -83,11 +83,11 @@ public class TournamentEndpoint {
   /**
    * Generates the first round of a tournament for the specified ID.
    *
-   * @param id The ID of the tournament.
+   * @param id      The ID of the tournament.
    * @param request The request containing information about horses and the date of the current tournament.
    * @return A stream of TournamentDetailParticipantDto objects representing horse details for the past year.
    */
-  @PostMapping ("{id}/generate-first-round")
+  @PostMapping("{id}/generate-first-round")
   public Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(@PathVariable("id") long id,
                                                                            @RequestBody HorseTournamentHistoryRequestDto request) {
     LOG.info("POST " + BASE_PATH + "/{}/generate-first-round", id);
