@@ -12,8 +12,11 @@ import org.springframework.stereotype.Component;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,15 +67,15 @@ public class StandingsValidator {
       return;
     }
 
+    Map<Long, Long> idToRoundReachedMap = new HashMap<>();
     this.entryNumber = 0;
     int maxDepth = 4; // Change this in case a tournament can have more than 8 participants.
-    validateTreeRecursively(1, tree, maxDepth, context);
+    validateTreeRecursively(1, tree, maxDepth, context, idToRoundReachedMap);
   }
 
   // TODO: add map to see if the entry numbers / rounds reached are correct or differ in any place; Map<Long, Long>
-  // TODO: validate for children
 
-  private void validateTreeRecursively(int depth, TournamentStandingsTreeDto branch, int maxDepth, ValidationContext context) {
+  private void validateTreeRecursively(int depth, TournamentStandingsTreeDto branch, int maxDepth, ValidationContext context, Map<Long, Long> numbers) {
     LOG.debug("validateTreeRecursively({})", depth);
     if (depth >= maxDepth) {
       this.entryNumber += 1;
@@ -96,12 +99,18 @@ public class StandingsValidator {
       return;
     }
 
-    if (branch.getBranches().length != 2) {
-      context.addError("There must be exactly 2 branches.");
+    if (branch.getBranches() == null) {
+      context.addError("Tree is too small.");
+      return;
     }
 
-    validateTreeRecursively(depth + 1, branch.getBranches()[0], maxDepth, context);
-    validateTreeRecursively(depth + 1, branch.getBranches()[1], maxDepth, context);
+    if (branch.getBranches().length != 2) {
+      context.addError("There must be exactly 2 branches.");
+      return;
+    }
+
+    validateTreeRecursively(depth + 1, branch.getBranches()[0], maxDepth, context, numbers);
+    validateTreeRecursively(depth + 1, branch.getBranches()[1], maxDepth, context, numbers);
 
     Set<Long> previous = new HashSet<>();
     Arrays.stream(branch.getBranches())
@@ -114,6 +123,19 @@ public class StandingsValidator {
         && !previous.contains(branch.getThisParticipant().getHorseId())) {
       context.addError("Horse: " + branch.getThisParticipant().getName()
           + " at depth " + depth + " does not match any of the ones before it.");
+    }
+
+    if (branch.getThisParticipant() != null
+        && branch.getThisParticipant().getHorseId() != null
+        && branch.getThisParticipant().getRoundReached() != null) {
+      var previousVal = numbers.putIfAbsent(branch.getThisParticipant().getHorseId(), branch.getThisParticipant().getRoundReached());
+      if (!Objects.equals(previousVal, branch.getThisParticipant().getRoundReached())) {
+        context.addError("Mismatched round reached for horse with id: " + branch.getThisParticipant().getHorseId());
+      }
+    }
+
+    if (branch.getThisParticipant() != null && previous.size() != 2) {
+      context.addError("Not enough horses registered in the previous round at depth: " + depth);
     }
   }
 
