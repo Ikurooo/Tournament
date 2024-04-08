@@ -72,7 +72,9 @@ public class TournamentDetailParticipantDto {
   public String toString() {
     return "TournamentDetailParticipantDto{"
         + "horseId=" + horseId
-        + ", name='" + name + '\''
+        + ", name='" + name + "'"
+        + ", round reached=" + roundReached
+        + ", entry number=" + entryNumber
         + '}';
   }
 }
