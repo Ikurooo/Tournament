@@ -6,6 +6,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
+import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
  */
 public interface LinkerService {
 
-  TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings);
+  TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws NotFoundException, ValidationException;
 
   /**
    * Retrieves horse details for the past year.

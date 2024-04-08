@@ -2,12 +2,11 @@ package at.ac.tuwien.sepr.assignment.individual.persistence.impl;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
-import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +36,15 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private static final String INSERT_NEW_TOURNAMENT = "INSERT INTO " + LINKER_TABLE_NAME + " "
       + "(horse_id, tournament_id, round_reached, entry_number) VALUES (?, ?, null, null)";
 
+  private static final String UPDATE_STANDINGS_FOR_HORSE_IN_TOURNAMENT = "UPDATE " + LINKER_TABLE_NAME
+      + " SET round_reached = ?"
+      + " , entry_number = ?"
+      + " WHERE horse_id = ?"
+      + " AND tournament_id = ?";
 
-  // TODO fix that iso date thingy because it is a pain in the ass
-  private static final String FIND_ROUNDS_REACHED_FOR_PAST_YEAR = "SELECT h.name, h.id, l.round_reached"
+
+  // TODO that collection sending thing is wild check if it breaks the thingy somewhere UwU
+  private static final String FIND_ROUNDS_REACHED_FOR_PAST_YEAR = "SELECT h.name, h.id, l.round_reached, l.entry_number"
       + " FROM " + LINKER_TABLE_NAME + " l"
       + " JOIN " + TOURNAMENT_TABLE_NAME + " t ON l.tournament_id = t.id"
       + " JOIN " + HORSE_TABLE_NAME + " h ON l.horse_id = h.id"
@@ -65,10 +70,25 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
     this.jdbcTemplate = jdbcTemplate;
   }
 
+  @Transactional
+  @Override
+  public Collection<TournamentDetailParticipantDto> updateStandings(Collection<TournamentDetailParticipantDto> horses,
+                                                                    long tournamentId) throws FailedToUpdateException {
+    try {
+      horses.forEach(horse -> jdbcTemplate.update(UPDATE_STANDINGS_FOR_HORSE_IN_TOURNAMENT,
+          horse.getRoundReached(), horse.getEntryNumber(), horse.getHorseId(), tournamentId)
+      );
+      return horses;
+    } catch (DataAccessException e) {
+      LOG.error("Failed to update a standings of tournament tournament: {}", e.getMessage());
+      throw new FailedToUpdateException("Failed to update a standings of tournament tournament due to a database error.");
+    }
+  }
+
   @Override
   public Collection<TournamentDetailParticipantDto> getHorseDetailsForPastYear(TournamentDetailParticipantDto horse,
                                                                                LocalDate dateOfCurrentTournament)
-                                                                               throws FailedToRetrieveException {
+      throws FailedToRetrieveException {
     LOG.trace("getHorseDetailsForPastYear({}, {})", horse, dateOfCurrentTournament);
     try {
       var horseId = horse.getHorseId();
@@ -159,6 +179,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
     return new TournamentDetailParticipantDto()
         .setHorseId(result.getLong("id"))
         .setRoundReached(result.getLong("round_reached"))
+        .setEntryNumber(result.getLong("entry_number"))
         .setName(result.getString("name"))
         ;
   }

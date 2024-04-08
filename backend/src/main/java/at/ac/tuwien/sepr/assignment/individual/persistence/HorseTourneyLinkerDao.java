@@ -1,15 +1,11 @@
 package at.ac.tuwien.sepr.assignment.individual.persistence;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
-import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
-import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
-import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
-import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -20,6 +16,10 @@ import java.util.List;
  * Provides methods to create tournaments and retrieve participants for tournaments.
  */
 public interface HorseTourneyLinkerDao {
+
+  // TODO: docs
+  Collection<TournamentDetailParticipantDto> updateStandings(Collection<TournamentDetailParticipantDto> horses,
+                                                             long tournamentId) throws FailedToUpdateException;
 
   /**
    * Retrieves all the rounds reached by a given horse for the past year.

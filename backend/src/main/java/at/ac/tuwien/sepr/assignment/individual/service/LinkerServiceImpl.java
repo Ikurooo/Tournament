@@ -6,7 +6,9 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
+import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.factory.TournamentStandingsTreeFactory;
+import at.ac.tuwien.sepr.assignment.individual.mapper.TournamentMapper;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 import org.slf4j.Logger;
@@ -26,21 +28,33 @@ public class LinkerServiceImpl implements LinkerService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final TournamentDao tournamentDao;
   private final HorseTourneyLinkerDao horseTourneyLinkerDao;
-
-
+  private final StandingsValidator standingsValidator;
+  private final TournamentMapper tournamentMapper;
 
   /**
    * @param tournamentDao         The TournamentDao instance
    * @param horseTourneyLinkerDao The HorseTourneyLinkerDao instance
    */
-  public LinkerServiceImpl(TournamentDao tournamentDao, HorseTourneyLinkerDao horseTourneyLinkerDao) {
+  public LinkerServiceImpl(TournamentDao tournamentDao, HorseTourneyLinkerDao horseTourneyLinkerDao, StandingsValidator standingsValidator,
+                           TournamentMapper tournamentMapper) {
     this.tournamentDao = tournamentDao;
     this.horseTourneyLinkerDao = horseTourneyLinkerDao;
+    this.standingsValidator = standingsValidator;
+    this.tournamentMapper = tournamentMapper;
   }
 
   @Override
-  public TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) {
-    return null;
+  public TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws ValidationException {
+    standingsValidator.validateStandings(standings);
+    var participants = tournamentMapper.standingsToCollection(standings);
+    var updatedParticipants = horseTourneyLinkerDao.updateStandings(participants, id);
+    return new TournamentStandingsDto(
+        standings.id(),
+        standings.name(),
+        standings.startDate(),
+        updatedParticipants.toArray(new TournamentDetailParticipantDto[0]),
+        standings.tree() // TODO: this goofy silly thingy.
+    );
   }
 
   @Override

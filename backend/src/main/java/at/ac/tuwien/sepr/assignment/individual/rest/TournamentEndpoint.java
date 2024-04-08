@@ -46,13 +46,20 @@ public class TournamentEndpoint {
     this.linkerService = linkerService;
   }
 
+  // TODO: docs
   @PutMapping("{id}")
   public TournamentStandingsDto updateTournamentStandings(@PathVariable("id") long id,
-                                        @RequestBody TournamentStandingsDto request) {
+                                                          @RequestBody TournamentStandingsDto request) throws NotFoundException {
     LOG.info("POST " + BASE_PATH + "/{}", id);
     LOG.info("Body of request {}", request.toString());
     // TODO: add exception handling
-    return this.linkerService.updateTournamentStandings(id, request);
+    try {
+      return this.linkerService.updateTournamentStandings(id, request);
+    } catch (ValidationException e) {
+      HttpStatus status = HttpStatus.BAD_REQUEST;
+      logClientError(status, "Validation issue during standings update.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    }
   }
 
   /**
