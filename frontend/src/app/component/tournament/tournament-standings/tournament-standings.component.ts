@@ -78,6 +78,9 @@ export class TournamentStandingsComponent implements OnInit {
       return;
     }
 
+    // If the standings have not yet been saved to the database then on click remove all horses
+    this.ngOnInit();
+
     const req: HorseTournamentHistoryRequest = {
       dateOfCurrentTournament: new Date(this.standings.startDate),
       horses: this.standings.participants

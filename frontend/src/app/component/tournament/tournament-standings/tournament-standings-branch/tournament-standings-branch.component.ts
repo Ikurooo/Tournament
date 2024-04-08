@@ -49,6 +49,5 @@ export class TournamentStandingsBranchComponent {
     return participant
         ? `${participant.name} (${new Date(participant.dateOfBirth).toLocaleDateString()})`
         : "";
-    // TODO: would be nice to add local date string
   }
 }
