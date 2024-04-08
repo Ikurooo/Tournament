@@ -24,4 +24,16 @@ public class TournamentStandingsTreeDto {
   public void setBranches(TournamentStandingsTreeDto[] branches) {
     this.branches = branches;
   }
+
+  @Override
+  public String toString() {
+    String thisParticipantString = (thisParticipant != null) ? thisParticipant.toString() : "null";
+    if (branches == null) {
+      return "";
+    }
+    String leftBranchString = (branches[0] != null) ? branches[0].toString() : "";
+    String rightBranchString = (branches[1] != null) ? branches[1].toString() : "";
+
+    return thisParticipantString + "{" + leftBranchString + "}" + "{" + rightBranchString + "}";
+  }
 }
