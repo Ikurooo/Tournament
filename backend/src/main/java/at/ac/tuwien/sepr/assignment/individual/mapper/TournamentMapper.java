@@ -1,9 +1,16 @@
 package at.ac.tuwien.sepr.assignment.individual.mapper;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
+import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsTreeDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import java.lang.invoke.MethodHandles;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -34,4 +41,43 @@ public class TournamentMapper {
         tournament.getEndDate()
     );
   }
+
+  /**
+   * Converts tournament standings data into a collection of participant details.
+   *
+   * @param standings The tournament standings data.
+   * @return A collection of participant details.
+   */
+  public Collection<TournamentDetailParticipantDto> standingsToCollection(TournamentStandingsDto standings) {
+    Map<Long, TournamentDetailParticipantDto> participants = new HashMap<>();
+    var tree = standings.tree();
+    processTree(tree, participants);
+    return participants.values();
+  }
+
+  /**
+   * Recursively processes the tournament standings tree to populate participant details.
+   *
+   * @param branch The current branch in the standings tree.
+   * @param participants The map to store participant details.
+   */
+  private void processTree(TournamentStandingsTreeDto branch, Map<Long, TournamentDetailParticipantDto> participants) {
+    if (branch == null) {
+      return;
+    }
+
+    if (branch.getThisParticipant() != null && branch.getThisParticipant().getHorseId() != null) {
+      long participantId = branch.getThisParticipant().getHorseId();
+      participants.computeIfAbsent(participantId, id -> branch.getThisParticipant());
+    }
+
+    if (branch.getBranches() == null) {
+      return;
+    }
+
+    for (TournamentStandingsTreeDto child : branch.getBranches()) {
+      processTree(child, participants);
+    }
+  }
+
 }
