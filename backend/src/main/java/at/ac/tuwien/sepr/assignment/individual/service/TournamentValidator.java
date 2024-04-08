@@ -2,8 +2,6 @@ package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.HorseSelectionDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
-import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.global.GlobalConstants;
@@ -56,6 +54,12 @@ public class TournamentValidator {
     context.throwIfErrorsPresent("Validation of tournament for create failed");
   }
 
+  /**
+   * Validates the name of a tournament.
+   *
+   * @param name     The name of the tournament to validate
+   * @param context  The validation context to accumulate errors
+   */
   private void validateName(String name, ValidationContext context) {
     if (name == null || name.isEmpty()) {
       context.addError("Tournament name cannot be empty or null.");
@@ -64,6 +68,13 @@ public class TournamentValidator {
     }
   }
 
+  /**
+   * Validates the start and end dates of a tournament.
+   *
+   * @param startDate  The start date of the tournament
+   * @param endDate    The end date of the tournament
+   * @param context    The validation context to accumulate errors
+   */
   private void validateDates(LocalDate startDate, LocalDate endDate, ValidationContext context) {
     if (startDate == null || endDate == null) {
       context.addError("Start date and end date cannot be null.");
@@ -78,6 +89,12 @@ public class TournamentValidator {
     }
   }
 
+  /**
+   * Validates the participants of a tournament.
+   *
+   * @param tournament  The tournament create DTO containing participants to validate
+   * @param context     The validation context to accumulate errors
+   */
   private void validateParticipants(TournamentCreateDto tournament, ValidationContext context) {
     Set<Long> seenIds = new HashSet<>();
 
@@ -96,6 +113,12 @@ public class TournamentValidator {
     }
   }
 
+  /**
+   * Checks if a horse with the given ID exists.
+   *
+   * @param horse  The horse selection DTO to check for existence
+   * @return True if the horse exists, false otherwise
+   */
   private boolean doesHorseExist(HorseSelectionDto horse) {
     try {
       horseService.getById(horse.id());
@@ -105,13 +128,27 @@ public class TournamentValidator {
     }
   }
 
+  /**
+   * Inner class representing the validation context used for accumulating errors during validation.
+   */
   private static class ValidationContext {
     private final List<String> errors = new ArrayList<>();
 
+    /**
+     * Adds an error message to the list of errors.
+     *
+     * @param errorMessage The error message to add
+     */
     public void addError(String errorMessage) {
       errors.add(errorMessage);
     }
 
+    /**
+     * Throws a ValidationException if errors are present in the context.
+     *
+     * @param exceptionMessage The message to include in the exception if errors are present
+     * @throws ValidationException If errors are present in the context
+     */
     public void throwIfErrorsPresent(String exceptionMessage) throws ValidationException {
       if (!errors.isEmpty()) {
         LOG.warn("Error during tournament validation: {}", errors);

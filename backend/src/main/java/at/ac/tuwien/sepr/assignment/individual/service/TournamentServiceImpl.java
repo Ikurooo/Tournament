@@ -1,11 +1,8 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
-import at.ac.tuwien.sepr.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
@@ -17,7 +14,6 @@ import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 
 import java.lang.invoke.MethodHandles;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;

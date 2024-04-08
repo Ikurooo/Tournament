@@ -17,7 +17,13 @@ import java.util.List;
  */
 public interface HorseTourneyLinkerDao {
 
-  // TODO: docs
+  /**
+   * Updates the standings of a tournament.
+   * @param horses the participants of the given tournament to be updated
+   * @param tournamentId the id of the tournament you wish to update the standings of
+   * @return on success the new standings of the tournament.
+   * @throws FailedToUpdateException if there is a failure in updating the tournament in the persistent data store
+   */
   Collection<TournamentDetailParticipantDto> updateStandings(Collection<TournamentDetailParticipantDto> horses,
                                                              long tournamentId) throws FailedToUpdateException;
 
@@ -26,6 +32,7 @@ public interface HorseTourneyLinkerDao {
    *
    * @param horse the tournament detail participant DTO representing the horse for which past year details are to be retrieved
    * @return a list of tournament detail participant DTOs containing the rounds reached by the horse for the past year
+   * @throws FailedToRetrieveException if there is a failure in retrieving the tournament from the persistent data store
    */
   Collection<TournamentDetailParticipantDto> getHorseDetailsForPastYear(TournamentDetailParticipantDto horse,
                                                                         LocalDate dateOfCurrentTournament)

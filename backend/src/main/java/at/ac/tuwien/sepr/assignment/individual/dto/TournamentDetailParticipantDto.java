@@ -1,5 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 /**
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 public class TournamentDetailParticipantDto {
   private Long horseId;
   private String name;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate dateOfBirth;
   private Long entryNumber;
   private Long roundReached;

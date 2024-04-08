@@ -1,7 +1,9 @@
 package at.ac.tuwien.sepr.assignment.individual.dto;
 
+/**
+ * Data Transfer Object (DTO) representing the standings tree of a tournament.
+ */
 public class TournamentStandingsTreeDto {
-
   private TournamentDetailParticipantDto thisParticipant;
   private TournamentStandingsTreeDto[] branches;
 

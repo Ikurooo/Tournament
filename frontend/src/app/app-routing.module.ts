@@ -28,9 +28,7 @@ const routes: Routes = [
     path: 'tournaments', children: [
       { path: '', component: TournamentComponent },
       { path: 'create', component: TournamentCreateComponent },
-      { path: 'standings/:id', component: TournamentStandingsComponent },
-      // TODO: this is monkey mode
-      { path: 'edit/:id', component: TournamentEditComponent }
+      { path: 'standings/:id', component: TournamentStandingsComponent }
     ]
   },
   { path: '**', redirectTo: 'horses' },

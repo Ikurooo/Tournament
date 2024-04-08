@@ -10,6 +10,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException
 import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseDao;
+import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 
 import java.lang.invoke.MethodHandles;
@@ -32,10 +33,13 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Implementation of the {@link HorseDao} interface using JDBC for data access.
+ * Handles database operations related to horses.
+ */
 @Repository
 public class HorseJdbcDao implements HorseDao {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
   private static final String TABLE_NAME = "horse";
   private static final String SQL_SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
   private static final String SQL_SELECT_SEARCH = "SELECT  "
@@ -49,7 +53,6 @@ public class HorseJdbcDao implements HorseDao {
       + "  AND (:breed IS NULL OR UPPER(b.name) LIKE UPPER('%'||:breed||'%'))";
 
   private static final String SQL_LIMIT_CLAUSE = " LIMIT :limit";
-
   private static final String SQL_UPDATE = "UPDATE " + TABLE_NAME
       + " SET name = ?"
       + "  , sex = ?"

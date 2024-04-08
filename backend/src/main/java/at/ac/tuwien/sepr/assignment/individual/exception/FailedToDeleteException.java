@@ -1,7 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.exception;
 
 /**
- * Exception thrown when a delete operation fails.
+ * Exception thrown when an error occurs while trying to delete an object or perform a delete operation.
  */
 public class FailedToDeleteException extends RuntimeException {
   public FailedToDeleteException(String message) {

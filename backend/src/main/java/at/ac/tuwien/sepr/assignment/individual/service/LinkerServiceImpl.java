@@ -1,10 +1,11 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
-import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequest;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequestDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.factory.TournamentStandingsTreeFactory;
@@ -14,7 +15,6 @@ import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.pattern.PathPattern;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -44,7 +44,7 @@ public class LinkerServiceImpl implements LinkerService {
   }
 
   @Override
-  public TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws ValidationException {
+  public TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws ValidationException, FailedToUpdateException {
     standingsValidator.validateStandings(standings);
     var participants = tournamentMapper.standingsToCollection(standings);
     var updatedParticipants = horseTourneyLinkerDao.updateStandings(participants, id);
@@ -58,7 +58,7 @@ public class LinkerServiceImpl implements LinkerService {
   }
 
   @Override
-  public Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(HorseTournamentHistoryRequest request)
+  public Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(HorseTournamentHistoryRequestDto request)
       throws FailedToRetrieveException {
     LOG.trace("getHorseDetailsForPastYear{{}}", request);
     return request.getHorses().stream().flatMap(horse -> horseTourneyLinkerDao

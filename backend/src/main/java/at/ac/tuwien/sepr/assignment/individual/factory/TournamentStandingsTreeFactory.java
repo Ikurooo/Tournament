@@ -6,6 +6,9 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsTreeDto;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Factory class to construct a tournament standings tree based on participant data.
+ */
 public class TournamentStandingsTreeFactory {
   private final TournamentDetailParticipantDto[] participants;
   private final TournamentStandingsTreeDto tree;
@@ -13,6 +16,11 @@ public class TournamentStandingsTreeFactory {
   private Long participantCounter;
   private final Long participantCount;
 
+  /**
+   * Constructor for TournamentStandingsTreeFactory.
+   *
+   * @param participants Array of tournament participants
+   */
   public TournamentStandingsTreeFactory(TournamentDetailParticipantDto[] participants) {
     this.participants = participants;
     this.tree = new TournamentStandingsTreeDto();
@@ -20,6 +28,11 @@ public class TournamentStandingsTreeFactory {
     this.participantCount = (long) participants.length;
   }
 
+  /**
+   * Builds the tournament standings tree.
+   *
+   * @return The constructed tournament standings tree
+   */
   public TournamentStandingsTreeDto buildTree() {
 
     this.entryMap = new HashMap<>();
@@ -34,6 +47,14 @@ public class TournamentStandingsTreeFactory {
     return this.tree;
   }
 
+  /**
+   * Recursively builds the empty tournament standings tree.
+   * Child function of buildTree().
+   *
+   * @param depth     Current depth of the tree
+   * @param branch    Current branch of the tree
+   * @param maxDepth  Maximum depth of the tree
+   */
   private void buildEmptyTreeRecursively(int depth, TournamentStandingsTreeDto branch, int maxDepth) {
     if (depth >= maxDepth) {
       TournamentDetailParticipantDto participant = this.entryMap.get(this.participantCounter % this.participantCount + 1);

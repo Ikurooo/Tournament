@@ -8,6 +8,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
+import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -27,22 +28,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Implementation of the {@link HorseTourneyLinkerDao} interface using JDBC for data access.
+ * Handles database operations related to both tournaments and horses.
+ */
 @Repository
 public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  private final JdbcTemplate jdbcTemplate;
   private static final String HORSE_TABLE_NAME = "horse";
   private static final String TOURNAMENT_TABLE_NAME = "tournament";
   private static final String LINKER_TABLE_NAME = "horse_tourney_linker";
   private static final String INSERT_NEW_TOURNAMENT = "INSERT INTO " + LINKER_TABLE_NAME + " "
       + "(horse_id, tournament_id, round_reached, entry_number) VALUES (?, ?, null, null)";
-
   private static final String UPDATE_STANDINGS_FOR_HORSE_IN_TOURNAMENT = "UPDATE " + LINKER_TABLE_NAME
       + " SET round_reached = ?"
       + " , entry_number = ?"
       + " WHERE horse_id = ?"
       + " AND tournament_id = ?";
-
-
   // TODO that collection sending thing is wild check if it breaks the thingy somewhere UwU
   private static final String FIND_ROUNDS_REACHED_FOR_PAST_YEAR = "SELECT h.name, h.id, l.round_reached, l.entry_number"
       + " FROM " + LINKER_TABLE_NAME + " l"
@@ -51,19 +54,15 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
       + " WHERE l.horse_id = ?"
       + " AND t.end_date > ?"
       + " AND t.end_date < ?";
-
   private static final String FIND_PARTICIPANTS_BY_TOURNAMENT_ID = "SELECT * "
       + "FROM " + HORSE_TABLE_NAME + " h "
       + "JOIN " + LINKER_TABLE_NAME + " l ON h.id = l.horse_id "
       + "WHERE l.tournament_id = ?";
-
   private static final String FIND_TOURNAMENT_BY_PARTICIPANT_ID =
       "SELECT t.* "
           + "FROM " + TOURNAMENT_TABLE_NAME + " t "
           + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.tournament_id "
           + "WHERE l.horse_id = ?";
-
-  private final JdbcTemplate jdbcTemplate;
 
   public HorseTourneyLinkerJdbcDao(
       JdbcTemplate jdbcTemplate) {

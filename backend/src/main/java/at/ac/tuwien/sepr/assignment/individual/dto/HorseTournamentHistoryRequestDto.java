@@ -1,18 +1,19 @@
 package at.ac.tuwien.sepr.assignment.individual.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public class HorseTournamentHistoryRequest {
+/**
+ * Data Transfer Object (DTO) for requesting horse details in s specific timeframe.
+ */
+public class HorseTournamentHistoryRequestDto {
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate dateOfCurrentTournament;
   private List<TournamentDetailParticipantDto> horses;
 
-  public HorseTournamentHistoryRequest() {
-  }
-
-  public HorseTournamentHistoryRequest(List<TournamentDetailParticipantDto> horses, LocalDate dateOfCurrentTournament) {
-    this.horses = horses;
-    this.dateOfCurrentTournament = dateOfCurrentTournament;
+  public HorseTournamentHistoryRequestDto() {
   }
 
   public LocalDate getDateOfCurrentTournament() {

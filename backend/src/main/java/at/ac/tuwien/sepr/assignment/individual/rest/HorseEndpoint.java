@@ -61,6 +61,7 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error.");
     }
   }
@@ -86,6 +87,7 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error.");
     }
   }
@@ -117,6 +119,7 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error.");
     }
   }
@@ -148,6 +151,7 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error.");
     }
   }
@@ -175,7 +179,7 @@ public class HorseEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Error deleting horse", e);
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Error deleting horse.");
     }
   }

@@ -1,10 +1,11 @@
 package at.ac.tuwien.sepr.assignment.individual.service;
 
-import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequest;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequestDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 
@@ -17,7 +18,18 @@ import java.util.stream.Stream;
  */
 public interface LinkerService {
 
-  TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws NotFoundException, ValidationException;
+  /**
+   * Updates the tournament standings with the provided data.
+   *
+   * @param id         The ID of the tournament to update standings for
+   * @param standings  The updated tournament standings data
+   * @return The updated tournament standings
+   * @throws NotFoundException     If the tournament with the specified ID is not found
+   * @throws ValidationException   If there is an issue with the validation of the standings data
+   * @throws FailedToUpdateException If there is an issue with updating the standings
+   */
+  TournamentStandingsDto updateTournamentStandings(long id, TournamentStandingsDto standings) throws NotFoundException, ValidationException,
+      FailedToUpdateException;
 
   /**
    * Retrieves horse details for the past year.
@@ -27,7 +39,7 @@ public interface LinkerService {
    * @param request a stream of horse details for which past year details need to be retrieved and the date
    * @return a stream of tournament detail participant DTOs containing horse details for the past year
    */
-  Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(HorseTournamentHistoryRequest request)
+  Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(HorseTournamentHistoryRequestDto request)
                                                                     throws FailedToRetrieveException;
 
   /**

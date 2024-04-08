@@ -1,8 +1,7 @@
 package at.ac.tuwien.sepr.assignment.individual.rest;
 
-import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequest;
+import at.ac.tuwien.sepr.assignment.individual.dto.HorseTournamentHistoryRequestDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentCreateDto;
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
@@ -10,6 +9,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
+import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.exception.ValidationException;
 import at.ac.tuwien.sepr.assignment.individual.service.LinkerService;
@@ -46,19 +46,37 @@ public class TournamentEndpoint {
     this.linkerService = linkerService;
   }
 
-  // TODO: docs
+  /**
+   * Controller method to update tournament standings.
+   *
+   * @param id       The ID of the tournament to update standings for
+   * @param request  The request body containing updated tournament standings data
+   * @return The updated tournament standings
+   * @throws ResponseStatusException If there is an error during the update process
+   */
   @PutMapping("{id}")
   public TournamentStandingsDto updateTournamentStandings(@PathVariable("id") long id,
-                                                          @RequestBody TournamentStandingsDto request) throws NotFoundException {
+                                                          @RequestBody TournamentStandingsDto request) {
     LOG.info("POST " + BASE_PATH + "/{}", id);
     LOG.info("Body of request {}", request.toString());
-    // TODO: add exception handling
     try {
       return this.linkerService.updateTournamentStandings(id, request);
     } catch (ValidationException e) {
       HttpStatus status = HttpStatus.BAD_REQUEST;
       logClientError(status, "Validation issue during standings update.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (NotFoundException e) {
+      HttpStatus status = HttpStatus.NOT_FOUND;
+      logClientError(status, "Tournament not found", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch(FailedToUpdateException e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      logClientError(status, "Failed to update standings.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (Exception e) {
+      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.error("{}", e.getMessage());
+      throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
 
@@ -71,7 +89,7 @@ public class TournamentEndpoint {
    */
   @PostMapping ("{id}/generate-first-round")
   public Stream<TournamentDetailParticipantDto> getHorseDetailsForPastYear(@PathVariable("id") long id,
-                                                                           @RequestBody HorseTournamentHistoryRequest request) {
+                                                                           @RequestBody HorseTournamentHistoryRequestDto request) {
     LOG.info("POST " + BASE_PATH + "/{}/generate-first-round", id);
     LOG.info("Body of request {}, Date: {}", request.getHorses().toString(), request.getDateOfCurrentTournament().toString());
     try {
@@ -82,7 +100,7 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.warn("{}", e.getMessage());
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
@@ -109,7 +127,7 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.warn("{}", e.getMessage());
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
@@ -132,6 +150,7 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, "Internal server error.");
     }
   }
@@ -159,7 +178,7 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (Exception e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      logClientError(status, "Internal server error. ", e);
+      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }

@@ -1,6 +1,5 @@
 package at.ac.tuwien.sepr.assignment.individual.mapper;
 
-import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentDetailParticipantDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
@@ -57,6 +56,7 @@ public class TournamentMapper {
 
   /**
    * Recursively processes the tournament standings tree to populate participant details.
+   * Child function of standingsToCollection()
    *
    * @param branch The current branch in the standings tree.
    * @param participants The map to store participant details.
