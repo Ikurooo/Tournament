@@ -74,6 +74,7 @@ public class StandingsValidator {
   }
 
   // TODO: add map to see if the entry numbers / rounds reached are correct or differ in any place; Map<Long, Long>
+  // TODO: sum of hours
 
   private void validateTreeRecursively(int depth, TournamentStandingsTreeDto branch, int maxDepth, ValidationContext context, Map<Long, Long> numbers) {
     LOG.debug("validateTreeRecursively({})", depth);
@@ -118,26 +119,12 @@ public class StandingsValidator {
             && branches.getThisParticipant().getHorseId() != null)
         .forEach(branches -> previous.add(branches.getThisParticipant().getHorseId()));
 
+
     if (branch.getThisParticipant() != null
         && branch.getThisParticipant().getHorseId() != null
         && !previous.contains(branch.getThisParticipant().getHorseId())) {
       context.addError("Horse: " + branch.getThisParticipant().getName()
           + " at depth " + depth + " does not match any of the ones before it.");
-    }
-
-    if (branch.getThisParticipant() != null
-        && branch.getThisParticipant().getHorseId() != null
-        && branch.getThisParticipant().getRoundReached() != null) {
-      var previousVal = numbers.putIfAbsent(branch.getThisParticipant().getHorseId(), branch.getThisParticipant().getRoundReached());
-
-      if (previousVal == null) {
-        previousVal = branch.getThisParticipant().getRoundReached();
-      }
-
-      if (!Objects.equals(previousVal, branch.getThisParticipant().getRoundReached())) {
-        context.addError("Mismatched round reached for horse with id: " + branch.getThisParticipant().getHorseId()
-            + " Previous: " + previousVal + ", Current: " + branch.getThisParticipant().getRoundReached());
-      }
     }
 
     if (branch.getThisParticipant() != null && previous.size() != 2) {

@@ -41,6 +41,7 @@ export class TournamentStandingsComponent implements OnInit {
             this.standings = data;
             this.standings.startDate = new Date(data.startDate);
             this.fillEntryMap();
+            console.log(this.standings.tree);
           },
           error: err => {
             this.notification.error('Error fetching horse details', err);
@@ -206,9 +207,9 @@ export class TournamentStandingsComponent implements OnInit {
     if (participant !== null && participant.entryNumber !== undefined) {
       const entry = this.entryMap.get(participant.entryNumber);
       if (entry && entry.roundReached) {
+        this.entryMap.set(participant.entryNumber, participant);
         participant.roundReached = Math.min(depth, entry.roundReached);
       }
-      this.entryMap.set(participant.entryNumber, participant);
     }
   }
 }
