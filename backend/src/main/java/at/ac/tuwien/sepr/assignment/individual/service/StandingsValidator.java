@@ -129,8 +129,14 @@ public class StandingsValidator {
         && branch.getThisParticipant().getHorseId() != null
         && branch.getThisParticipant().getRoundReached() != null) {
       var previousVal = numbers.putIfAbsent(branch.getThisParticipant().getHorseId(), branch.getThisParticipant().getRoundReached());
+
+      if (previousVal == null) {
+        previousVal = branch.getThisParticipant().getRoundReached();
+      }
+
       if (!Objects.equals(previousVal, branch.getThisParticipant().getRoundReached())) {
-        context.addError("Mismatched round reached for horse with id: " + branch.getThisParticipant().getHorseId());
+        context.addError("Mismatched round reached for horse with id: " + branch.getThisParticipant().getHorseId()
+            + " Previous: " + previousVal + ", Current: " + branch.getThisParticipant().getRoundReached());
       }
     }
 

@@ -5,7 +5,6 @@ import {ToastrService} from "ngx-toastr";
 import {Location} from "@angular/common";
 import {
   HorseTournamentHistoryRequest,
-  TournamentDetailDto,
   TournamentDetailParticipantDto,
   TournamentStandingsDto,
   TournamentStandingsTreeDto
@@ -66,7 +65,8 @@ export class TournamentStandingsComponent implements OnInit {
     },
     error: (err) => {
       console.error("Error updating standings:", err);
-      this.notification.error("Failed to update standings.");
+      this.notification.error("Failed to update standings.", this.errorFormatter.format(err));
+      this.ngOnInit() // TODO temp
     }
   });
   }
