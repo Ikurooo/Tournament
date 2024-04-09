@@ -185,9 +185,10 @@ export class HorseCreateEditComponent implements OnInit {
           this.router.navigate(['/horses']);
         },
         error: err => {
-          const errorMessage = this.errorFormatter.logError(err);
-          this.notification.error("Failure", errorMessage);
-          this.notification.error("Failure", errorMessage);
+          this.notification.error(this.errorFormatter.format(err), "Could Not Generate First Round", {
+            enableHtml: true,
+            timeOut: 10000,
+          });
         }
       });
     }
