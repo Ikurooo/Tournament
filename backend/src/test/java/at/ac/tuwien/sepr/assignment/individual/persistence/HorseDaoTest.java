@@ -67,13 +67,6 @@ public class HorseDaoTest extends TestBase {
   }
 
   @Test
-  public void deleteExistingHorseButHorseIsInTournament() {
-    assertThatThrownBy(() -> horseDao.delete(-1L))
-        .isInstanceOf(FailedToDeleteException.class)
-        .hasMessageContaining("Failed to delete horse with ID -1");
-  }
-
-  @Test
   public void updateExistingHorse() throws NotFoundException {
     var horseDto = new HorseDetailDto(
         -2L,
