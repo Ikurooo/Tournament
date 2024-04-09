@@ -78,8 +78,4 @@ export class TournamentComponent implements OnInit {
   searchChanged(): void {
     this.searchChangedObservable.next();
   }
-
-  onDelete(s: string) {
-
-  }
 }

@@ -61,8 +61,10 @@ export class HorseInfoComponent implements OnInit {
           }
         },
         error: (err) => {
-          const errorMessage = this.errorFormatter.logError(err);
-          this.notification.error("Failure", errorMessage);
+          this.notification.error(this.errorFormatter.format(err), "Failure.", {
+            enableHtml: true,
+            timeOut: 10000,
+          });
         }
       });
     }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {Location} from "@angular/common";
 import {
@@ -28,6 +28,7 @@ export class TournamentStandingsComponent implements OnInit {
     private errorFormatter: ErrorFormatterService,
     private route: ActivatedRoute,
     private notification: ToastrService,
+    private router: Router,
     private location: Location
   ) {
   }
@@ -43,8 +44,10 @@ export class TournamentStandingsComponent implements OnInit {
             this.fillEntryMap();
           },
           error: err => {
-            const errorMessage = this.errorFormatter.logError(err);
-            this.notification.error("Failure", errorMessage);
+            this.notification.error(this.errorFormatter.format(err), "Failure.", {
+              enableHtml: true,
+              timeOut: 10000,
+            });
           }
         });
       }
@@ -62,7 +65,7 @@ export class TournamentStandingsComponent implements OnInit {
       next: data => {
         this.standings = data;
         this.notification.success("Update successful.");
-        this.ngOnInit();
+        this.router.navigate(['horses', 'deletion-successful']);
       },
       error: (err) => {
         this.notification.error(this.errorFormatter.format(err), "Failed To Update", {
