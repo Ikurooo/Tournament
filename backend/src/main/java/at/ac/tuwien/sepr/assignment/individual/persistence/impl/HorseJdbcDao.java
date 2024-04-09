@@ -107,7 +107,7 @@ public class HorseJdbcDao implements HorseDao {
       if (horse.breed() != null) {
         ps.setLong(6, horse.breed().id());
       } else {
-        ps.setNull(6, Types.BIGINT); // Assuming breed_id column is of type BIGINT in your database
+        ps.setNull(6, Types.BIGINT);
       }
       return ps;
     }, keyHolder);
