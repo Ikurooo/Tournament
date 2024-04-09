@@ -103,6 +103,10 @@ public class HorseEndpoint {
       HttpStatus status = HttpStatus.CONFLICT;
       logClientError(status, "Conflict issue during creation.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch (ValidationException e) {
+      HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+      logClientError(status, "Failed to validate horse.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToUpdateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);

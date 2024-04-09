@@ -55,7 +55,7 @@ public class TournamentServiceImpl implements TournamentService {
 
   @Override
   public Tournament create(TournamentCreateDto tournament)
-      throws ValidationException, ConflictException, NotFoundException, FailedToCreateException {
+      throws ValidationException, ConflictException, FailedToCreateException {
     LOG.trace("create({})", tournament);
     validator.validateForCreate(tournament);
     return horseTourneyLinkerDao.create(tournament);

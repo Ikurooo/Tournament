@@ -7,6 +7,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentListDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentSearchDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
+import at.ac.tuwien.sepr.assignment.individual.exception.ConflictException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToCreateException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveException;
 import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException;
@@ -152,6 +153,10 @@ public class TournamentEndpoint {
     } catch (ValidationException e) {
       HttpStatus status = HttpStatus.BAD_REQUEST;
       logClientError(status, "Validation issue during creation.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
+    } catch(ConflictException e) {
+      HttpStatus status = HttpStatus.BAD_REQUEST;
+      logClientError(status, "Conflict occurred.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToCreateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
