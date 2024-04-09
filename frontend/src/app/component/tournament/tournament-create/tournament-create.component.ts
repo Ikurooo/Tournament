@@ -9,6 +9,7 @@ import {HorseSelection} from "../../../dto/horse";
 import {map, Observable} from "rxjs";
 import {HorseService} from "../../../service/horse.service";
 import {Location} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tournament-create',
@@ -60,6 +61,7 @@ export class TournamentCreateComponent {
     private horseService: HorseService,
     private notification: ToastrService,
     private errorFormatter: ErrorFormatterService,
+    private router: Router,
     private location: Location,
   ) {
   }
@@ -82,6 +84,7 @@ export class TournamentCreateComponent {
       .subscribe({
         next: data => {
           this.notification.success(`Tournament ${this.tournament.name} created`, "Tournament created successfully");
+          this.router.navigate(['tournaments']);
         },
         error: error => {
           console.error(error.message, error);

@@ -41,7 +41,6 @@ export class TournamentStandingsComponent implements OnInit {
             this.standings = data;
             this.standings.startDate = new Date(data.startDate);
             this.fillEntryMap();
-            console.log(this.standings.tree);
           },
           error: err => {
             const errorMessage = this.errorFormatter.logError(err);
@@ -64,6 +63,7 @@ export class TournamentStandingsComponent implements OnInit {
       next: data => {
         this.standings = data;
         this.notification.success("Update successful.");
+        this.ngOnInit();
       },
       error: (err) => {
         this.notification.error(this.errorFormatter.format(err), "Failed To Update", {
@@ -185,6 +185,7 @@ export class TournamentStandingsComponent implements OnInit {
       return;
     }
 
+    this.entryMap = new Map<number, TournamentDetailParticipantDto>();
     this.participantCounter = 0;
     const maxDepth = Math.ceil(Math.log2(this.standings.participants.length)) + 1;
     this.updateTreeRecursively(1, tree, maxDepth);
