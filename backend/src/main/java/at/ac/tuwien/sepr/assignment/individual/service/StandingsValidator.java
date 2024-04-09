@@ -87,7 +87,6 @@ public class StandingsValidator {
       }
 
       if (branch.getThisParticipant() == null || branch.getThisParticipant().getEntryNumber() == null) {
-        // TODO uwu
         return;
       }
 

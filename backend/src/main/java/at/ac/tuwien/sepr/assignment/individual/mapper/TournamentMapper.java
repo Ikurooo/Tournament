@@ -6,6 +6,7 @@ import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsDto;
 import at.ac.tuwien.sepr.assignment.individual.dto.TournamentStandingsTreeDto;
 import at.ac.tuwien.sepr.assignment.individual.entity.Tournament;
 import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +53,12 @@ public class TournamentMapper {
     Map<Long, TournamentDetailParticipantDto> participants = new HashMap<>();
     var tree = standings.tree();
     processTree(tree, participants);
+    Arrays.stream(standings.participants())
+        .filter(participant -> !participants.containsKey(participant.getHorseId()))
+        .forEach(participant -> {
+          participant.setRoundReached(0L).setEntryNumber(0L);
+          participants.put(participant.getHorseId(), participant);
+        });
     return participants.values();
   }
 
