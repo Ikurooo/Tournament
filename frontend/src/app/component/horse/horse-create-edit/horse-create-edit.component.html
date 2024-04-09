@@ -45,7 +45,7 @@
                  placeholder="yyyy-mm-dd"
                  class="form-control"
                  [class]="dynamicCssClassesForInput(horseDateOfBirthModel)"
-                 [(ngModel)]="horse.dateOfBirth"
+                 [(ngModel)]="dateOfBirth"
                  #horseDateOfBirthModel="ngModel"
                  required
                  >
@@ -175,7 +175,6 @@
     <span class="flex-grow-1"></span>
     <button type="submit"
             class="btn btn-primary"
-            [disabled]="!form.valid"
     >
       {{submitButtonText}}
     </button>

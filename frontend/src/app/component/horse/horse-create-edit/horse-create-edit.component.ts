@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Observable, of } from 'rxjs';
-import { Horse } from 'src/app/dto/horse';
-import { Sex } from 'src/app/dto/sex';
-import { HorseService } from 'src/app/service/horse.service';
-import { Breed } from "../../../dto/breed";
-import { BreedService } from "../../../service/breed.service";
-import { DeletionResponseDto } from "../../../dto/deletion-response";
+import {Component, OnInit} from '@angular/core';
+import {NgForm, NgModel} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Observable, of} from 'rxjs';
+import {Horse} from 'src/app/dto/horse';
+import {Sex} from 'src/app/dto/sex';
+import {HorseService} from 'src/app/service/horse.service';
+import {Breed} from "../../../dto/breed";
+import {BreedService} from "../../../service/breed.service";
+import {DeletionResponseDto} from "../../../dto/deletion-response";
 import {ErrorFormatterService} from "../../../service/error-formatter.service";
 
 export enum HorseCreateEditMode {
@@ -109,9 +109,12 @@ export class HorseCreateEditComponent implements OnInit {
 
   get sex(): string {
     switch (this.horse.sex) {
-      case Sex.male: return 'Male';
-      case Sex.female: return 'Female';
-      default: return '';
+      case Sex.male:
+        return 'Male';
+      case Sex.female:
+        return 'Female';
+      default:
+        return '';
     }
   }
 
@@ -137,7 +140,7 @@ export class HorseCreateEditComponent implements OnInit {
             this.service.getById(this.horseId).subscribe({
               next: data => {
                 this.horse = data;
-                this.horse.dateOfBirth = new Date(data.dateOfBirth);
+                this.dateOfBirthSet = true;
               },
               error: err => {
                 this.notification.error(this.errorFormatter.format(err), "Failure.", {
@@ -168,32 +171,32 @@ export class HorseCreateEditComponent implements OnInit {
 
   public onSubmit(form: NgForm): void {
     console.log('is form valid?', form.valid, this.horse);
-    if (form.valid) {
-      let observable: Observable<Horse>;
-      switch (this.mode) {
-        case HorseCreateEditMode.create:
-          observable = this.service.create(this.horse);
-          break;
-        case HorseCreateEditMode.edit:
-          observable = this.service.update(this.horse);
-          break;
-        default:
-          console.error('Unknown HorseCreateEditMode', this.mode);
-          return;
-      }
-      observable.subscribe({
-        next: data => {
-          this.notification.success(`Horse ${this.horse.name} successfully ${this.modeActionFinished}.`);
-          this.router.navigate(['/horses']);
-        },
-        error: err => {
-          this.notification.error(this.errorFormatter.format(err), "Could Not Generate First Round", {
-            enableHtml: true,
-            timeOut: 10000,
-          });
-        }
-      });
+
+    let observable: Observable<Horse>;
+    switch (this.mode) {
+      case HorseCreateEditMode.create:
+        observable = this.service.create(this.horse);
+        break;
+      case HorseCreateEditMode.edit:
+        observable = this.service.update(this.horse);
+        break;
+      default:
+        console.error('Unknown HorseCreateEditMode', this.mode);
+        return;
     }
+    observable.subscribe({
+      next: data => {
+        this.notification.success(`Horse ${this.horse.name} successfully ${this.modeActionFinished}.`);
+        this.router.navigate(['/horses']);
+      },
+      error: err => {
+        this.notification.error(this.errorFormatter.format(err), "Could Not Generate First Round", {
+          enableHtml: true,
+          timeOut: 10000,
+        });
+      }
+    });
+
   }
 
   onDelete() {
@@ -203,7 +206,7 @@ export class HorseCreateEditComponent implements OnInit {
         next: (response: DeletionResponseDto) => {
           if (response.success) {
             console.log('Horse deleted successfully');
-            this.router.navigate(['horses','deletion-successful']);
+            this.router.navigate(['horses', 'deletion-successful']);
           } else {
             console.error('Error deleting horse:', response.message);
             // Handle the error message or navigate as needed
