@@ -106,7 +106,7 @@ public class HorseServiceImpl implements HorseService {
   }
 
   private Map<Long, BreedDto> breedMapForSingleHorse(Horse horse) {
-    return breedMapForHorses(Collections.singleton(horse.getBreedId()));
+    return horse.getBreedId() != null ? breedMapForHorses(Collections.singleton(horse.getBreedId())) : null;
   }
 
   private Map<Long, BreedDto> breedMapForHorses(Set<Long> horse) {

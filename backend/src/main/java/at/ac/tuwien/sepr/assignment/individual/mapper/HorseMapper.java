@@ -54,6 +54,8 @@ public class HorseMapper {
       return null;
     }
 
+    var breed = horse.getBreedId() != null ? breedFromMap(horse, breeds) : null;
+
     return new HorseDetailDto(
         horse.getId(),
         horse.getName(),
@@ -61,7 +63,7 @@ public class HorseMapper {
         horse.getDateOfBirth(),
         horse.getHeight(),
         horse.getWeight(),
-        breedFromMap(horse, breeds)
+        breed
     );
   }
 

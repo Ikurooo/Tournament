@@ -104,7 +104,11 @@ public class HorseJdbcDao implements HorseDao {
       ps.setDate(3, java.sql.Date.valueOf(horse.dateOfBirth()));
       ps.setDouble(4, horse.height());
       ps.setDouble(5, horse.weight());
-      ps.setLong(6, horse.breed().id());
+      if (horse.breed() != null) {
+        ps.setLong(6, horse.breed().id());
+      } else {
+        ps.setNull(6, Types.BIGINT); // Assuming breed_id column is of type BIGINT in your database
+      }
       return ps;
     }, keyHolder);
 
@@ -115,6 +119,8 @@ public class HorseJdbcDao implements HorseDao {
 
     long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
 
+    var breed = horse.breed() != null ? horse.breed().id() : null;
+
     return new Horse()
         .setId(generatedId)
         .setName(horse.name())
@@ -122,7 +128,7 @@ public class HorseJdbcDao implements HorseDao {
         .setDateOfBirth(horse.dateOfBirth())
         .setHeight(horse.height())
         .setWeight(horse.weight())
-        .setBreedId(horse.breed().id());
+        .setBreedId(breed);
 
   }
 
@@ -135,8 +141,6 @@ public class HorseJdbcDao implements HorseDao {
       LOG.warn("Failed to delete horse because horse with ID: {} does not exist", id);
       throw new NotFoundException("No horse with ID %d found for deletion".formatted(id));
     }
-
-
   }
 
 
@@ -157,13 +161,16 @@ public class HorseJdbcDao implements HorseDao {
   @Override
   public Horse update(HorseDetailDto horse) throws NotFoundException, FailedToUpdateException {
     LOG.trace("update({})", horse);
+
+    var breed = horse.breed() != null ? horse.breed().id() : null;
+
     int updated = jdbcTemplate.update(SQL_UPDATE,
         horse.name(),
         horse.sex().toString(),
         horse.dateOfBirth(),
         horse.height(),
         horse.weight(),
-        horse.breed().id(),
+        breed,
         horse.id());
     if (updated == 0) {
       LOG.warn("Failed to update horse with ID {} because it does not exist", horse.id());
@@ -177,7 +184,7 @@ public class HorseJdbcDao implements HorseDao {
         .setDateOfBirth(horse.dateOfBirth())
         .setHeight(horse.height())
         .setWeight(horse.weight())
-        .setBreedId(horse.breed().id());
+        .setBreedId(breed);
 
   }
 
