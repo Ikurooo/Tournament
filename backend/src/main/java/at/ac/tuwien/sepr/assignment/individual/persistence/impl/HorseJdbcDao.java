@@ -10,7 +10,6 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToUpdateException
 import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.HorseDao;
-import at.ac.tuwien.sepr.assignment.individual.persistence.HorseTourneyLinkerDao;
 import at.ac.tuwien.sepr.assignment.individual.type.Sex;
 
 import java.lang.invoke.MethodHandles;
@@ -25,7 +24,6 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
