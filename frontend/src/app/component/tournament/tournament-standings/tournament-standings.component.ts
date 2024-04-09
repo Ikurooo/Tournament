@@ -57,7 +57,6 @@ export class TournamentStandingsComponent implements OnInit {
       this.notification.warning("There's nothing to submit.");
       return;
     }
-    console.log(this.standings.tree);
 
     this.service.update(this.standings, this.standings.id.toString()).subscribe({
       next: data => {
