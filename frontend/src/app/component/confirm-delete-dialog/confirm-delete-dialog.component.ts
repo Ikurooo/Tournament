@@ -16,12 +16,4 @@ export class ConfirmDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  confirmDeletion() {
-    this.confirm.emit(); // Emit the confirm event
-  }
-
-  cancelDeletion() {
-    // Optionally, handle any cancel logic here
-  }
 }
