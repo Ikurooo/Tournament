@@ -58,10 +58,6 @@ public class HorseEndpoint {
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error.");
     }
   }
 
@@ -83,10 +79,6 @@ public class HorseEndpoint {
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error.");
     }
   }
 
@@ -114,10 +106,6 @@ public class HorseEndpoint {
     } catch (FailedToUpdateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error.");
     }
   }
 
@@ -145,10 +133,6 @@ public class HorseEndpoint {
     } catch (FailedToCreateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error.");
     }
   }
 
@@ -172,10 +156,10 @@ public class HorseEndpoint {
     } catch (FailedToDeleteException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Error deleting horse.");
+    } catch (ValidationException e) {
+      HttpStatus status = HttpStatus.NOT_FOUND;
+      logClientError(status, "Horse already in tournament.", e);
+      throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
 

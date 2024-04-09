@@ -73,10 +73,6 @@ public class TournamentEndpoint {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       logClientError(status, "Failed to update standings.", e);
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
 
@@ -97,10 +93,6 @@ public class TournamentEndpoint {
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
 
@@ -123,10 +115,6 @@ public class TournamentEndpoint {
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error." + e.getMessage());
     }
   }
 
@@ -145,10 +133,6 @@ public class TournamentEndpoint {
     } catch (FailedToRetrieveException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
       throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
-      throw new ResponseStatusException(status, "Internal server error.");
     }
   }
 
@@ -171,10 +155,6 @@ public class TournamentEndpoint {
       throw new ResponseStatusException(status, e.getMessage(), e);
     } catch (FailedToCreateException e) {
       HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      throw new ResponseStatusException(status, e.getMessage(), e);
-    } catch (Exception e) {
-      HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-      LOG.error("{}", e.getMessage());
       throw new ResponseStatusException(status, e.getMessage(), e);
     }
   }
