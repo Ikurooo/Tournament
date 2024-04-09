@@ -140,8 +140,10 @@ export class HorseCreateEditComponent implements OnInit {
                 this.horse.dateOfBirth = new Date(data.dateOfBirth);
               },
               error: err => {
-                const errorMessage = this.errorFormatter.logError(err);
-                this.notification.error("Failure", errorMessage);
+                this.notification.error(this.errorFormatter.format(err), "Failure.", {
+                  enableHtml: true,
+                  timeOut: 10000,
+                });
               }
             });
           }
@@ -209,8 +211,10 @@ export class HorseCreateEditComponent implements OnInit {
           }
         },
         error: err => {
-          const errorMessage = this.errorFormatter.logError(err);
-          this.notification.error("Failure", errorMessage);
+          this.notification.error(this.errorFormatter.format(err), "Failure", {
+            enableHtml: true,
+            timeOut: 10000,
+          });
           this.router.navigate(['horses', 'deletion-failed']);
         }
       });
