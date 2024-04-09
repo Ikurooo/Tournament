@@ -75,24 +75,20 @@ public class HorseJdbcDao implements HorseDao {
   @Override
   public Horse getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("getById({})", id);
-    try {
-      List<Horse> horses = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
+    List<Horse> horses = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
-      if (horses.isEmpty()) {
-        LOG.warn("Horse with ID {} does not exist", id);
-        throw new NotFoundException("No horse with ID %d found".formatted(id));
-      }
-
-      if (horses.size() > 1) {
-        LOG.error("Multiple horses with ID: {} found", id);
-        throw new FatalException("Too many horses with ID %d found".formatted(id));
-      }
-
-      return horses.getFirst();
-    } catch (DataAccessException e) {
-      LOG.error("Failed to retrieve horse with ID {}: {}", id, e.getMessage());
-      throw new FailedToRetrieveException("Failed to retrieve horse with ID " + id, e);
+    if (horses.isEmpty()) {
+      LOG.warn("Horse with ID {} does not exist", id);
+      throw new NotFoundException("No horse with ID %d found".formatted(id));
     }
+
+    if (horses.size() > 1) {
+      LOG.error("Multiple horses with ID: {} found", id);
+      throw new FatalException("Too many horses with ID %d found".formatted(id));
+    }
+
+    return horses.getFirst();
+
   }
 
   @Override
@@ -100,107 +96,91 @@ public class HorseJdbcDao implements HorseDao {
     LOG.trace("create({})", horse);
     KeyHolder keyHolder = new GeneratedKeyHolder();
 
-    try {
-      int update = jdbcTemplate.update(connection -> {
-        PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE_NAME
-                + " (name, sex, date_of_birth, height, weight, breed_id)"
-                + " VALUES (?, ?, ?, ?, ?, ?)",
-            Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, horse.name());
-        ps.setString(2, horse.sex().toString());
-        ps.setDate(3, java.sql.Date.valueOf(horse.dateOfBirth()));
-        ps.setDouble(4, horse.height());
-        ps.setDouble(5, horse.weight());
-        ps.setLong(6, horse.breed().id());
-        return ps;
-      }, keyHolder);
+    int update = jdbcTemplate.update(connection -> {
+      PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE_NAME
+              + " (name, sex, date_of_birth, height, weight, breed_id)"
+              + " VALUES (?, ?, ?, ?, ?, ?)",
+          Statement.RETURN_GENERATED_KEYS);
+      ps.setString(1, horse.name());
+      ps.setString(2, horse.sex().toString());
+      ps.setDate(3, java.sql.Date.valueOf(horse.dateOfBirth()));
+      ps.setDouble(4, horse.height());
+      ps.setDouble(5, horse.weight());
+      ps.setLong(6, horse.breed().id());
+      return ps;
+    }, keyHolder);
 
-      if (update != 1) {
-        LOG.warn("Failed to insert a new horse. Rows affected: {}", update);
-        throw new FailedToCreateException("Failed to insert a new horse.");
-      }
-
-      long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
-
-      return new Horse()
-          .setId(generatedId)
-          .setName(horse.name())
-          .setSex(horse.sex())
-          .setDateOfBirth(horse.dateOfBirth())
-          .setHeight(horse.height())
-          .setWeight(horse.weight())
-          .setBreedId(horse.breed().id());
-    } catch (DataAccessException e) {
-      LOG.error("Failed to create a new horse: {} {}", horse, e.getMessage());
-      throw new FailedToCreateException("Failed to create a new horse.", e);
+    if (update != 1) {
+      LOG.warn("Failed to insert a new horse. Rows affected: {}", update);
+      throw new FailedToCreateException("Failed to insert a new horse.");
     }
+
+    long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
+
+    return new Horse()
+        .setId(generatedId)
+        .setName(horse.name())
+        .setSex(horse.sex())
+        .setDateOfBirth(horse.dateOfBirth())
+        .setHeight(horse.height())
+        .setWeight(horse.weight())
+        .setBreedId(horse.breed().id());
+
   }
 
   @Override
   public void delete(long id) throws NotFoundException, FailedToDeleteException {
     LOG.trace("delete({})", id);
-    try {
-      int deleted = jdbcTemplate.update("DELETE FROM " + TABLE_NAME + " WHERE id = ?", id);
+    int deleted = jdbcTemplate.update("DELETE FROM " + TABLE_NAME + " WHERE id = ?", id);
 
-      if (deleted == 0) {
-        LOG.warn("Failed to delete horse because horse with ID: {} does not exist", id);
-        throw new NotFoundException("No horse with ID %d found for deletion".formatted(id));
-      }
-
-    } catch (DataAccessException e) {
-      LOG.error("Failed to delete horse with ID {}: {}", id, e.getMessage());
-      throw new FailedToDeleteException("Failed to delete horse with ID " + id, e);
+    if (deleted == 0) {
+      LOG.warn("Failed to delete horse because horse with ID: {} does not exist", id);
+      throw new NotFoundException("No horse with ID %d found for deletion".formatted(id));
     }
+
+
   }
 
 
   @Override
   public Collection<Horse> search(HorseSearchDto searchParameters) throws FailedToRetrieveException {
     LOG.trace("search({})", searchParameters);
-    try {
-      String query = SQL_SELECT_SEARCH;
-      if (searchParameters.limit() != null) {
-        query += SQL_LIMIT_CLAUSE;
-      }
-      BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(searchParameters);
-      params.registerSqlType("sex", Types.VARCHAR);
-
-      return jdbcNamed.query(query, params, this::mapRow);
-    } catch (DataAccessException e) {
-      LOG.error("Failed to search horses with parameters: {} {}", searchParameters, e.getMessage());
-      throw new FailedToRetrieveException("Failed to search horses", e);
+    String query = SQL_SELECT_SEARCH;
+    if (searchParameters.limit() != null) {
+      query += SQL_LIMIT_CLAUSE;
     }
+    BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(searchParameters);
+    params.registerSqlType("sex", Types.VARCHAR);
+
+    return jdbcNamed.query(query, params, this::mapRow);
+
   }
 
   @Override
   public Horse update(HorseDetailDto horse) throws NotFoundException, FailedToUpdateException {
     LOG.trace("update({})", horse);
-    try {
-      int updated = jdbcTemplate.update(SQL_UPDATE,
-          horse.name(),
-          horse.sex().toString(),
-          horse.dateOfBirth(),
-          horse.height(),
-          horse.weight(),
-          horse.breed().id(),
-          horse.id());
-      if (updated == 0) {
-        LOG.warn("Failed to update horse with ID {} because it does not exist", horse.id());
-        throw new NotFoundException("Could not update horse with ID " + horse.id() + ", because it does not exist");
-      }
-
-      return new Horse()
-          .setId(horse.id())
-          .setName(horse.name())
-          .setSex(horse.sex())
-          .setDateOfBirth(horse.dateOfBirth())
-          .setHeight(horse.height())
-          .setWeight(horse.weight())
-          .setBreedId(horse.breed().id());
-    } catch (DataAccessException e) {
-      LOG.error("Failed to update horse with ID {}: {}", horse.id(), e.getMessage());
-      throw new FailedToUpdateException("Failed to update horse with ID " + horse.id(), e);
+    int updated = jdbcTemplate.update(SQL_UPDATE,
+        horse.name(),
+        horse.sex().toString(),
+        horse.dateOfBirth(),
+        horse.height(),
+        horse.weight(),
+        horse.breed().id(),
+        horse.id());
+    if (updated == 0) {
+      LOG.warn("Failed to update horse with ID {} because it does not exist", horse.id());
+      throw new NotFoundException("Could not update horse with ID " + horse.id() + ", because it does not exist");
     }
+
+    return new Horse()
+        .setId(horse.id())
+        .setName(horse.name())
+        .setSex(horse.sex())
+        .setDateOfBirth(horse.dateOfBirth())
+        .setHeight(horse.height())
+        .setWeight(horse.weight())
+        .setBreedId(horse.breed().id());
+
   }
 
 

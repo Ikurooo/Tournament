@@ -47,38 +47,24 @@ public class BreedJdbcDao implements BreedDao {
   @Override
   public Collection<Breed> allBreeds() {
     LOG.trace("allBreeds()");
-    try {
-      return jdbcTemplate.query(SQL_ALL, this::mapRow);
-    } catch (DataAccessException ex) {
-      LOG.error("Error occurred while collecting breeds: {}", ex.getMessage());
-      throw new FailedToRetrieveException("Failed to collect breeds");
-    }
+    return jdbcTemplate.query(SQL_ALL, this::mapRow);
   }
 
   @Override
   public Collection<Breed> findBreedsById(Set<Long> breedIds) {
     LOG.trace("findBreedsById({})", breedIds);
-    try {
-      return jdbcTemplate.query(SQL_FIND_BY_IDS, Map.of("ids", breedIds), this::mapRow);
-    } catch (DataAccessException ex) {
-      LOG.error("Error occurred while finding breeds by IDs: {} {}", breedIds, ex.getMessage());
-      throw new FailedToRetrieveException("Failed to retrieve breeds: " + breedIds.toString());
-    }
+    return jdbcTemplate.query(SQL_FIND_BY_IDS, Map.of("ids", breedIds), this::mapRow);
   }
 
   @Override
   public Collection<Breed> search(BreedSearchDto searchParams) {
     LOG.trace("search({})", searchParams);
-    try {
-      String query = SQL_SEARCH;
-      if (searchParams.limit() != null) {
-        query += SQL_LIMIT_CLAUSE;
-      }
-      return jdbcTemplate.query(query, new BeanPropertySqlParameterSource(searchParams), this::mapRow);
-    } catch (DataAccessException ex) {
-      LOG.error("Error occurred while searching for breeds with parameters: {} {}", searchParams, ex.getMessage());
-      throw new FailedToRetrieveException("Failed to retrieve breeds with parameters: " + searchParams.toString());
+    String query = SQL_SEARCH;
+    if (searchParams.limit() != null) {
+      query += SQL_LIMIT_CLAUSE;
     }
+    return jdbcTemplate.query(query, new BeanPropertySqlParameterSource(searchParams), this::mapRow);
+
   }
 
   private Breed mapRow(ResultSet resultSet, int i) throws SQLException {

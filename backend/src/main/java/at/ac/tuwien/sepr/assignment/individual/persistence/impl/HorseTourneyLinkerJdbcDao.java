@@ -35,7 +35,6 @@ import java.util.Objects;
 @Repository
 public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private final JdbcTemplate jdbcTemplate;
   private static final String HORSE_TABLE_NAME = "horse";
   private static final String TOURNAMENT_TABLE_NAME = "tournament";
   private static final String LINKER_TABLE_NAME = "horse_tourney_linker";
@@ -63,6 +62,7 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
           + "FROM " + TOURNAMENT_TABLE_NAME + " t "
           + "JOIN " + LINKER_TABLE_NAME + " l ON t.id = l.tournament_id "
           + "WHERE l.horse_id = ?";
+  private final JdbcTemplate jdbcTemplate;
 
   public HorseTourneyLinkerJdbcDao(
       JdbcTemplate jdbcTemplate) {
@@ -108,69 +108,54 @@ public class HorseTourneyLinkerJdbcDao implements HorseTourneyLinkerDao {
   @Override
   public Tournament create(TournamentCreateDto tournament) throws FailedToCreateException {
     LOG.trace("create({})", tournament);
-    try {
-      KeyHolder keyHolder = new GeneratedKeyHolder();
+    KeyHolder keyHolder = new GeneratedKeyHolder();
 
-      int rowsAffectedTournament = jdbcTemplate.update(connection -> {
-        PreparedStatement ps = connection.prepareStatement(
-            "INSERT INTO " + TOURNAMENT_TABLE_NAME + " (name, start_date, end_date) VALUES (?, ?, ?)",
-            Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, tournament.name());
-        ps.setDate(2, java.sql.Date.valueOf(tournament.startDate()));
-        ps.setDate(3, java.sql.Date.valueOf(tournament.endDate()));
-        return ps;
-      }, keyHolder);
+    int rowsAffectedTournament = jdbcTemplate.update(connection -> {
+      PreparedStatement ps = connection.prepareStatement(
+          "INSERT INTO " + TOURNAMENT_TABLE_NAME + " (name, start_date, end_date) VALUES (?, ?, ?)",
+          Statement.RETURN_GENERATED_KEYS);
+      ps.setString(1, tournament.name());
+      ps.setDate(2, java.sql.Date.valueOf(tournament.startDate()));
+      ps.setDate(3, java.sql.Date.valueOf(tournament.endDate()));
+      return ps;
+    }, keyHolder);
 
-      if (rowsAffectedTournament != 1) {
-        LOG.error("Failed to insert a new tournament. Number of rows affected: {}", rowsAffectedTournament);
-        throw new FailedToCreateException("Failed to create a new tournament. No records were inserted.");
-      }
-
-      long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
-
-      for (HorseSelectionDto horse : tournament.participants()) {
-        LOG.debug("Horse Details: {}", horse);
-        int rowsAffectedLinker = jdbcTemplate.update(INSERT_NEW_TOURNAMENT, horse.id(), generatedId);
-
-        if (rowsAffectedLinker < 1) {
-          String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.id(), generatedId);
-          throw new FailedToCreateException(errorMessage);
-
-        }
-      }
-      return new Tournament()
-          .setId(generatedId)
-          .setName(tournament.name())
-          .setStartDate(tournament.startDate())
-          .setEndDate(tournament.endDate())
-          .setParticipants(tournament.participants());
-
-    } catch (DataAccessException e) {
-      LOG.error("Failed to insert a new tournament: {}", e.getMessage());
-      throw new FailedToCreateException("Failed to create a new tournament due to a database error." + e.getMessage());
+    if (rowsAffectedTournament != 1) {
+      LOG.error("Failed to insert a new tournament. Number of rows affected: {}", rowsAffectedTournament);
+      throw new FailedToCreateException("Failed to create a new tournament. No records were inserted.");
     }
+
+    long generatedId = Objects.requireNonNull(keyHolder.getKey()).longValue();
+
+    for (HorseSelectionDto horse : tournament.participants()) {
+      LOG.debug("Horse Details: {}", horse);
+      int rowsAffectedLinker = jdbcTemplate.update(INSERT_NEW_TOURNAMENT, horse.id(), generatedId);
+
+      if (rowsAffectedLinker < 1) {
+        String errorMessage = String.format("Failed to link horse (ID: %d) with tournament (ID: %d)", horse.id(), generatedId);
+        throw new FailedToCreateException(errorMessage);
+
+      }
+    }
+    return new Tournament()
+        .setId(generatedId)
+        .setName(tournament.name())
+        .setStartDate(tournament.startDate())
+        .setEndDate(tournament.endDate())
+        .setParticipants(tournament.participants());
+
   }
 
   @Override
   public Collection<TournamentDetailParticipantDto> findParticipantsByTournamentId(long id) throws FailedToRetrieveException {
     LOG.trace("findParticipantsByTournamentId({})", id);
-    try {
-      return jdbcTemplate.query(FIND_PARTICIPANTS_BY_TOURNAMENT_ID, this::mapRowHorse, id);
-    } catch (DataAccessException e) {
-      LOG.error("Failed to find participants for tournament with ID {}: {}", id, e.getMessage());
-      throw new FailedToRetrieveException("Failed to find participants for tournament with ID " + id, e);
-    }
+    return jdbcTemplate.query(FIND_PARTICIPANTS_BY_TOURNAMENT_ID, this::mapRowHorse, id);
   }
 
   @Override
   public List<Tournament> getTournamentsAssociatedWithHorseId(long id) throws FailedToRetrieveException {
     LOG.trace("getTournamentsAssociatedWithHorseId({})", id);
-    try {
-      return jdbcTemplate.query(FIND_TOURNAMENT_BY_PARTICIPANT_ID, this::mapRowTournament, id);
-    } catch (DataAccessException e) {
-      LOG.error("Failed to find tournaments associated with horse with ID {}: {}", id, e.getMessage());
-      throw new FailedToRetrieveException("Failed to retrieve tournaments associated with horse with ID " + id, e);
-    }
+    return jdbcTemplate.query(FIND_TOURNAMENT_BY_PARTICIPANT_ID, this::mapRowTournament, id);
   }
 
   private TournamentDetailParticipantDto mapRowRoundReached(ResultSet result, int rownum) throws SQLException {

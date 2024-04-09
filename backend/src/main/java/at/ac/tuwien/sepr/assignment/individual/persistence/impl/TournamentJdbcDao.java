@@ -6,6 +6,7 @@ import at.ac.tuwien.sepr.assignment.individual.exception.FailedToRetrieveExcepti
 import at.ac.tuwien.sepr.assignment.individual.exception.FatalException;
 import at.ac.tuwien.sepr.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepr.assignment.individual.persistence.TournamentDao;
+
 import java.lang.invoke.MethodHandles;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,8 +29,6 @@ import org.springframework.stereotype.Repository;
 public class TournamentJdbcDao implements TournamentDao {
 
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private final JdbcTemplate jdbcTemplate;
-  private final NamedParameterJdbcTemplate jdbcNamed;
   private static final String TABLE_NAME = "tournament";
   private static final String SQL_SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
   private static final String SQL_SELECT_SEARCH = "SELECT "
@@ -42,8 +41,9 @@ public class TournamentJdbcDao implements TournamentDao {
       + "       (:startDate is NULL AND t.start_date <= :endDate) OR"
       + "       (:endDate is NULL AND t.end_date >= :startDate)"
       + "      )";
-
   private static final String SQL_LIMIT_CLAUSE = " LIMIT :limit";
+  private final JdbcTemplate jdbcTemplate;
+  private final NamedParameterJdbcTemplate jdbcNamed;
 
   public TournamentJdbcDao(JdbcTemplate jdbcTemplate,
                            NamedParameterJdbcTemplate jdbcNamed) {
@@ -54,41 +54,31 @@ public class TournamentJdbcDao implements TournamentDao {
   @Override
   public Collection<Tournament> search(TournamentSearchDto searchParameters) throws FailedToRetrieveException {
     LOG.trace("search({})", searchParameters);
-    try {
-      String query = SQL_SELECT_SEARCH;
-      if (searchParameters.limit() != null) {
-        query += SQL_LIMIT_CLAUSE;
-      }
-      BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(searchParameters);
-
-      return jdbcNamed.query(query, params, this::mapRow);
-    } catch (DataAccessException e) {
-      LOG.error("Failed to search tournaments: {}", e.getMessage());
-      throw new FailedToRetrieveException("Failed to search tournaments", e);
+    String query = SQL_SELECT_SEARCH;
+    if (searchParameters.limit() != null) {
+      query += SQL_LIMIT_CLAUSE;
     }
+    BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(searchParameters);
+
+    return jdbcNamed.query(query, params, this::mapRow);
   }
 
   @Override
   public Tournament getById(long id) throws NotFoundException, FailedToRetrieveException {
     LOG.trace("getById({})", id);
-    try {
-      List<Tournament> tournaments = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
+    List<Tournament> tournaments = jdbcTemplate.query(SQL_SELECT_BY_ID, this::mapRow, id);
 
-      if (tournaments.isEmpty()) {
-        LOG.warn("Tournament with ID {} does not exist", id);
-        throw new NotFoundException("No tournament with ID %d found".formatted(id));
-      }
-
-      if (tournaments.size() > 1) {
-        LOG.error("Multiple tournaments with ID: {} found", id);
-        throw new FatalException("Too many tournaments with ID %d found".formatted(id));
-      }
-
-      return tournaments.getFirst();
-    } catch (DataAccessException e) {
-      LOG.error("Failed to retrieve tournament with ID {}: {}", id, e.getMessage());
-      throw new FailedToRetrieveException("Failed to retrieve tournament with ID " + id, e);
+    if (tournaments.isEmpty()) {
+      LOG.warn("Tournament with ID {} does not exist", id);
+      throw new NotFoundException("No tournament with ID %d found".formatted(id));
     }
+
+    if (tournaments.size() > 1) {
+      LOG.error("Multiple tournaments with ID: {} found", id);
+      throw new FatalException("Too many tournaments with ID %d found".formatted(id));
+    }
+
+    return tournaments.getFirst();
   }
 
 
