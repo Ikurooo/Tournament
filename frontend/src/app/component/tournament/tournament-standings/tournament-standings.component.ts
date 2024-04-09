@@ -65,7 +65,7 @@ export class TournamentStandingsComponent implements OnInit {
       next: data => {
         this.standings = data;
         this.notification.success("Update successful.");
-        this.router.navigate(['horses', 'deletion-successful']);
+        this.router.navigate(['tournaments']);
       },
       error: (err) => {
         this.notification.error(this.errorFormatter.format(err), "Failed To Update", {
