@@ -61,6 +61,8 @@ export class TournamentStandingsComponent implements OnInit {
       return;
     }
 
+    console.log(this.standings);
+
     this.service.update(this.standings, this.standings.id.toString()).subscribe({
       next: data => {
         this.standings = data;
@@ -203,6 +205,7 @@ export class TournamentStandingsComponent implements OnInit {
         participant.roundReached = entry && entry.roundReached ? entry.roundReached : depth;
         this.entryMap.set(participant.entryNumber, participant);
       }
+
       return;
     }
 
@@ -211,15 +214,15 @@ export class TournamentStandingsComponent implements OnInit {
       return;
     }
 
+    this.updateTreeRecursively(depth + 1, branch.branches[0], maxDepth);
+    this.updateTreeRecursively(depth + 1, branch.branches[1], maxDepth);
+
     if (participant !== null && participant.entryNumber !== undefined) {
       const entry = this.entryMap.get(participant.entryNumber);
       if (entry && entry.roundReached) {
-        this.entryMap.set(participant.entryNumber, participant);
         participant.roundReached = Math.min(depth, entry.roundReached);
+        this.entryMap.set(participant.entryNumber, participant);
       }
     }
-
-    this.updateTreeRecursively(depth + 1, branch.branches[0], maxDepth);
-    this.updateTreeRecursively(depth + 1, branch.branches[1], maxDepth);
   }
 }
