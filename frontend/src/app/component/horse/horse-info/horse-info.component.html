@@ -12,7 +12,7 @@
   <ul>
     <li><strong>Name:</strong> {{ horse.name ?? "Not Set" }}</li>
     <li><strong>Sex:</strong> {{ horse.sex ?? "Not Set" }}</li>
-    <li><strong>Date of Birth:</strong> {{ horse.dateOfBirth }}</li>
+    <li><strong>Date of Birth:</strong> {{ horse.dateOfBirth.toLocaleDateString() }}</li>
     <li><strong>Breed:</strong> {{ horse.breed?.name ?? "Not Set" }}</li>
     <li><strong>Weight:</strong> {{ horse.weight ?? "Not Set" }} kg</li>
     <li><strong>Height:</strong> {{ horse.height ?? "Not Set"}} m</li>

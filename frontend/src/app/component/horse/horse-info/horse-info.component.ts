@@ -36,6 +36,7 @@ export class HorseInfoComponent implements OnInit {
         this.horseService.getById(this.horseId).subscribe(
           (data: Horse) => {
             this.horse = data;
+            this.horse.dateOfBirth = new Date(data.dateOfBirth);
           },
           (error) => {
             console.error('Error fetching horse details:', error);
