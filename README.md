@@ -49,6 +49,7 @@ Vergessen Sie nicht im Projekt ihren Namen und Matrikelnummer zu ersetzen.
 | 2024.Apr.7  | 14:00     | 2 Stunden | 7      | Tree now gets built in the backend                                  |
 | 2024.Apr.8  | 14:00     | 4 Stunden | 7      | Added missing docs, logs, cleanup and validator implementation      |
 | 2024.Apr.9  | 14:00     | 4 Stunden | 7      | Added missing docs, logs and cleanup                                |
+| 2024.Apr.10 | 14:00     | 4 Stunden | 1-8    | Added missing docs, logs, debugging and cleanup                     |
 
 
 
