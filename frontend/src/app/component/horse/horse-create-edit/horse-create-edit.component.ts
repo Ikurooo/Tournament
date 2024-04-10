@@ -144,7 +144,7 @@ export class HorseCreateEditComponent implements OnInit {
                 this.dateOfBirthSet = true;
               },
               error: err => {
-                this.notification.error(this.errorFormatter.format(err), "Failure.", {
+                this.notification.error(this.errorFormatter.format(err), "Failed to load horse details.", {
                   enableHtml: true,
                   timeOut: 10000,
                 });
@@ -215,7 +215,7 @@ export class HorseCreateEditComponent implements OnInit {
           }
         },
         error: err => {
-          this.notification.error(this.errorFormatter.format(err), "Failure", {
+          this.notification.error(this.errorFormatter.format(err), "Failed to delete horse", {
             enableHtml: true,
             timeOut: 10000,
           });

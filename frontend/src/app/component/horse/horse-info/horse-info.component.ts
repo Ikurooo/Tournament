@@ -62,7 +62,7 @@ export class HorseInfoComponent implements OnInit {
           }
         },
         error: (err) => {
-          this.notification.error(this.errorFormatter.format(err), "Failure.", {
+          this.notification.error(this.errorFormatter.format(err), "Failed to fetch horse details.", {
             enableHtml: true,
             timeOut: 10000,
           });

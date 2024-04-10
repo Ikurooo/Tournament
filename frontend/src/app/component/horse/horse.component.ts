@@ -77,7 +77,7 @@ export class HorseComponent implements OnInit {
 
         },
         error: (err) => {
-          this.notification.error(this.errorFormatter.format(err), "Failure.", {
+          this.notification.error(this.errorFormatter.format(err), "Failed to set horse for deletion.", {
             enableHtml: true,
             timeOut: 10000,
           });
@@ -96,7 +96,7 @@ export class HorseComponent implements OnInit {
           this.reloadHorses();
         },
         error: (err) => {
-          this.notification.error(this.errorFormatter.format(err), "Failure.", {
+          this.notification.error(this.errorFormatter.format(err), "Failed to fetch horses.", {
             enableHtml: true,
             timeOut: 10000,
           });

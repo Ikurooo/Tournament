@@ -44,7 +44,7 @@ export class TournamentStandingsComponent implements OnInit {
             this.fillEntryMap();
           },
           error: err => {
-            this.notification.error(this.errorFormatter.format(err), "Failure.", {
+            this.notification.error(this.errorFormatter.format(err), "Failed Loading Standing Details.", {
               enableHtml: true,
               timeOut: 10000,
             });
@@ -70,7 +70,7 @@ export class TournamentStandingsComponent implements OnInit {
         this.router.navigate(['tournaments']);
       },
       error: (err) => {
-        this.notification.error(this.errorFormatter.format(err), "Failed To Update", {
+        this.notification.error(this.errorFormatter.format(err), "Failed To Update Standings", {
           enableHtml: true,
           timeOut: 10000,
         });
