@@ -128,6 +128,9 @@ public class HorseValidator {
     if (horse.height() <= 0) {
       context.addError("Height must be greater than zero.");
     }
+    if (horse.height() > 10) {
+      context.addError("Height cannot be greater than ten.");
+    }
   }
 
   /**
@@ -139,6 +142,9 @@ public class HorseValidator {
   private void validateWeight(HorseDetailDto horse, ValidationContext context) {
     if (horse.weight() <= 0) {
       context.addError("Weight must be greater than zero.");
+    }
+    if (horse.height() > 1200) {
+      context.addError("Weight cannot be greater than 1200.");
     }
   }
 
