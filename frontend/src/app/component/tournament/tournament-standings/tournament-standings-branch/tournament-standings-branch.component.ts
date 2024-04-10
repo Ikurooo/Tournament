@@ -38,16 +38,23 @@ export class TournamentStandingsBranchComponent {
       this.treeBranch?.branches?.map(b => b.thisParticipant)
       ?? this.allParticipants;
     const results = allCandidates
-        .filter(x => !!x)
-        .map(x => <TournamentDetailParticipantDto><unknown>x)
-        .filter((x) =>
-            x.name.toUpperCase().match(new RegExp(`.*${input.toUpperCase()}.*`)));
+      .filter(x => !!x)
+      .map(x => <TournamentDetailParticipantDto><unknown>x)
+      .filter((x) =>
+        x.name.toUpperCase().match(new RegExp(`.*${input.toUpperCase()}.*`)));
     return of(results);
   };
 
+  public hasKids() {
+    if (!this.treeBranch?.branches) {
+      return false;
+    }
+    return !this.treeBranch.branches.every(branch => branch.thisParticipant !== null);
+  }
+
   public formatParticipant(participant: TournamentDetailParticipantDto | null): string {
     return participant
-        ? `${participant.name} (${new Date(participant.dateOfBirth).toLocaleDateString()})`
-        : "";
+      ? `${participant.name} (${new Date(participant.dateOfBirth).toLocaleDateString()})`
+      : "";
   }
 }

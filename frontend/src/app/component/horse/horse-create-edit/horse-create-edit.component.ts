@@ -140,6 +140,7 @@ export class HorseCreateEditComponent implements OnInit {
             this.service.getById(this.horseId).subscribe({
               next: data => {
                 this.horse = data;
+                this.horse.dateOfBirth = new Date(data.dateOfBirth)
                 this.dateOfBirthSet = true;
               },
               error: err => {

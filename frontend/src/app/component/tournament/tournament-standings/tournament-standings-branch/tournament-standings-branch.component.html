@@ -24,6 +24,7 @@
   <app-autocomplete
     textInputClass="form-control"
     valueNeedsToMatchSuggestion="true"
+    [disabled]="hasKids()"
     [suggestions]="suggestions"
     [(ngModel)]="treeBranch.thisParticipant"
     [formatModel]="formatParticipant"
